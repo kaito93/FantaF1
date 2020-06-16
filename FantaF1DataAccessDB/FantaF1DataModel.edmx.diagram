@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a3ff4814752e4de99be60c4a135f93e2" Name="Diagram1" ZoomLevel="99">
+        <EntityTypeShape EntityType="FantaF1_SVRKModel.CampionatiMondiali" Width="1.5" PointX="3.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FantaF1_SVRKModel.Circuiti" Width="1.5" PointX="6" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FantaF1_SVRKModel.FantaCampionati" Width="1.5" PointX="6" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FantaF1_SVRKModel.IscrizioniCircuitiCampionato" Width="1.5" PointX="9.75" PointY="30" IsExpanded="true" />
+        <EntityTypeShape EntityType="FantaF1_SVRKModel.IscrizioniPilotiCampionato" Width="1.5" PointX="5.25" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="FantaF1_SVRKModel.IscrizioniScuderieCampionato" Width="1.5" PointX="6" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FantaF1_SVRKModel.IscrizioniUtentiFantaCampionato" Width="1.5" PointX="8.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="FantaF1_SVRKModel.Piloti" Width="1.5" PointX="3" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FantaF1_SVRKModel.PronosticoUtenteFantaCampionato" Width="1.5" PointX="11.25" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FantaF1_SVRKModel.PronosticoUtenteGara" Width="1.5" PointX="8.25" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FantaF1_SVRKModel.RegoleCampionatoMondiale" Width="2.25" PointX="1.5" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FantaF1_SVRKModel.RegoleFantaCampionato" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FantaF1_SVRKModel.RisultatoDFNGaraReale" Width="1.5" PointX="5.25" PointY="35" IsExpanded="true" />
+        <EntityTypeShape EntityType="FantaF1_SVRKModel.RisultatoGaraReale" Width="1.5" PointX="7.5" PointY="25.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FantaF1_SVRKModel.RisultatoPronostico" Width="1.5" PointX="10.5" PointY="25.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FantaF1_SVRKModel.Scuderie" Width="1.5" PointX="0.75" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FantaF1_SVRKModel.Utenti" Width="1.5" PointX="6" PointY="6" IsExpanded="true" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_CampionatiMondiali_RegoleCampionatoMondiale" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_CampionatoFanta" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_IscrizioneCampionato" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_IscrizioneCampionatoCircuito" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_IscrizioneCampionatoPilota" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_IscrizioneCircuito" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoUtenteGara_Circuiti" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoUtenteGara_FantaCampionati" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_IscrizioniCircuitiCampionato_RisultatoGaraReale" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_IscrizionePilota" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_IscrizioneScuderia" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_IscrizioneUtente" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota01DFN" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota01Posizione" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota02DFN" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota02Posizione" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota03DFN" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota03Posizione" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota04DFN" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota04Posizione" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota05DFN" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota05Posizione" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota06DFN" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota06Posizione" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota07DFN" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota07Posizione" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota08DFN" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota08Posizione" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota09DFN" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota09Posizione" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota10DFN" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota10Posizione" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota11DFN" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota11Posizione" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota12DFN" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota12Posizione" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota13DFN" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota13Posizione" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota14DFN" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota14Posizione" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota15DFN" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota15Posizione" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota16DFN" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota16Posizione" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota17DFN" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota17Posizione" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota18DFN" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota18Posizione" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota19DFN" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota19Posizione" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota20DFN" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_Pilota20Posizione" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PilotaGiroVeloce" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PilotaPolePosition" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PilotaScuderia" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoDecimoPilota" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoNonoPilota" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoOttavoPilota" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoPrimoPilota" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoQuartoPilota" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoQuintoPilota" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoSecondoPilota" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoSestoPilota" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoSettimoPilota" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoTerzoPilota" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoUtenteGara_Piloti" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoUtenteGara_Piloti1" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoUtenteGara_Piloti2" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoUtenteGara_Piloti3" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoUtenteGara_Piloti4" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoUtenteGara_Piloti5" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoDecimaScuderia" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoNonaScuderia" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoOttavaScuderia" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoPrimaScuderia" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoQuartaScuderia" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoQuintaScuderia" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoSecondaScuderia" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoSestaScuderia" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoSettimaScuderia" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoTerzaScuderia" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoRisultato" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoUtenteGara_Utenti" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_RisultatoDFN" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

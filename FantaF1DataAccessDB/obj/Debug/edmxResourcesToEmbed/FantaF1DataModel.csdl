@@ -1,0 +1,1807 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FantaF1_SVRKModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CampionatiMondiali">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Anno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Categoria" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RegoleId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="RegoleCampionatoMondiale" Relationship="Self.FK_CampionatiMondiali_RegoleCampionatoMondiale" FromRole="CampionatiMondiali" ToRole="RegoleCampionatoMondiale" />
+    <NavigationProperty Name="FantaCampionati" Relationship="Self.FK_CampionatoFanta" FromRole="CampionatiMondiali" ToRole="FantaCampionati" />
+    <NavigationProperty Name="IscrizioniScuderieCampionato" Relationship="Self.FK_IscrizioneCampionato" FromRole="CampionatiMondiali" ToRole="IscrizioniScuderieCampionato" />
+    <NavigationProperty Name="IscrizioniCircuitiCampionato" Relationship="Self.FK_IscrizioneCampionatoCircuito" FromRole="CampionatiMondiali" ToRole="IscrizioniCircuitiCampionato" />
+    <NavigationProperty Name="IscrizioniPilotiCampionato" Relationship="Self.FK_IscrizioneCampionatoPilota" FromRole="CampionatiMondiali" ToRole="IscrizioniPilotiCampionato" />
+  </EntityType>
+  <EntityType Name="Circuiti">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Nazione" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Lunghezza_m_" Type="Int32" />
+    <NavigationProperty Name="IscrizioniCircuitiCampionato" Relationship="Self.FK_IscrizioneCircuito" FromRole="Circuiti" ToRole="IscrizioniCircuitiCampionato" />
+    <NavigationProperty Name="PronosticoUtenteGara" Relationship="Self.FK_PronosticoUtenteGara_Circuiti" FromRole="Circuiti" ToRole="PronosticoUtenteGara" />
+  </EntityType>
+  <EntityType Name="FantaCampionati">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Anno" Type="Int32" Nullable="false" />
+    <Property Name="CampionatoRealeId" Type="Int32" Nullable="false" />
+    <Property Name="RegoleId" Type="Int32" Nullable="false" />
+    <Property Name="DataTerminePronostici" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="CampionatiMondiali" Relationship="Self.FK_CampionatoFanta" FromRole="FantaCampionati" ToRole="CampionatiMondiali" />
+    <NavigationProperty Name="PronosticoUtenteGara" Relationship="Self.FK_PronosticoUtenteGara_FantaCampionati" FromRole="FantaCampionati" ToRole="PronosticoUtenteGara" />
+  </EntityType>
+  <EntityType Name="IscrizioniCircuitiCampionato">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CircuitoId" Type="Int32" Nullable="false" />
+    <Property Name="CampionatoId" Type="Int32" Nullable="false" />
+    <Property Name="RisultatiId" Type="Int32" />
+    <Property Name="DataGara" Type="DateTime" Precision="3" Nullable="false" />
+    <NavigationProperty Name="CampionatiMondiali" Relationship="Self.FK_IscrizioneCampionatoCircuito" FromRole="IscrizioniCircuitiCampionato" ToRole="CampionatiMondiali" />
+    <NavigationProperty Name="Circuiti" Relationship="Self.FK_IscrizioneCircuito" FromRole="IscrizioniCircuitiCampionato" ToRole="Circuiti" />
+    <NavigationProperty Name="RisultatoGaraReale" Relationship="Self.FK_IscrizioniCircuitiCampionato_RisultatoGaraReale" FromRole="IscrizioniCircuitiCampionato" ToRole="RisultatoGaraReale" />
+    <Property Name="NomeGP" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="IscrizioniPilotiCampionato">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PilotaId" Type="Int32" Nullable="false" />
+    <Property Name="CampionatoId" Type="Int32" Nullable="false" />
+    <Property Name="Punteggio" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CampionatiMondiali" Relationship="Self.FK_IscrizioneCampionatoPilota" FromRole="IscrizioniPilotiCampionato" ToRole="CampionatiMondiali" />
+    <NavigationProperty Name="Piloti" Relationship="Self.FK_IscrizionePilota" FromRole="IscrizioniPilotiCampionato" ToRole="Piloti" />
+  </EntityType>
+  <EntityType Name="IscrizioniScuderieCampionato">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ScuderiaId" Type="Int32" Nullable="false" />
+    <Property Name="CampionatoId" Type="Int32" Nullable="false" />
+    <Property Name="Punteggio" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CampionatiMondiali" Relationship="Self.FK_IscrizioneCampionato" FromRole="IscrizioniScuderieCampionato" ToRole="CampionatiMondiali" />
+    <NavigationProperty Name="Scuderie" Relationship="Self.FK_IscrizioneScuderia" FromRole="IscrizioniScuderieCampionato" ToRole="Scuderie" />
+  </EntityType>
+  <EntityType Name="IscrizioniUtentiFantaCampionato">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UtenteId" Type="Int32" Nullable="false" />
+    <Property Name="CampionatoId" Type="Int32" Nullable="false" />
+    <Property Name="PronosticoCampionatoId" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioCampionatoMondiale" Type="Int32" Nullable="false" />
+    <Property Name="DataPronosticoMondiale" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Utenti" Relationship="Self.FK_IscrizioneUtente" FromRole="IscrizioniUtentiFantaCampionato" ToRole="Utenti" />
+  </EntityType>
+  <EntityType Name="Piloti">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Cognome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ScuderiaId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="IscrizioniPilotiCampionato" Relationship="Self.FK_IscrizionePilota" FromRole="Piloti" ToRole="IscrizioniPilotiCampionato" />
+    <NavigationProperty Name="RisultatoDFNGaraReale" Relationship="Self.FK_Pilota01DFN" FromRole="Piloti" ToRole="RisultatoDFNGaraReale" />
+    <NavigationProperty Name="RisultatoGaraReale" Relationship="Self.FK_Pilota01Posizione" FromRole="Piloti" ToRole="RisultatoGaraReale" />
+    <NavigationProperty Name="RisultatoDFNGaraReale1" Relationship="Self.FK_Pilota02DFN" FromRole="Piloti" ToRole="RisultatoDFNGaraReale" />
+    <NavigationProperty Name="RisultatoGaraReale1" Relationship="Self.FK_Pilota02Posizione" FromRole="Piloti" ToRole="RisultatoGaraReale" />
+    <NavigationProperty Name="RisultatoDFNGaraReale2" Relationship="Self.FK_Pilota03DFN" FromRole="Piloti" ToRole="RisultatoDFNGaraReale" />
+    <NavigationProperty Name="RisultatoGaraReale2" Relationship="Self.FK_Pilota03Posizione" FromRole="Piloti" ToRole="RisultatoGaraReale" />
+    <NavigationProperty Name="RisultatoDFNGaraReale3" Relationship="Self.FK_Pilota04DFN" FromRole="Piloti" ToRole="RisultatoDFNGaraReale" />
+    <NavigationProperty Name="RisultatoGaraReale3" Relationship="Self.FK_Pilota04Posizione" FromRole="Piloti" ToRole="RisultatoGaraReale" />
+    <NavigationProperty Name="RisultatoDFNGaraReale4" Relationship="Self.FK_Pilota05DFN" FromRole="Piloti" ToRole="RisultatoDFNGaraReale" />
+    <NavigationProperty Name="RisultatoGaraReale4" Relationship="Self.FK_Pilota05Posizione" FromRole="Piloti" ToRole="RisultatoGaraReale" />
+    <NavigationProperty Name="RisultatoDFNGaraReale5" Relationship="Self.FK_Pilota06DFN" FromRole="Piloti" ToRole="RisultatoDFNGaraReale" />
+    <NavigationProperty Name="RisultatoGaraReale5" Relationship="Self.FK_Pilota06Posizione" FromRole="Piloti" ToRole="RisultatoGaraReale" />
+    <NavigationProperty Name="RisultatoDFNGaraReale6" Relationship="Self.FK_Pilota07DFN" FromRole="Piloti" ToRole="RisultatoDFNGaraReale" />
+    <NavigationProperty Name="RisultatoGaraReale6" Relationship="Self.FK_Pilota07Posizione" FromRole="Piloti" ToRole="RisultatoGaraReale" />
+    <NavigationProperty Name="RisultatoDFNGaraReale7" Relationship="Self.FK_Pilota08DFN" FromRole="Piloti" ToRole="RisultatoDFNGaraReale" />
+    <NavigationProperty Name="RisultatoGaraReale7" Relationship="Self.FK_Pilota08Posizione" FromRole="Piloti" ToRole="RisultatoGaraReale" />
+    <NavigationProperty Name="RisultatoDFNGaraReale8" Relationship="Self.FK_Pilota09DFN" FromRole="Piloti" ToRole="RisultatoDFNGaraReale" />
+    <NavigationProperty Name="RisultatoGaraReale8" Relationship="Self.FK_Pilota09Posizione" FromRole="Piloti" ToRole="RisultatoGaraReale" />
+    <NavigationProperty Name="RisultatoDFNGaraReale9" Relationship="Self.FK_Pilota10DFN" FromRole="Piloti" ToRole="RisultatoDFNGaraReale" />
+    <NavigationProperty Name="RisultatoGaraReale9" Relationship="Self.FK_Pilota10Posizione" FromRole="Piloti" ToRole="RisultatoGaraReale" />
+    <NavigationProperty Name="RisultatoDFNGaraReale10" Relationship="Self.FK_Pilota11DFN" FromRole="Piloti" ToRole="RisultatoDFNGaraReale" />
+    <NavigationProperty Name="RisultatoGaraReale10" Relationship="Self.FK_Pilota11Posizione" FromRole="Piloti" ToRole="RisultatoGaraReale" />
+    <NavigationProperty Name="RisultatoDFNGaraReale11" Relationship="Self.FK_Pilota12DFN" FromRole="Piloti" ToRole="RisultatoDFNGaraReale" />
+    <NavigationProperty Name="RisultatoGaraReale11" Relationship="Self.FK_Pilota12Posizione" FromRole="Piloti" ToRole="RisultatoGaraReale" />
+    <NavigationProperty Name="RisultatoDFNGaraReale12" Relationship="Self.FK_Pilota13DFN" FromRole="Piloti" ToRole="RisultatoDFNGaraReale" />
+    <NavigationProperty Name="RisultatoGaraReale12" Relationship="Self.FK_Pilota13Posizione" FromRole="Piloti" ToRole="RisultatoGaraReale" />
+    <NavigationProperty Name="RisultatoDFNGaraReale13" Relationship="Self.FK_Pilota14DFN" FromRole="Piloti" ToRole="RisultatoDFNGaraReale" />
+    <NavigationProperty Name="RisultatoGaraReale13" Relationship="Self.FK_Pilota14Posizione" FromRole="Piloti" ToRole="RisultatoGaraReale" />
+    <NavigationProperty Name="RisultatoDFNGaraReale14" Relationship="Self.FK_Pilota15DFN" FromRole="Piloti" ToRole="RisultatoDFNGaraReale" />
+    <NavigationProperty Name="RisultatoGaraReale14" Relationship="Self.FK_Pilota15Posizione" FromRole="Piloti" ToRole="RisultatoGaraReale" />
+    <NavigationProperty Name="RisultatoDFNGaraReale15" Relationship="Self.FK_Pilota16DFN" FromRole="Piloti" ToRole="RisultatoDFNGaraReale" />
+    <NavigationProperty Name="RisultatoGaraReale15" Relationship="Self.FK_Pilota16Posizione" FromRole="Piloti" ToRole="RisultatoGaraReale" />
+    <NavigationProperty Name="RisultatoDFNGaraReale16" Relationship="Self.FK_Pilota17DFN" FromRole="Piloti" ToRole="RisultatoDFNGaraReale" />
+    <NavigationProperty Name="RisultatoGaraReale16" Relationship="Self.FK_Pilota17Posizione" FromRole="Piloti" ToRole="RisultatoGaraReale" />
+    <NavigationProperty Name="RisultatoDFNGaraReale17" Relationship="Self.FK_Pilota18DFN" FromRole="Piloti" ToRole="RisultatoDFNGaraReale" />
+    <NavigationProperty Name="RisultatoGaraReale17" Relationship="Self.FK_Pilota18Posizione" FromRole="Piloti" ToRole="RisultatoGaraReale" />
+    <NavigationProperty Name="RisultatoDFNGaraReale18" Relationship="Self.FK_Pilota19DFN" FromRole="Piloti" ToRole="RisultatoDFNGaraReale" />
+    <NavigationProperty Name="RisultatoGaraReale18" Relationship="Self.FK_Pilota19Posizione" FromRole="Piloti" ToRole="RisultatoGaraReale" />
+    <NavigationProperty Name="RisultatoDFNGaraReale19" Relationship="Self.FK_Pilota20DFN" FromRole="Piloti" ToRole="RisultatoDFNGaraReale" />
+    <NavigationProperty Name="RisultatoGaraReale19" Relationship="Self.FK_Pilota20Posizione" FromRole="Piloti" ToRole="RisultatoGaraReale" />
+    <NavigationProperty Name="RisultatoGaraReale20" Relationship="Self.FK_PilotaGiroVeloce" FromRole="Piloti" ToRole="RisultatoGaraReale" />
+    <NavigationProperty Name="RisultatoGaraReale21" Relationship="Self.FK_PilotaPolePosition" FromRole="Piloti" ToRole="RisultatoGaraReale" />
+    <NavigationProperty Name="Scuderie" Relationship="Self.FK_PilotaScuderia" FromRole="Piloti" ToRole="Scuderie" />
+    <NavigationProperty Name="PronosticoUtenteFantaCampionato" Relationship="Self.FK_PronosticoDecimoPilota" FromRole="Piloti" ToRole="PronosticoUtenteFantaCampionato" />
+    <NavigationProperty Name="PronosticoUtenteFantaCampionato1" Relationship="Self.FK_PronosticoNonoPilota" FromRole="Piloti" ToRole="PronosticoUtenteFantaCampionato" />
+    <NavigationProperty Name="PronosticoUtenteFantaCampionato2" Relationship="Self.FK_PronosticoOttavoPilota" FromRole="Piloti" ToRole="PronosticoUtenteFantaCampionato" />
+    <NavigationProperty Name="PronosticoUtenteFantaCampionato3" Relationship="Self.FK_PronosticoPrimoPilota" FromRole="Piloti" ToRole="PronosticoUtenteFantaCampionato" />
+    <NavigationProperty Name="PronosticoUtenteFantaCampionato4" Relationship="Self.FK_PronosticoQuartoPilota" FromRole="Piloti" ToRole="PronosticoUtenteFantaCampionato" />
+    <NavigationProperty Name="PronosticoUtenteFantaCampionato5" Relationship="Self.FK_PronosticoQuintoPilota" FromRole="Piloti" ToRole="PronosticoUtenteFantaCampionato" />
+    <NavigationProperty Name="PronosticoUtenteFantaCampionato6" Relationship="Self.FK_PronosticoSecondoPilota" FromRole="Piloti" ToRole="PronosticoUtenteFantaCampionato" />
+    <NavigationProperty Name="PronosticoUtenteFantaCampionato7" Relationship="Self.FK_PronosticoSestoPilota" FromRole="Piloti" ToRole="PronosticoUtenteFantaCampionato" />
+    <NavigationProperty Name="PronosticoUtenteFantaCampionato8" Relationship="Self.FK_PronosticoSettimoPilota" FromRole="Piloti" ToRole="PronosticoUtenteFantaCampionato" />
+    <NavigationProperty Name="PronosticoUtenteFantaCampionato9" Relationship="Self.FK_PronosticoTerzoPilota" FromRole="Piloti" ToRole="PronosticoUtenteFantaCampionato" />
+    <NavigationProperty Name="PronosticoUtenteGara" Relationship="Self.FK_PronosticoUtenteGara_Piloti" FromRole="Piloti" ToRole="PronosticoUtenteGara" />
+    <NavigationProperty Name="PronosticoUtenteGara1" Relationship="Self.FK_PronosticoUtenteGara_Piloti1" FromRole="Piloti" ToRole="PronosticoUtenteGara" />
+    <NavigationProperty Name="PronosticoUtenteGara2" Relationship="Self.FK_PronosticoUtenteGara_Piloti2" FromRole="Piloti" ToRole="PronosticoUtenteGara" />
+    <NavigationProperty Name="PronosticoUtenteGara3" Relationship="Self.FK_PronosticoUtenteGara_Piloti3" FromRole="Piloti" ToRole="PronosticoUtenteGara" />
+    <NavigationProperty Name="PronosticoUtenteGara4" Relationship="Self.FK_PronosticoUtenteGara_Piloti4" FromRole="Piloti" ToRole="PronosticoUtenteGara" />
+    <NavigationProperty Name="PronosticoUtenteGara5" Relationship="Self.FK_PronosticoUtenteGara_Piloti5" FromRole="Piloti" ToRole="PronosticoUtenteGara" />
+  </EntityType>
+  <EntityType Name="PronosticoUtenteFantaCampionato">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PrimoClassificatoPilotaId" Type="Int32" Nullable="false" />
+    <Property Name="SecondoClassificatoPilotaId" Type="Int32" Nullable="false" />
+    <Property Name="TerzoClassificatoPilotaId" Type="Int32" Nullable="false" />
+    <Property Name="QuartoClassificatoPilotaId" Type="Int32" Nullable="false" />
+    <Property Name="QuintoClassificatoPilotaId" Type="Int32" Nullable="false" />
+    <Property Name="SestoClassificatoPilotaId" Type="Int32" Nullable="false" />
+    <Property Name="SettimoClassificatoPilotaId" Type="Int32" Nullable="false" />
+    <Property Name="OttavoClassificatoPilotaId" Type="Int32" Nullable="false" />
+    <Property Name="NonoClassificatoPilotaId" Type="Int32" Nullable="false" />
+    <Property Name="DecimoClassificatoPilotaId" Type="Int32" Nullable="false" />
+    <Property Name="PrimaClassificataScuderiaId" Type="Int32" Nullable="false" />
+    <Property Name="SecondaClassificataScuderiaId" Type="Int32" Nullable="false" />
+    <Property Name="TerzaClassificataScuderiaId" Type="Int32" Nullable="false" />
+    <Property Name="QuartaClassificataScuderiaId" Type="Int32" Nullable="false" />
+    <Property Name="QuintaClassificataScuderiaId" Type="Int32" Nullable="false" />
+    <Property Name="SestaClassificataScuderiaId" Type="Int32" Nullable="false" />
+    <Property Name="SettimaClassificataScuderiaId" Type="Int32" Nullable="false" />
+    <Property Name="OttavaClassificataScuderiaId" Type="Int32" Nullable="false" />
+    <Property Name="NonaClassificataScuderiaId" Type="Int32" Nullable="false" />
+    <Property Name="DecimaClassificataScuderiaId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Piloti" Relationship="Self.FK_PronosticoDecimoPilota" FromRole="PronosticoUtenteFantaCampionato" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti1" Relationship="Self.FK_PronosticoNonoPilota" FromRole="PronosticoUtenteFantaCampionato" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti2" Relationship="Self.FK_PronosticoOttavoPilota" FromRole="PronosticoUtenteFantaCampionato" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti3" Relationship="Self.FK_PronosticoPrimoPilota" FromRole="PronosticoUtenteFantaCampionato" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti4" Relationship="Self.FK_PronosticoQuartoPilota" FromRole="PronosticoUtenteFantaCampionato" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti5" Relationship="Self.FK_PronosticoQuintoPilota" FromRole="PronosticoUtenteFantaCampionato" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti6" Relationship="Self.FK_PronosticoSecondoPilota" FromRole="PronosticoUtenteFantaCampionato" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti7" Relationship="Self.FK_PronosticoSestoPilota" FromRole="PronosticoUtenteFantaCampionato" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti8" Relationship="Self.FK_PronosticoSettimoPilota" FromRole="PronosticoUtenteFantaCampionato" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti9" Relationship="Self.FK_PronosticoTerzoPilota" FromRole="PronosticoUtenteFantaCampionato" ToRole="Piloti" />
+    <NavigationProperty Name="Scuderie" Relationship="Self.FK_PronosticoDecimaScuderia" FromRole="PronosticoUtenteFantaCampionato" ToRole="Scuderie" />
+    <NavigationProperty Name="Scuderie1" Relationship="Self.FK_PronosticoNonaScuderia" FromRole="PronosticoUtenteFantaCampionato" ToRole="Scuderie" />
+    <NavigationProperty Name="Scuderie2" Relationship="Self.FK_PronosticoOttavaScuderia" FromRole="PronosticoUtenteFantaCampionato" ToRole="Scuderie" />
+    <NavigationProperty Name="Scuderie3" Relationship="Self.FK_PronosticoPrimaScuderia" FromRole="PronosticoUtenteFantaCampionato" ToRole="Scuderie" />
+    <NavigationProperty Name="Scuderie4" Relationship="Self.FK_PronosticoQuartaScuderia" FromRole="PronosticoUtenteFantaCampionato" ToRole="Scuderie" />
+    <NavigationProperty Name="Scuderie5" Relationship="Self.FK_PronosticoQuintaScuderia" FromRole="PronosticoUtenteFantaCampionato" ToRole="Scuderie" />
+    <NavigationProperty Name="Scuderie6" Relationship="Self.FK_PronosticoSecondaScuderia" FromRole="PronosticoUtenteFantaCampionato" ToRole="Scuderie" />
+    <NavigationProperty Name="Scuderie7" Relationship="Self.FK_PronosticoSestaScuderia" FromRole="PronosticoUtenteFantaCampionato" ToRole="Scuderie" />
+    <NavigationProperty Name="Scuderie8" Relationship="Self.FK_PronosticoSettimaScuderia" FromRole="PronosticoUtenteFantaCampionato" ToRole="Scuderie" />
+    <NavigationProperty Name="Scuderie9" Relationship="Self.FK_PronosticoTerzaScuderia" FromRole="PronosticoUtenteFantaCampionato" ToRole="Scuderie" />
+  </EntityType>
+  <EntityType Name="PronosticoUtenteGara">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="UtenteId" Type="Int32" Nullable="false" />
+    <Property Name="FantaCampionatoId" Type="Int32" Nullable="false" />
+    <Property Name="CircuitoId" Type="Int32" Nullable="false" />
+    <Property Name="PrimoClassificatoPilotaId" Type="Int32" Nullable="false" />
+    <Property Name="SecondoClassificatoPilotaId" Type="Int32" Nullable="false" />
+    <Property Name="TerzoClassificatoPilotaId" Type="Int32" Nullable="false" />
+    <Property Name="PolePositionPilotaId" Type="Int32" Nullable="false" />
+    <Property Name="GiroVelocePilotaId" Type="Int32" Nullable="false" />
+    <Property Name="DFNPilotaId" Type="Int32" Nullable="false" />
+    <Property Name="Inserimento" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Circuiti" Relationship="Self.FK_PronosticoUtenteGara_Circuiti" FromRole="PronosticoUtenteGara" ToRole="Circuiti" />
+    <NavigationProperty Name="FantaCampionati" Relationship="Self.FK_PronosticoUtenteGara_FantaCampionati" FromRole="PronosticoUtenteGara" ToRole="FantaCampionati" />
+    <NavigationProperty Name="Piloti" Relationship="Self.FK_PronosticoUtenteGara_Piloti" FromRole="PronosticoUtenteGara" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti1" Relationship="Self.FK_PronosticoUtenteGara_Piloti1" FromRole="PronosticoUtenteGara" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti2" Relationship="Self.FK_PronosticoUtenteGara_Piloti2" FromRole="PronosticoUtenteGara" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti3" Relationship="Self.FK_PronosticoUtenteGara_Piloti3" FromRole="PronosticoUtenteGara" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti4" Relationship="Self.FK_PronosticoUtenteGara_Piloti4" FromRole="PronosticoUtenteGara" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti5" Relationship="Self.FK_PronosticoUtenteGara_Piloti5" FromRole="PronosticoUtenteGara" ToRole="Piloti" />
+    <NavigationProperty Name="RisultatoPronostico" Relationship="Self.FK_PronosticoRisultato" FromRole="PronosticoUtenteGara" ToRole="RisultatoPronostico" />
+    <NavigationProperty Name="Utenti" Relationship="Self.FK_PronosticoUtenteGara_Utenti" FromRole="PronosticoUtenteGara" ToRole="Utenti" />
+  </EntityType>
+  <EntityType Name="RegoleCampionatoMondiale">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PunteggioPrimoClassificato" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioSecondoClassificato" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioTerzoClassificato" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioQuartoClassificato" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioQuintoClassificato" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioSestoClassificato" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioSettimoClassificato" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioOttavoClassificato" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioNonoClassificato" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioDecimoClassificato" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioUndicesimoClassificato" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioDodicesimoClassificato" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioTredicesimoClassificato" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioQuattordicesimoClassificato" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioQuindicesimoClassificato" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioSedicesimoClassificato" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioDiciassettesimoClassificato" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioDiciottesimoClassificato" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioDiciannovesimoClassificato" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioVentesimoClassificato" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioGiroVeloce" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioPolePosition" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CampionatiMondiali" Relationship="Self.FK_CampionatiMondiali_RegoleCampionatoMondiale" FromRole="RegoleCampionatoMondiale" ToRole="CampionatiMondiali" />
+  </EntityType>
+  <EntityType Name="RegoleFantaCampionato">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PunteggioPrimoClassificato" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioSecondoClassificato" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioTerzoClassificato" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioGiroVeloce" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioPolePosition" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioDFN" Type="Int32" Nullable="false" />
+    <Property Name="ComboPodio" Type="Boolean" Nullable="false" />
+    <Property Name="ComboTotale" Type="Boolean" Nullable="false" />
+    <Property Name="PunteggioPodio" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioTotale" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioPrimoPilotaMondiale" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioSecondoPilotaMondiale" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioTerzoPilotaMondiale" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioQuartoPilotaMondiale" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioQuintoPilotaMondiale" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioSestoPilotaMondiale" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioSettimoPilotaMondiale" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioOttavoPilotaMondiale" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioNonoPilotaMondiale" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioDecimoPilotaMondiale" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioPrimaScuderiaMondiale" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioSecondaScuderiaMondiale" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioTerzaScuderiaMondiale" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioQuartaScuderiaMondiale" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioQuintaScuderiaMondiale" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioSestaScuderiaMondiale" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioSettimaScuderiaMondiale" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioOttavaScuderiaMondiale" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioNonaScuderiaMondiale" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioDecimaScuderiaMondiale" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioMalusCambioPronosticoMondiale" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RisultatoDFNGaraReale">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PilotaId01" Type="Int32" />
+    <Property Name="PilotaId02" Type="Int32" />
+    <Property Name="PilotaId03" Type="Int32" />
+    <Property Name="PilotaId04" Type="Int32" />
+    <Property Name="PilotaId05" Type="Int32" />
+    <Property Name="PilotaId06" Type="Int32" />
+    <Property Name="PilotaId07" Type="Int32" />
+    <Property Name="PilotaId08" Type="Int32" />
+    <Property Name="PilotaId09" Type="Int32" />
+    <Property Name="PilotaId10" Type="Int32" />
+    <Property Name="PilotaId11" Type="Int32" />
+    <Property Name="PilotaId12" Type="Int32" />
+    <Property Name="PilotaId13" Type="Int32" />
+    <Property Name="PilotaId14" Type="Int32" />
+    <Property Name="PilotaId15" Type="Int32" />
+    <Property Name="PilotaId16" Type="Int32" />
+    <Property Name="PilotaId17" Type="Int32" />
+    <Property Name="PilotaId18" Type="Int32" />
+    <Property Name="PilotaId19" Type="Int32" />
+    <Property Name="PilotaId20" Type="Int32" />
+    <NavigationProperty Name="Piloti" Relationship="Self.FK_Pilota01DFN" FromRole="RisultatoDFNGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti1" Relationship="Self.FK_Pilota02DFN" FromRole="RisultatoDFNGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti2" Relationship="Self.FK_Pilota03DFN" FromRole="RisultatoDFNGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti3" Relationship="Self.FK_Pilota04DFN" FromRole="RisultatoDFNGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti4" Relationship="Self.FK_Pilota05DFN" FromRole="RisultatoDFNGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti5" Relationship="Self.FK_Pilota06DFN" FromRole="RisultatoDFNGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti6" Relationship="Self.FK_Pilota07DFN" FromRole="RisultatoDFNGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti7" Relationship="Self.FK_Pilota08DFN" FromRole="RisultatoDFNGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti8" Relationship="Self.FK_Pilota09DFN" FromRole="RisultatoDFNGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti9" Relationship="Self.FK_Pilota10DFN" FromRole="RisultatoDFNGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti10" Relationship="Self.FK_Pilota11DFN" FromRole="RisultatoDFNGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti11" Relationship="Self.FK_Pilota12DFN" FromRole="RisultatoDFNGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti12" Relationship="Self.FK_Pilota13DFN" FromRole="RisultatoDFNGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti13" Relationship="Self.FK_Pilota14DFN" FromRole="RisultatoDFNGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti14" Relationship="Self.FK_Pilota15DFN" FromRole="RisultatoDFNGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti15" Relationship="Self.FK_Pilota16DFN" FromRole="RisultatoDFNGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti16" Relationship="Self.FK_Pilota17DFN" FromRole="RisultatoDFNGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti17" Relationship="Self.FK_Pilota18DFN" FromRole="RisultatoDFNGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti18" Relationship="Self.FK_Pilota19DFN" FromRole="RisultatoDFNGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti19" Relationship="Self.FK_Pilota20DFN" FromRole="RisultatoDFNGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="RisultatoGaraReale" Relationship="Self.FK_RisultatoDFN" FromRole="RisultatoDFNGaraReale" ToRole="RisultatoGaraReale" />
+  </EntityType>
+  <EntityType Name="RisultatoGaraReale">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PilotaId01" Type="Int32" Nullable="false" />
+    <Property Name="PilotaId02" Type="Int32" />
+    <Property Name="PilotaId03" Type="Int32" />
+    <Property Name="PilotaId04" Type="Int32" />
+    <Property Name="PilotaId05" Type="Int32" />
+    <Property Name="PilotaId06" Type="Int32" />
+    <Property Name="PilotaId07" Type="Int32" />
+    <Property Name="PilotaId08" Type="Int32" />
+    <Property Name="PilotaId09" Type="Int32" />
+    <Property Name="PilotaId10" Type="Int32" />
+    <Property Name="PilotaId11" Type="Int32" />
+    <Property Name="PilotaId12" Type="Int32" />
+    <Property Name="PilotaId13" Type="Int32" />
+    <Property Name="PilotaId14" Type="Int32" />
+    <Property Name="PilotaId15" Type="Int32" />
+    <Property Name="PilotaId16" Type="Int32" />
+    <Property Name="PilotaId17" Type="Int32" />
+    <Property Name="PilotaId18" Type="Int32" />
+    <Property Name="PilotaId19" Type="Int32" />
+    <Property Name="PilotaId20" Type="Int32" />
+    <Property Name="PilotaIdGiroVeloce" Type="Int32" />
+    <Property Name="PilotaIdPolePosition" Type="Int32" />
+    <Property Name="RisultatoDFNId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="IscrizioniCircuitiCampionato" Relationship="Self.FK_IscrizioniCircuitiCampionato_RisultatoGaraReale" FromRole="RisultatoGaraReale" ToRole="IscrizioniCircuitiCampionato" />
+    <NavigationProperty Name="Piloti" Relationship="Self.FK_Pilota01Posizione" FromRole="RisultatoGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti1" Relationship="Self.FK_Pilota02Posizione" FromRole="RisultatoGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti2" Relationship="Self.FK_Pilota03Posizione" FromRole="RisultatoGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti3" Relationship="Self.FK_Pilota04Posizione" FromRole="RisultatoGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti4" Relationship="Self.FK_Pilota05Posizione" FromRole="RisultatoGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti5" Relationship="Self.FK_Pilota06Posizione" FromRole="RisultatoGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti6" Relationship="Self.FK_Pilota07Posizione" FromRole="RisultatoGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti7" Relationship="Self.FK_Pilota08Posizione" FromRole="RisultatoGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti8" Relationship="Self.FK_Pilota09Posizione" FromRole="RisultatoGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti9" Relationship="Self.FK_Pilota10Posizione" FromRole="RisultatoGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti10" Relationship="Self.FK_Pilota11Posizione" FromRole="RisultatoGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti11" Relationship="Self.FK_Pilota12Posizione" FromRole="RisultatoGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti12" Relationship="Self.FK_Pilota13Posizione" FromRole="RisultatoGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti13" Relationship="Self.FK_Pilota14Posizione" FromRole="RisultatoGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti14" Relationship="Self.FK_Pilota15Posizione" FromRole="RisultatoGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti15" Relationship="Self.FK_Pilota16Posizione" FromRole="RisultatoGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti16" Relationship="Self.FK_Pilota17Posizione" FromRole="RisultatoGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti17" Relationship="Self.FK_Pilota18Posizione" FromRole="RisultatoGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti18" Relationship="Self.FK_Pilota19Posizione" FromRole="RisultatoGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti19" Relationship="Self.FK_Pilota20Posizione" FromRole="RisultatoGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti20" Relationship="Self.FK_PilotaGiroVeloce" FromRole="RisultatoGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="Piloti21" Relationship="Self.FK_PilotaPolePosition" FromRole="RisultatoGaraReale" ToRole="Piloti" />
+    <NavigationProperty Name="RisultatoDFNGaraReale" Relationship="Self.FK_RisultatoDFN" FromRole="RisultatoGaraReale" ToRole="RisultatoDFNGaraReale" />
+  </EntityType>
+  <EntityType Name="RisultatoPronostico">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PronosticoId" Type="Int32" Nullable="false" />
+    <Property Name="RisultatoPrimoClassificato" Type="Boolean" Nullable="false" />
+    <Property Name="RisultatoSecondoClassificato" Type="Boolean" Nullable="false" />
+    <Property Name="RisultatoTerzoClassificato" Type="Boolean" Nullable="false" />
+    <Property Name="RisultatoPolePosition" Type="Boolean" Nullable="false" />
+    <Property Name="RisultatoGiroVeloce" Type="Boolean" Nullable="false" />
+    <Property Name="RisultatoDFN" Type="Boolean" Nullable="false" />
+    <Property Name="PunteggioComplessivoPronostico" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PronosticoUtenteGara" Relationship="Self.FK_PronosticoRisultato" FromRole="RisultatoPronostico" ToRole="PronosticoUtenteGara" />
+  </EntityType>
+  <EntityType Name="Scuderie">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Nazionalita" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NomeCorto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="IscrizioniScuderieCampionato" Relationship="Self.FK_IscrizioneScuderia" FromRole="Scuderie" ToRole="IscrizioniScuderieCampionato" />
+    <NavigationProperty Name="Piloti" Relationship="Self.FK_PilotaScuderia" FromRole="Scuderie" ToRole="Piloti" />
+    <NavigationProperty Name="PronosticoUtenteFantaCampionato" Relationship="Self.FK_PronosticoDecimaScuderia" FromRole="Scuderie" ToRole="PronosticoUtenteFantaCampionato" />
+    <NavigationProperty Name="PronosticoUtenteFantaCampionato1" Relationship="Self.FK_PronosticoNonaScuderia" FromRole="Scuderie" ToRole="PronosticoUtenteFantaCampionato" />
+    <NavigationProperty Name="PronosticoUtenteFantaCampionato2" Relationship="Self.FK_PronosticoOttavaScuderia" FromRole="Scuderie" ToRole="PronosticoUtenteFantaCampionato" />
+    <NavigationProperty Name="PronosticoUtenteFantaCampionato3" Relationship="Self.FK_PronosticoPrimaScuderia" FromRole="Scuderie" ToRole="PronosticoUtenteFantaCampionato" />
+    <NavigationProperty Name="PronosticoUtenteFantaCampionato4" Relationship="Self.FK_PronosticoQuartaScuderia" FromRole="Scuderie" ToRole="PronosticoUtenteFantaCampionato" />
+    <NavigationProperty Name="PronosticoUtenteFantaCampionato5" Relationship="Self.FK_PronosticoQuintaScuderia" FromRole="Scuderie" ToRole="PronosticoUtenteFantaCampionato" />
+    <NavigationProperty Name="PronosticoUtenteFantaCampionato6" Relationship="Self.FK_PronosticoSecondaScuderia" FromRole="Scuderie" ToRole="PronosticoUtenteFantaCampionato" />
+    <NavigationProperty Name="PronosticoUtenteFantaCampionato7" Relationship="Self.FK_PronosticoSestaScuderia" FromRole="Scuderie" ToRole="PronosticoUtenteFantaCampionato" />
+    <NavigationProperty Name="PronosticoUtenteFantaCampionato8" Relationship="Self.FK_PronosticoSettimaScuderia" FromRole="Scuderie" ToRole="PronosticoUtenteFantaCampionato" />
+    <NavigationProperty Name="PronosticoUtenteFantaCampionato9" Relationship="Self.FK_PronosticoTerzaScuderia" FromRole="Scuderie" ToRole="PronosticoUtenteFantaCampionato" />
+  </EntityType>
+  <EntityType Name="Utenti">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Cognome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Data_Registrazione" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="IscrizioniUtentiFantaCampionato" Relationship="Self.FK_IscrizioneUtente" FromRole="Utenti" ToRole="IscrizioniUtentiFantaCampionato" />
+    <NavigationProperty Name="PronosticoUtenteGara" Relationship="Self.FK_PronosticoUtenteGara_Utenti" FromRole="Utenti" ToRole="PronosticoUtenteGara" />
+  </EntityType>
+  <Association Name="FK_CampionatiMondiali_RegoleCampionatoMondiale">
+    <End Role="RegoleCampionatoMondiale" Type="Self.RegoleCampionatoMondiale" Multiplicity="1" />
+    <End Role="CampionatiMondiali" Type="Self.CampionatiMondiali" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RegoleCampionatoMondiale">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CampionatiMondiali">
+        <PropertyRef Name="RegoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CampionatoFanta">
+    <End Role="CampionatiMondiali" Type="Self.CampionatiMondiali" Multiplicity="1" />
+    <End Role="FantaCampionati" Type="Self.FantaCampionati" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CampionatiMondiali">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FantaCampionati">
+        <PropertyRef Name="CampionatoRealeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IscrizioneCampionato">
+    <End Role="CampionatiMondiali" Type="Self.CampionatiMondiali" Multiplicity="1" />
+    <End Role="IscrizioniScuderieCampionato" Type="Self.IscrizioniScuderieCampionato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CampionatiMondiali">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="IscrizioniScuderieCampionato">
+        <PropertyRef Name="CampionatoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IscrizioneCampionatoCircuito">
+    <End Role="CampionatiMondiali" Type="Self.CampionatiMondiali" Multiplicity="1" />
+    <End Role="IscrizioniCircuitiCampionato" Type="Self.IscrizioniCircuitiCampionato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CampionatiMondiali">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="IscrizioniCircuitiCampionato">
+        <PropertyRef Name="CampionatoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IscrizioneCampionatoPilota">
+    <End Role="CampionatiMondiali" Type="Self.CampionatiMondiali" Multiplicity="1" />
+    <End Role="IscrizioniPilotiCampionato" Type="Self.IscrizioniPilotiCampionato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CampionatiMondiali">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="IscrizioniPilotiCampionato">
+        <PropertyRef Name="CampionatoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IscrizioneCircuito">
+    <End Role="Circuiti" Type="Self.Circuiti" Multiplicity="1" />
+    <End Role="IscrizioniCircuitiCampionato" Type="Self.IscrizioniCircuitiCampionato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Circuiti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="IscrizioniCircuitiCampionato">
+        <PropertyRef Name="CircuitoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PronosticoUtenteGara_Circuiti">
+    <End Role="Circuiti" Type="Self.Circuiti" Multiplicity="1" />
+    <End Role="PronosticoUtenteGara" Type="Self.PronosticoUtenteGara" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Circuiti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PronosticoUtenteGara">
+        <PropertyRef Name="CircuitoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PronosticoUtenteGara_FantaCampionati">
+    <End Role="FantaCampionati" Type="Self.FantaCampionati" Multiplicity="1" />
+    <End Role="PronosticoUtenteGara" Type="Self.PronosticoUtenteGara" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FantaCampionati">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PronosticoUtenteGara">
+        <PropertyRef Name="FantaCampionatoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IscrizioniCircuitiCampionato_RisultatoGaraReale">
+    <End Role="RisultatoGaraReale" Type="Self.RisultatoGaraReale" Multiplicity="0..1" />
+    <End Role="IscrizioniCircuitiCampionato" Type="Self.IscrizioniCircuitiCampionato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RisultatoGaraReale">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="IscrizioniCircuitiCampionato">
+        <PropertyRef Name="RisultatiId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IscrizionePilota">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="1" />
+    <End Role="IscrizioniPilotiCampionato" Type="Self.IscrizioniPilotiCampionato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="IscrizioniPilotiCampionato">
+        <PropertyRef Name="PilotaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IscrizioneScuderia">
+    <End Role="Scuderie" Type="Self.Scuderie" Multiplicity="1" />
+    <End Role="IscrizioniScuderieCampionato" Type="Self.IscrizioniScuderieCampionato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Scuderie">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="IscrizioniScuderieCampionato">
+        <PropertyRef Name="ScuderiaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IscrizioneUtente">
+    <End Role="Utenti" Type="Self.Utenti" Multiplicity="1" />
+    <End Role="IscrizioniUtentiFantaCampionato" Type="Self.IscrizioniUtentiFantaCampionato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utenti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="IscrizioniUtentiFantaCampionato">
+        <PropertyRef Name="UtenteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota01DFN">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoDFNGaraReale" Type="Self.RisultatoDFNGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoDFNGaraReale">
+        <PropertyRef Name="PilotaId01" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota01Posizione">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="1" />
+    <End Role="RisultatoGaraReale" Type="Self.RisultatoGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoGaraReale">
+        <PropertyRef Name="PilotaId01" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota02DFN">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoDFNGaraReale" Type="Self.RisultatoDFNGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoDFNGaraReale">
+        <PropertyRef Name="PilotaId02" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota02Posizione">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoGaraReale" Type="Self.RisultatoGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoGaraReale">
+        <PropertyRef Name="PilotaId02" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota03DFN">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoDFNGaraReale" Type="Self.RisultatoDFNGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoDFNGaraReale">
+        <PropertyRef Name="PilotaId03" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota03Posizione">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoGaraReale" Type="Self.RisultatoGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoGaraReale">
+        <PropertyRef Name="PilotaId03" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota04DFN">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoDFNGaraReale" Type="Self.RisultatoDFNGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoDFNGaraReale">
+        <PropertyRef Name="PilotaId04" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota04Posizione">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoGaraReale" Type="Self.RisultatoGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoGaraReale">
+        <PropertyRef Name="PilotaId04" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota05DFN">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoDFNGaraReale" Type="Self.RisultatoDFNGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoDFNGaraReale">
+        <PropertyRef Name="PilotaId05" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota05Posizione">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoGaraReale" Type="Self.RisultatoGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoGaraReale">
+        <PropertyRef Name="PilotaId05" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota06DFN">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoDFNGaraReale" Type="Self.RisultatoDFNGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoDFNGaraReale">
+        <PropertyRef Name="PilotaId06" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota06Posizione">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoGaraReale" Type="Self.RisultatoGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoGaraReale">
+        <PropertyRef Name="PilotaId06" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota07DFN">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoDFNGaraReale" Type="Self.RisultatoDFNGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoDFNGaraReale">
+        <PropertyRef Name="PilotaId07" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota07Posizione">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoGaraReale" Type="Self.RisultatoGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoGaraReale">
+        <PropertyRef Name="PilotaId07" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota08DFN">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoDFNGaraReale" Type="Self.RisultatoDFNGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoDFNGaraReale">
+        <PropertyRef Name="PilotaId08" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota08Posizione">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoGaraReale" Type="Self.RisultatoGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoGaraReale">
+        <PropertyRef Name="PilotaId08" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota09DFN">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoDFNGaraReale" Type="Self.RisultatoDFNGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoDFNGaraReale">
+        <PropertyRef Name="PilotaId09" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota09Posizione">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoGaraReale" Type="Self.RisultatoGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoGaraReale">
+        <PropertyRef Name="PilotaId09" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota10DFN">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoDFNGaraReale" Type="Self.RisultatoDFNGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoDFNGaraReale">
+        <PropertyRef Name="PilotaId10" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota10Posizione">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoGaraReale" Type="Self.RisultatoGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoGaraReale">
+        <PropertyRef Name="PilotaId10" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota11DFN">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoDFNGaraReale" Type="Self.RisultatoDFNGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoDFNGaraReale">
+        <PropertyRef Name="PilotaId11" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota11Posizione">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoGaraReale" Type="Self.RisultatoGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoGaraReale">
+        <PropertyRef Name="PilotaId11" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota12DFN">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoDFNGaraReale" Type="Self.RisultatoDFNGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoDFNGaraReale">
+        <PropertyRef Name="PilotaId12" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota12Posizione">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoGaraReale" Type="Self.RisultatoGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoGaraReale">
+        <PropertyRef Name="PilotaId12" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota13DFN">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoDFNGaraReale" Type="Self.RisultatoDFNGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoDFNGaraReale">
+        <PropertyRef Name="PilotaId13" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota13Posizione">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoGaraReale" Type="Self.RisultatoGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoGaraReale">
+        <PropertyRef Name="PilotaId13" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota14DFN">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoDFNGaraReale" Type="Self.RisultatoDFNGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoDFNGaraReale">
+        <PropertyRef Name="PilotaId14" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota14Posizione">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoGaraReale" Type="Self.RisultatoGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoGaraReale">
+        <PropertyRef Name="PilotaId14" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota15DFN">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoDFNGaraReale" Type="Self.RisultatoDFNGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoDFNGaraReale">
+        <PropertyRef Name="PilotaId15" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota15Posizione">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoGaraReale" Type="Self.RisultatoGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoGaraReale">
+        <PropertyRef Name="PilotaId15" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota16DFN">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoDFNGaraReale" Type="Self.RisultatoDFNGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoDFNGaraReale">
+        <PropertyRef Name="PilotaId16" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota16Posizione">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoGaraReale" Type="Self.RisultatoGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoGaraReale">
+        <PropertyRef Name="PilotaId16" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota17DFN">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoDFNGaraReale" Type="Self.RisultatoDFNGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoDFNGaraReale">
+        <PropertyRef Name="PilotaId17" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota17Posizione">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoGaraReale" Type="Self.RisultatoGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoGaraReale">
+        <PropertyRef Name="PilotaId17" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota18DFN">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoDFNGaraReale" Type="Self.RisultatoDFNGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoDFNGaraReale">
+        <PropertyRef Name="PilotaId18" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota18Posizione">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoGaraReale" Type="Self.RisultatoGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoGaraReale">
+        <PropertyRef Name="PilotaId18" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota19DFN">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoDFNGaraReale" Type="Self.RisultatoDFNGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoDFNGaraReale">
+        <PropertyRef Name="PilotaId19" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota19Posizione">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoGaraReale" Type="Self.RisultatoGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoGaraReale">
+        <PropertyRef Name="PilotaId19" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota20DFN">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoDFNGaraReale" Type="Self.RisultatoDFNGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoDFNGaraReale">
+        <PropertyRef Name="PilotaId20" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pilota20Posizione">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoGaraReale" Type="Self.RisultatoGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoGaraReale">
+        <PropertyRef Name="PilotaId20" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PilotaGiroVeloce">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoGaraReale" Type="Self.RisultatoGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoGaraReale">
+        <PropertyRef Name="PilotaIdGiroVeloce" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PilotaPolePosition">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoGaraReale" Type="Self.RisultatoGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoGaraReale">
+        <PropertyRef Name="PilotaIdPolePosition" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PilotaScuderia">
+    <End Role="Scuderie" Type="Self.Scuderie" Multiplicity="1" />
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Scuderie">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Piloti">
+        <PropertyRef Name="ScuderiaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PronosticoDecimoPilota">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="1" />
+    <End Role="PronosticoUtenteFantaCampionato" Type="Self.PronosticoUtenteFantaCampionato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PronosticoUtenteFantaCampionato">
+        <PropertyRef Name="DecimoClassificatoPilotaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PronosticoNonoPilota">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="1" />
+    <End Role="PronosticoUtenteFantaCampionato" Type="Self.PronosticoUtenteFantaCampionato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PronosticoUtenteFantaCampionato">
+        <PropertyRef Name="NonoClassificatoPilotaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PronosticoOttavoPilota">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="1" />
+    <End Role="PronosticoUtenteFantaCampionato" Type="Self.PronosticoUtenteFantaCampionato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PronosticoUtenteFantaCampionato">
+        <PropertyRef Name="OttavoClassificatoPilotaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PronosticoPrimoPilota">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="1" />
+    <End Role="PronosticoUtenteFantaCampionato" Type="Self.PronosticoUtenteFantaCampionato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PronosticoUtenteFantaCampionato">
+        <PropertyRef Name="PrimoClassificatoPilotaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PronosticoQuartoPilota">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="1" />
+    <End Role="PronosticoUtenteFantaCampionato" Type="Self.PronosticoUtenteFantaCampionato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PronosticoUtenteFantaCampionato">
+        <PropertyRef Name="QuartoClassificatoPilotaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PronosticoQuintoPilota">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="1" />
+    <End Role="PronosticoUtenteFantaCampionato" Type="Self.PronosticoUtenteFantaCampionato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PronosticoUtenteFantaCampionato">
+        <PropertyRef Name="QuintoClassificatoPilotaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PronosticoSecondoPilota">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="1" />
+    <End Role="PronosticoUtenteFantaCampionato" Type="Self.PronosticoUtenteFantaCampionato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PronosticoUtenteFantaCampionato">
+        <PropertyRef Name="SecondoClassificatoPilotaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PronosticoSestoPilota">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="1" />
+    <End Role="PronosticoUtenteFantaCampionato" Type="Self.PronosticoUtenteFantaCampionato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PronosticoUtenteFantaCampionato">
+        <PropertyRef Name="SestoClassificatoPilotaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PronosticoSettimoPilota">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="1" />
+    <End Role="PronosticoUtenteFantaCampionato" Type="Self.PronosticoUtenteFantaCampionato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PronosticoUtenteFantaCampionato">
+        <PropertyRef Name="SettimoClassificatoPilotaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PronosticoTerzoPilota">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="1" />
+    <End Role="PronosticoUtenteFantaCampionato" Type="Self.PronosticoUtenteFantaCampionato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PronosticoUtenteFantaCampionato">
+        <PropertyRef Name="TerzoClassificatoPilotaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PronosticoUtenteGara_Piloti">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="1" />
+    <End Role="PronosticoUtenteGara" Type="Self.PronosticoUtenteGara" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PronosticoUtenteGara">
+        <PropertyRef Name="PrimoClassificatoPilotaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PronosticoUtenteGara_Piloti1">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="1" />
+    <End Role="PronosticoUtenteGara" Type="Self.PronosticoUtenteGara" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PronosticoUtenteGara">
+        <PropertyRef Name="SecondoClassificatoPilotaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PronosticoUtenteGara_Piloti2">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="1" />
+    <End Role="PronosticoUtenteGara" Type="Self.PronosticoUtenteGara" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PronosticoUtenteGara">
+        <PropertyRef Name="TerzoClassificatoPilotaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PronosticoUtenteGara_Piloti3">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="1" />
+    <End Role="PronosticoUtenteGara" Type="Self.PronosticoUtenteGara" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PronosticoUtenteGara">
+        <PropertyRef Name="DFNPilotaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PronosticoUtenteGara_Piloti4">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="1" />
+    <End Role="PronosticoUtenteGara" Type="Self.PronosticoUtenteGara" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PronosticoUtenteGara">
+        <PropertyRef Name="GiroVelocePilotaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PronosticoUtenteGara_Piloti5">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="1" />
+    <End Role="PronosticoUtenteGara" Type="Self.PronosticoUtenteGara" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PronosticoUtenteGara">
+        <PropertyRef Name="PolePositionPilotaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PronosticoDecimaScuderia">
+    <End Role="Scuderie" Type="Self.Scuderie" Multiplicity="1" />
+    <End Role="PronosticoUtenteFantaCampionato" Type="Self.PronosticoUtenteFantaCampionato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Scuderie">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PronosticoUtenteFantaCampionato">
+        <PropertyRef Name="DecimaClassificataScuderiaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PronosticoNonaScuderia">
+    <End Role="Scuderie" Type="Self.Scuderie" Multiplicity="1" />
+    <End Role="PronosticoUtenteFantaCampionato" Type="Self.PronosticoUtenteFantaCampionato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Scuderie">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PronosticoUtenteFantaCampionato">
+        <PropertyRef Name="NonaClassificataScuderiaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PronosticoOttavaScuderia">
+    <End Role="Scuderie" Type="Self.Scuderie" Multiplicity="1" />
+    <End Role="PronosticoUtenteFantaCampionato" Type="Self.PronosticoUtenteFantaCampionato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Scuderie">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PronosticoUtenteFantaCampionato">
+        <PropertyRef Name="OttavaClassificataScuderiaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PronosticoPrimaScuderia">
+    <End Role="Scuderie" Type="Self.Scuderie" Multiplicity="1" />
+    <End Role="PronosticoUtenteFantaCampionato" Type="Self.PronosticoUtenteFantaCampionato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Scuderie">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PronosticoUtenteFantaCampionato">
+        <PropertyRef Name="PrimaClassificataScuderiaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PronosticoQuartaScuderia">
+    <End Role="Scuderie" Type="Self.Scuderie" Multiplicity="1" />
+    <End Role="PronosticoUtenteFantaCampionato" Type="Self.PronosticoUtenteFantaCampionato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Scuderie">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PronosticoUtenteFantaCampionato">
+        <PropertyRef Name="QuartaClassificataScuderiaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PronosticoQuintaScuderia">
+    <End Role="Scuderie" Type="Self.Scuderie" Multiplicity="1" />
+    <End Role="PronosticoUtenteFantaCampionato" Type="Self.PronosticoUtenteFantaCampionato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Scuderie">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PronosticoUtenteFantaCampionato">
+        <PropertyRef Name="QuintaClassificataScuderiaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PronosticoSecondaScuderia">
+    <End Role="Scuderie" Type="Self.Scuderie" Multiplicity="1" />
+    <End Role="PronosticoUtenteFantaCampionato" Type="Self.PronosticoUtenteFantaCampionato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Scuderie">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PronosticoUtenteFantaCampionato">
+        <PropertyRef Name="SecondaClassificataScuderiaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PronosticoSestaScuderia">
+    <End Role="Scuderie" Type="Self.Scuderie" Multiplicity="1" />
+    <End Role="PronosticoUtenteFantaCampionato" Type="Self.PronosticoUtenteFantaCampionato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Scuderie">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PronosticoUtenteFantaCampionato">
+        <PropertyRef Name="SestaClassificataScuderiaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PronosticoSettimaScuderia">
+    <End Role="Scuderie" Type="Self.Scuderie" Multiplicity="1" />
+    <End Role="PronosticoUtenteFantaCampionato" Type="Self.PronosticoUtenteFantaCampionato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Scuderie">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PronosticoUtenteFantaCampionato">
+        <PropertyRef Name="SettimaClassificataScuderiaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PronosticoTerzaScuderia">
+    <End Role="Scuderie" Type="Self.Scuderie" Multiplicity="1" />
+    <End Role="PronosticoUtenteFantaCampionato" Type="Self.PronosticoUtenteFantaCampionato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Scuderie">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PronosticoUtenteFantaCampionato">
+        <PropertyRef Name="TerzaClassificataScuderiaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PronosticoRisultato">
+    <End Role="PronosticoUtenteGara" Type="Self.PronosticoUtenteGara" Multiplicity="1" />
+    <End Role="RisultatoPronostico" Type="Self.RisultatoPronostico" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PronosticoUtenteGara">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoPronostico">
+        <PropertyRef Name="PronosticoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PronosticoUtenteGara_Utenti">
+    <End Role="Utenti" Type="Self.Utenti" Multiplicity="1" />
+    <End Role="PronosticoUtenteGara" Type="Self.PronosticoUtenteGara" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utenti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PronosticoUtenteGara">
+        <PropertyRef Name="UtenteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RisultatoDFN">
+    <End Role="RisultatoDFNGaraReale" Type="Self.RisultatoDFNGaraReale" Multiplicity="1" />
+    <End Role="RisultatoGaraReale" Type="Self.RisultatoGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RisultatoDFNGaraReale">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoGaraReale">
+        <PropertyRef Name="RisultatoDFNId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FantaF1_SVRKEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CampionatiMondiali" EntityType="Self.CampionatiMondiali" />
+    <EntitySet Name="Circuiti" EntityType="Self.Circuiti" />
+    <EntitySet Name="FantaCampionati" EntityType="Self.FantaCampionati" />
+    <EntitySet Name="IscrizioniCircuitiCampionato" EntityType="Self.IscrizioniCircuitiCampionato" />
+    <EntitySet Name="IscrizioniPilotiCampionato" EntityType="Self.IscrizioniPilotiCampionato" />
+    <EntitySet Name="IscrizioniScuderieCampionato" EntityType="Self.IscrizioniScuderieCampionato" />
+    <EntitySet Name="IscrizioniUtentiFantaCampionato" EntityType="Self.IscrizioniUtentiFantaCampionato" />
+    <EntitySet Name="Piloti" EntityType="Self.Piloti" />
+    <EntitySet Name="PronosticoUtenteFantaCampionato" EntityType="Self.PronosticoUtenteFantaCampionato" />
+    <EntitySet Name="PronosticoUtenteGara" EntityType="Self.PronosticoUtenteGara" />
+    <EntitySet Name="RegoleCampionatoMondiale" EntityType="Self.RegoleCampionatoMondiale" />
+    <EntitySet Name="RegoleFantaCampionato" EntityType="Self.RegoleFantaCampionato" />
+    <EntitySet Name="RisultatoDFNGaraReale" EntityType="Self.RisultatoDFNGaraReale" />
+    <EntitySet Name="RisultatoGaraReale" EntityType="Self.RisultatoGaraReale" />
+    <EntitySet Name="RisultatoPronostico" EntityType="Self.RisultatoPronostico" />
+    <EntitySet Name="Scuderie" EntityType="Self.Scuderie" />
+    <EntitySet Name="Utenti" EntityType="Self.Utenti" />
+    <AssociationSet Name="FK_CampionatiMondiali_RegoleCampionatoMondiale" Association="Self.FK_CampionatiMondiali_RegoleCampionatoMondiale">
+      <End Role="RegoleCampionatoMondiale" EntitySet="RegoleCampionatoMondiale" />
+      <End Role="CampionatiMondiali" EntitySet="CampionatiMondiali" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CampionatoFanta" Association="Self.FK_CampionatoFanta">
+      <End Role="CampionatiMondiali" EntitySet="CampionatiMondiali" />
+      <End Role="FantaCampionati" EntitySet="FantaCampionati" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IscrizioneCampionato" Association="Self.FK_IscrizioneCampionato">
+      <End Role="CampionatiMondiali" EntitySet="CampionatiMondiali" />
+      <End Role="IscrizioniScuderieCampionato" EntitySet="IscrizioniScuderieCampionato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IscrizioneCampionatoCircuito" Association="Self.FK_IscrizioneCampionatoCircuito">
+      <End Role="CampionatiMondiali" EntitySet="CampionatiMondiali" />
+      <End Role="IscrizioniCircuitiCampionato" EntitySet="IscrizioniCircuitiCampionato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IscrizioneCampionatoPilota" Association="Self.FK_IscrizioneCampionatoPilota">
+      <End Role="CampionatiMondiali" EntitySet="CampionatiMondiali" />
+      <End Role="IscrizioniPilotiCampionato" EntitySet="IscrizioniPilotiCampionato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IscrizioneCircuito" Association="Self.FK_IscrizioneCircuito">
+      <End Role="Circuiti" EntitySet="Circuiti" />
+      <End Role="IscrizioniCircuitiCampionato" EntitySet="IscrizioniCircuitiCampionato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PronosticoUtenteGara_Circuiti" Association="Self.FK_PronosticoUtenteGara_Circuiti">
+      <End Role="Circuiti" EntitySet="Circuiti" />
+      <End Role="PronosticoUtenteGara" EntitySet="PronosticoUtenteGara" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PronosticoUtenteGara_FantaCampionati" Association="Self.FK_PronosticoUtenteGara_FantaCampionati">
+      <End Role="FantaCampionati" EntitySet="FantaCampionati" />
+      <End Role="PronosticoUtenteGara" EntitySet="PronosticoUtenteGara" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IscrizioniCircuitiCampionato_RisultatoGaraReale" Association="Self.FK_IscrizioniCircuitiCampionato_RisultatoGaraReale">
+      <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+      <End Role="IscrizioniCircuitiCampionato" EntitySet="IscrizioniCircuitiCampionato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IscrizionePilota" Association="Self.FK_IscrizionePilota">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="IscrizioniPilotiCampionato" EntitySet="IscrizioniPilotiCampionato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IscrizioneScuderia" Association="Self.FK_IscrizioneScuderia">
+      <End Role="Scuderie" EntitySet="Scuderie" />
+      <End Role="IscrizioniScuderieCampionato" EntitySet="IscrizioniScuderieCampionato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IscrizioneUtente" Association="Self.FK_IscrizioneUtente">
+      <End Role="Utenti" EntitySet="Utenti" />
+      <End Role="IscrizioniUtentiFantaCampionato" EntitySet="IscrizioniUtentiFantaCampionato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota01DFN" Association="Self.FK_Pilota01DFN">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoDFNGaraReale" EntitySet="RisultatoDFNGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota01Posizione" Association="Self.FK_Pilota01Posizione">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota02DFN" Association="Self.FK_Pilota02DFN">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoDFNGaraReale" EntitySet="RisultatoDFNGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota02Posizione" Association="Self.FK_Pilota02Posizione">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota03DFN" Association="Self.FK_Pilota03DFN">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoDFNGaraReale" EntitySet="RisultatoDFNGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota03Posizione" Association="Self.FK_Pilota03Posizione">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota04DFN" Association="Self.FK_Pilota04DFN">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoDFNGaraReale" EntitySet="RisultatoDFNGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota04Posizione" Association="Self.FK_Pilota04Posizione">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota05DFN" Association="Self.FK_Pilota05DFN">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoDFNGaraReale" EntitySet="RisultatoDFNGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota05Posizione" Association="Self.FK_Pilota05Posizione">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota06DFN" Association="Self.FK_Pilota06DFN">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoDFNGaraReale" EntitySet="RisultatoDFNGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota06Posizione" Association="Self.FK_Pilota06Posizione">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota07DFN" Association="Self.FK_Pilota07DFN">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoDFNGaraReale" EntitySet="RisultatoDFNGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota07Posizione" Association="Self.FK_Pilota07Posizione">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota08DFN" Association="Self.FK_Pilota08DFN">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoDFNGaraReale" EntitySet="RisultatoDFNGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota08Posizione" Association="Self.FK_Pilota08Posizione">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota09DFN" Association="Self.FK_Pilota09DFN">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoDFNGaraReale" EntitySet="RisultatoDFNGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota09Posizione" Association="Self.FK_Pilota09Posizione">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota10DFN" Association="Self.FK_Pilota10DFN">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoDFNGaraReale" EntitySet="RisultatoDFNGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota10Posizione" Association="Self.FK_Pilota10Posizione">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota11DFN" Association="Self.FK_Pilota11DFN">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoDFNGaraReale" EntitySet="RisultatoDFNGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota11Posizione" Association="Self.FK_Pilota11Posizione">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota12DFN" Association="Self.FK_Pilota12DFN">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoDFNGaraReale" EntitySet="RisultatoDFNGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota12Posizione" Association="Self.FK_Pilota12Posizione">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota13DFN" Association="Self.FK_Pilota13DFN">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoDFNGaraReale" EntitySet="RisultatoDFNGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota13Posizione" Association="Self.FK_Pilota13Posizione">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota14DFN" Association="Self.FK_Pilota14DFN">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoDFNGaraReale" EntitySet="RisultatoDFNGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota14Posizione" Association="Self.FK_Pilota14Posizione">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota15DFN" Association="Self.FK_Pilota15DFN">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoDFNGaraReale" EntitySet="RisultatoDFNGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota15Posizione" Association="Self.FK_Pilota15Posizione">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota16DFN" Association="Self.FK_Pilota16DFN">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoDFNGaraReale" EntitySet="RisultatoDFNGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota16Posizione" Association="Self.FK_Pilota16Posizione">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota17DFN" Association="Self.FK_Pilota17DFN">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoDFNGaraReale" EntitySet="RisultatoDFNGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota17Posizione" Association="Self.FK_Pilota17Posizione">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota18DFN" Association="Self.FK_Pilota18DFN">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoDFNGaraReale" EntitySet="RisultatoDFNGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota18Posizione" Association="Self.FK_Pilota18Posizione">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota19DFN" Association="Self.FK_Pilota19DFN">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoDFNGaraReale" EntitySet="RisultatoDFNGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota19Posizione" Association="Self.FK_Pilota19Posizione">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota20DFN" Association="Self.FK_Pilota20DFN">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoDFNGaraReale" EntitySet="RisultatoDFNGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pilota20Posizione" Association="Self.FK_Pilota20Posizione">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PilotaGiroVeloce" Association="Self.FK_PilotaGiroVeloce">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PilotaPolePosition" Association="Self.FK_PilotaPolePosition">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PilotaScuderia" Association="Self.FK_PilotaScuderia">
+      <End Role="Scuderie" EntitySet="Scuderie" />
+      <End Role="Piloti" EntitySet="Piloti" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PronosticoDecimoPilota" Association="Self.FK_PronosticoDecimoPilota">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="PronosticoUtenteFantaCampionato" EntitySet="PronosticoUtenteFantaCampionato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PronosticoNonoPilota" Association="Self.FK_PronosticoNonoPilota">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="PronosticoUtenteFantaCampionato" EntitySet="PronosticoUtenteFantaCampionato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PronosticoOttavoPilota" Association="Self.FK_PronosticoOttavoPilota">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="PronosticoUtenteFantaCampionato" EntitySet="PronosticoUtenteFantaCampionato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PronosticoPrimoPilota" Association="Self.FK_PronosticoPrimoPilota">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="PronosticoUtenteFantaCampionato" EntitySet="PronosticoUtenteFantaCampionato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PronosticoQuartoPilota" Association="Self.FK_PronosticoQuartoPilota">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="PronosticoUtenteFantaCampionato" EntitySet="PronosticoUtenteFantaCampionato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PronosticoQuintoPilota" Association="Self.FK_PronosticoQuintoPilota">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="PronosticoUtenteFantaCampionato" EntitySet="PronosticoUtenteFantaCampionato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PronosticoSecondoPilota" Association="Self.FK_PronosticoSecondoPilota">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="PronosticoUtenteFantaCampionato" EntitySet="PronosticoUtenteFantaCampionato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PronosticoSestoPilota" Association="Self.FK_PronosticoSestoPilota">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="PronosticoUtenteFantaCampionato" EntitySet="PronosticoUtenteFantaCampionato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PronosticoSettimoPilota" Association="Self.FK_PronosticoSettimoPilota">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="PronosticoUtenteFantaCampionato" EntitySet="PronosticoUtenteFantaCampionato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PronosticoTerzoPilota" Association="Self.FK_PronosticoTerzoPilota">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="PronosticoUtenteFantaCampionato" EntitySet="PronosticoUtenteFantaCampionato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PronosticoUtenteGara_Piloti" Association="Self.FK_PronosticoUtenteGara_Piloti">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="PronosticoUtenteGara" EntitySet="PronosticoUtenteGara" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PronosticoUtenteGara_Piloti1" Association="Self.FK_PronosticoUtenteGara_Piloti1">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="PronosticoUtenteGara" EntitySet="PronosticoUtenteGara" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PronosticoUtenteGara_Piloti2" Association="Self.FK_PronosticoUtenteGara_Piloti2">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="PronosticoUtenteGara" EntitySet="PronosticoUtenteGara" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PronosticoUtenteGara_Piloti3" Association="Self.FK_PronosticoUtenteGara_Piloti3">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="PronosticoUtenteGara" EntitySet="PronosticoUtenteGara" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PronosticoUtenteGara_Piloti4" Association="Self.FK_PronosticoUtenteGara_Piloti4">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="PronosticoUtenteGara" EntitySet="PronosticoUtenteGara" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PronosticoUtenteGara_Piloti5" Association="Self.FK_PronosticoUtenteGara_Piloti5">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="PronosticoUtenteGara" EntitySet="PronosticoUtenteGara" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PronosticoDecimaScuderia" Association="Self.FK_PronosticoDecimaScuderia">
+      <End Role="Scuderie" EntitySet="Scuderie" />
+      <End Role="PronosticoUtenteFantaCampionato" EntitySet="PronosticoUtenteFantaCampionato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PronosticoNonaScuderia" Association="Self.FK_PronosticoNonaScuderia">
+      <End Role="Scuderie" EntitySet="Scuderie" />
+      <End Role="PronosticoUtenteFantaCampionato" EntitySet="PronosticoUtenteFantaCampionato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PronosticoOttavaScuderia" Association="Self.FK_PronosticoOttavaScuderia">
+      <End Role="Scuderie" EntitySet="Scuderie" />
+      <End Role="PronosticoUtenteFantaCampionato" EntitySet="PronosticoUtenteFantaCampionato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PronosticoPrimaScuderia" Association="Self.FK_PronosticoPrimaScuderia">
+      <End Role="Scuderie" EntitySet="Scuderie" />
+      <End Role="PronosticoUtenteFantaCampionato" EntitySet="PronosticoUtenteFantaCampionato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PronosticoQuartaScuderia" Association="Self.FK_PronosticoQuartaScuderia">
+      <End Role="Scuderie" EntitySet="Scuderie" />
+      <End Role="PronosticoUtenteFantaCampionato" EntitySet="PronosticoUtenteFantaCampionato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PronosticoQuintaScuderia" Association="Self.FK_PronosticoQuintaScuderia">
+      <End Role="Scuderie" EntitySet="Scuderie" />
+      <End Role="PronosticoUtenteFantaCampionato" EntitySet="PronosticoUtenteFantaCampionato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PronosticoSecondaScuderia" Association="Self.FK_PronosticoSecondaScuderia">
+      <End Role="Scuderie" EntitySet="Scuderie" />
+      <End Role="PronosticoUtenteFantaCampionato" EntitySet="PronosticoUtenteFantaCampionato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PronosticoSestaScuderia" Association="Self.FK_PronosticoSestaScuderia">
+      <End Role="Scuderie" EntitySet="Scuderie" />
+      <End Role="PronosticoUtenteFantaCampionato" EntitySet="PronosticoUtenteFantaCampionato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PronosticoSettimaScuderia" Association="Self.FK_PronosticoSettimaScuderia">
+      <End Role="Scuderie" EntitySet="Scuderie" />
+      <End Role="PronosticoUtenteFantaCampionato" EntitySet="PronosticoUtenteFantaCampionato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PronosticoTerzaScuderia" Association="Self.FK_PronosticoTerzaScuderia">
+      <End Role="Scuderie" EntitySet="Scuderie" />
+      <End Role="PronosticoUtenteFantaCampionato" EntitySet="PronosticoUtenteFantaCampionato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PronosticoRisultato" Association="Self.FK_PronosticoRisultato">
+      <End Role="PronosticoUtenteGara" EntitySet="PronosticoUtenteGara" />
+      <End Role="RisultatoPronostico" EntitySet="RisultatoPronostico" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PronosticoUtenteGara_Utenti" Association="Self.FK_PronosticoUtenteGara_Utenti">
+      <End Role="Utenti" EntitySet="Utenti" />
+      <End Role="PronosticoUtenteGara" EntitySet="PronosticoUtenteGara" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RisultatoDFN" Association="Self.FK_RisultatoDFN">
+      <End Role="RisultatoDFNGaraReale" EntitySet="RisultatoDFNGaraReale" />
+      <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

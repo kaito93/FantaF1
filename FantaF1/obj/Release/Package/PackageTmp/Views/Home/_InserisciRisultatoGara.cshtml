@@ -1,0 +1,37 @@
+﻿@model FantaF1.Models.RisultatoGaraViewModel
+
+<div id="CampionatoId">
+    <b>Campionato:</b> @Html.DropDownList("Campionato", Model.Campionato, new { @class = "form-control selectDati wide-select large-text select-multiline" })
+</div>
+<div id="CircuitoId">
+    <b>Circuito:</b> @Html.DropDownList("Circuito", Model.Circuiti, new { @class = "form-control selectDati wide-select large-text select-multiline" })
+</div>
+<br />
+<b>Piloti:</b>
+<br />
+<div id="PilotiSection">
+    @for (var posizione = 1; posizione < 21; posizione++)
+    {
+        <div class="col-md-12" id="Posizione@(posizione)">
+
+            <div class="col-md-3" id="PilotaPosizione@(posizione)">
+                @posizione°: @Html.DropDownList("Pilota" + posizione, Model.Piloti, new { @class = "form-control selectDati wide-select large-text select-multiline" })
+            </div>
+            <div class="col-md-3" id="PilotaPolePosition@(posizione)" style="padding-top:30px;">
+                Pole Position <input type="checkbox" id="PilotaPolePositionInput@(posizione)" />
+            </div>
+            <div class="col-md-3" id="PilotaGiroVeloce@(posizione)" style="padding-top:30px;">
+                Giro Veloce <input type="checkbox" id="PilotaGiroVeloceInput@(posizione)" />
+            </div>
+            <div class="col-md-3" id="PilotaDFN@(posizione)" style="padding-top:30px;">
+                DFN <input type="checkbox" id="PilotaDFNInput@(posizione)" />
+            </div>
+        </div>
+
+    }
+</div>
+<br />
+
+<button id="InsertResultRace" onclick="javascript: SendResultRace();">Inserisci risultati gara</button>
+
+
