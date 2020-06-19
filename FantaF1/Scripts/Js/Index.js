@@ -120,7 +120,10 @@ function CheckFileType(e) {
         processData: false,
         data: formData,
         success: function (response) {
-
+            if (response.Data == "Ok")
+                alert("Partecipanti iscritti correttamente al FantaF1");
+            else
+                alert(response.Data);
         }
     });
 
@@ -137,8 +140,6 @@ function AsyncValidation(oParams) {
         }
     });
 }
-
-
 
 function SendResultRace() {
 
@@ -165,7 +166,6 @@ function SendResultRace() {
         }
 
         dat.push(oData);
-
     }
 
     var odat = JSON.stringify({ listResultRace: dat });
@@ -175,8 +175,11 @@ function SendResultRace() {
         "oData": odat,
         "dataType": "json",
         "Type": "POST",
-        "CallBackFn": function (result) {
-
+        "CallBackFn": function (response) {
+            if (response.Data == "Ok")
+                alert("Risultato gara registrato correttamente");
+            else
+                alert(response.Data);
         }
     }
     AsyncValidation(oParams);
@@ -206,7 +209,10 @@ function CheckFileTypePronostici(e) {
         processData: false,
         data: formData,
         success: function (response) {
-
+            if (response.Data == "Ok")
+                alert("Pronostici gara inseriti correttamente");
+            else
+                alert(response.Data);
         }
     });
 }
@@ -241,7 +247,7 @@ function ClickOnButtonScaricaRisultatiPronostici() {
     if (fantaId == "") {
         alert("Seleziona almeno un fanta campionato!");
     } else {
-        window.location.href = "/Home/GenerateResultsExcel?fantaCampionatoId="+fantaId;
+        window.location.href = "/Home/GenerateResultsExcel?fantaCampionatoId=" + fantaId;
     }
 }
 
@@ -278,8 +284,6 @@ $(document).on("change", "#FantaCampionatiList", function () {
                 $("#CircuitiList").selectpicker('refresh');
                 $("#CircuitiList").selectpicker("val", "");
             }, 100);
-
-
         }
     }
 
@@ -343,8 +347,6 @@ $(document).on("change", "#InserisciCampionato", function () {
                 $("#IscrizioneGP").selectpicker('refresh');
                 $("#IscrizioneGP").selectpicker("val", "");
             }, 100);
-
-
         }
     }
 

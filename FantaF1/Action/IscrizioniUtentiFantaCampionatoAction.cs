@@ -43,7 +43,7 @@ namespace FantaF1.Action
                 while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
-                    var registrazione = line?.Split(';').ToList();
+                    var registrazione = line?.Split(',').ToList();
 
                     if (riga != 0)
                     {
@@ -51,28 +51,28 @@ namespace FantaF1.Action
                         {
                             var registrazioneParsed = new RegistrazioneUtenteStructure
                             {
-                                Nome = registrazione[0],
-                                Cognome = registrazione[1],
-                                PrimoCognomePilota = registrazione[2],
-                                SecondoCognomePilota = registrazione[3],
-                                TerzoCognomePilota = registrazione[4],
-                                QuartoCognomePilota = registrazione[5],
-                                QuintoCognomePilota = registrazione[6],
-                                SestoCognomePilota = registrazione[7],
-                                SettimoCognomePilota = registrazione[8],
-                                OttavoCognomePilota = registrazione[9],
-                                NonoCognomePilota = registrazione[10],
-                                DecimoCognomePilota = registrazione[11],
-                                PrimoNomeScuderia = registrazione[12],
-                                SecondoNomeScuderia = registrazione[13],
-                                TerzoNomeScuderia = registrazione[14],
-                                QuartoNomeScuderia = registrazione[15],
-                                QuintoNomeScuderia = registrazione[16],
-                                SestoNomeScuderia = registrazione[17],
-                                SettimoNomeScuderia = registrazione[18],
-                                OttavoNomeScuderia = registrazione[19],
-                                NonoNomeScuderia = registrazione[20],
-                                DecimoNomeScuderia = registrazione[21]
+                                Nome = registrazione[1],
+                                Cognome = registrazione[2],
+                                PrimoCognomePilota = registrazione[3],
+                                SecondoCognomePilota = registrazione[4],
+                                TerzoCognomePilota = registrazione[5],
+                                QuartoCognomePilota = registrazione[6],
+                                QuintoCognomePilota = registrazione[7],
+                                SestoCognomePilota = registrazione[8],
+                                SettimoCognomePilota = registrazione[9],
+                                OttavoCognomePilota = registrazione[10],
+                                NonoCognomePilota = registrazione[11],
+                                DecimoCognomePilota = registrazione[12],
+                                PrimoNomeScuderia = registrazione[13],
+                                SecondoNomeScuderia = registrazione[14],
+                                TerzoNomeScuderia = registrazione[15],
+                                QuartoNomeScuderia = registrazione[16],
+                                QuintoNomeScuderia = registrazione[17],
+                                SestoNomeScuderia = registrazione[18],
+                                SettimoNomeScuderia = registrazione[19],
+                                OttavoNomeScuderia = registrazione[20],
+                                NonoNomeScuderia = registrazione[21],
+                                DecimoNomeScuderia = registrazione[22]
                             };
 
                             registrazioniList.Add(registrazioneParsed);

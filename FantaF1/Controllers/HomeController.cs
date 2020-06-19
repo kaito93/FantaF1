@@ -88,40 +88,66 @@ namespace FantaF1.Controllers
         {
             InitializeAll();
 
-            var pronostici = _orchestrator.IscrizioniUtentiFantaCampionatoAction.LoadUtentiFromFileCsv(uploadedFiles.FirstOrDefault());
+            JsonResult res;
 
-            SaveUtentiInDatabase(pronostici, idFantaCampionato);
+            try
+            {
+                var pronostici =
+                    _orchestrator.IscrizioniUtentiFantaCampionatoAction.LoadUtentiFromFileCsv(
+                        uploadedFiles.FirstOrDefault());
 
-            var res = new JsonResult { Data = "Ok" };
+                SaveUtentiInDatabase(pronostici, idFantaCampionato);
+
+                res = new JsonResult { Data = "Ok" };
+            }
+
+            catch (Exception ex)
+            {
+                res = new JsonResult { Data = ex.Message };
+            }
 
             return res;
         }
 
         [HttpPost]
         [UploadFileFilter]
-        public ActionResult LoadPronostici(List<FileInformation> uploadedFiles)
+        public JsonResult LoadPronostici(List<FileInformation> uploadedFiles)
         {
             InitializeAll();
 
-            var result = uploadedFiles.FirstOrDefault();
+            JsonResult res;
 
-            if (result == null) return null;
+            try
+            {
+                var result = uploadedFiles.FirstOrDefault();
 
-            var splitName = result.FileName.Split('-');
+                if (result == null) return null;
 
-            var idCircuito = int.Parse(splitName[0]);
+                var splitName = result.FileName.Split('-');
 
-            var idFantaCampionato = _orchestrator.FantaCampionatiAction.GetFantaCampionatoIdFromName(splitName[1].Trim());
+                var idCircuito = int.Parse(splitName[0]);
 
-            var pronostici = _orchestrator.PronosticoUtenteGaraAction.LoadPronosticiFromFileCsv(uploadedFiles.FirstOrDefault());
+                var idFantaCampionato =
+                    _orchestrator.FantaCampionatiAction.GetFantaCampionatoIdFromName(splitName[1].Trim());
 
-            var pilotiList = _orchestrator.PilotiAction.GetPilotiList();
+                var pronostici =
+                    _orchestrator.PronosticoUtenteGaraAction.LoadPronosticiFromFileCsv(uploadedFiles.FirstOrDefault());
 
-            var utentiList = _orchestrator.UtentiAction.GetUtentiList();
+                var pilotiList = _orchestrator.PilotiAction.GetPilotiList();
 
-            _orchestrator.PronosticoUtenteGaraAction.SavePronosticiInDatabase(pronostici, idCircuito, idFantaCampionato, pilotiList, utentiList);
+                var utentiList = _orchestrator.UtentiAction.GetUtentiList();
 
-            return null;
+                _orchestrator.PronosticoUtenteGaraAction.SavePronosticiInDatabase(pronostici, idCircuito,
+                    idFantaCampionato, pilotiList, utentiList);
+
+                res = new JsonResult { Data = "Ok" };
+            }
+            catch (Exception ex)
+            {
+                res = new JsonResult { Data = ex.Message };
+            }
+
+            return res;
         }
 
         public ActionResult ShowSetResultRace()
@@ -151,37 +177,52 @@ namespace FantaF1.Controllers
         }
 
         [HttpPost]
-        public ActionResult SetRaceResult(RaceResultObj[] listResultRace)
+        public JsonResult SetRaceResult(RaceResultObj[] listResultRace)
         {
             var list = listResultRace.ToList();
             InitializeAll();
 
-            var idDfnResult = _orchestrator.RisultatoDfnGaraRealeAction.ManageDfnResult(list);
+            JsonResult res;
 
-            var idRisultato = _orchestrator.RisultatoGaraRealeAction.ManageSaveResultRace(list, idDfnResult);
+            try
+            {
+                var idDfnResult = _orchestrator.RisultatoDfnGaraRealeAction.ManageDfnResult(list);
 
-            var result = list.FirstOrDefault();
+                var idRisultato = _orchestrator.RisultatoGaraRealeAction.ManageSaveResultRace(list, idDfnResult);
 
-            if (result == null) return null;
+                var result = list.FirstOrDefault();
 
-            _orchestrator.IscrizioniCircuitoCampionatoAction.UpdateResultRace(result.IdIscrizione, idRisultato);
+                if (result == null) return null;
 
-            var regoleCampionatoMondialeId =
-                _orchestrator.CampionatiMondialiAction.GetRegoleCampionatoIdFromCampionatoId(result.IdCampionato);
+                _orchestrator.IscrizioniCircuitoCampionatoAction.UpdateResultRace(result.IdIscrizione, idRisultato);
 
-            var regolamentoCampionato =
-                _orchestrator.RegoleCampionatoMondialeAction.GetRegoleCampionatoMondialeFromIdRegole(regoleCampionatoMondialeId);
+                var regoleCampionatoMondialeId =
+                    _orchestrator.CampionatiMondialiAction.GetRegoleCampionatoIdFromCampionatoId(result.IdCampionato);
 
-            _orchestrator.IscrizioniPilotiCampionatoAction.UpdatePunteggioPiloti(regolamentoCampionato, listResultRace.ToList(), result.IdCampionato);
+                var regolamentoCampionato =
+                    _orchestrator.RegoleCampionatoMondialeAction.GetRegoleCampionatoMondialeFromIdRegole(
+                        regoleCampionatoMondialeId);
 
-            var iscrizioniPilotiCampionato =
-                _orchestrator.IscrizioniPilotiCampionatoAction.GetAllIscrizioniPilotiCampionatoForCampionatoMondialeId(result.IdCampionato);
+                _orchestrator.IscrizioniPilotiCampionatoAction.UpdatePunteggioPiloti(regolamentoCampionato,
+                    listResultRace.ToList(), result.IdCampionato);
 
-            var pilotiList = _orchestrator.PilotiAction.GetPilotiList();
+                var iscrizioniPilotiCampionato =
+                    _orchestrator.IscrizioniPilotiCampionatoAction
+                        .GetAllIscrizioniPilotiCampionatoForCampionatoMondialeId(result.IdCampionato);
 
-            _orchestrator.IscrizioniScuderieCampionatoAction.UpdatePunteggioScuderie(result.IdCampionato, iscrizioniPilotiCampionato, pilotiList);
+                var pilotiList = _orchestrator.PilotiAction.GetPilotiList();
 
-            return null;
+                _orchestrator.IscrizioniScuderieCampionatoAction.UpdatePunteggioScuderie(result.IdCampionato,
+                    iscrizioniPilotiCampionato, pilotiList);
+
+                res = new JsonResult { Data = "Ok" };
+            }
+            catch (Exception ex)
+            {
+                res = new JsonResult { Data = ex.Message };
+            }
+
+            return res;
         }
 
         public JsonResult CalculateScorePronostici(int iscrizioneCircuitoCampionatoReale)
