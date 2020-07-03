@@ -82,11 +82,18 @@ namespace FantaF1.Controllers
                 _orchestrator.IscrizioniCircuitoCampionatoAction.GetIscrizioniWithResultsForCampionatoReale(
                     campionatoRealeId);
 
-            var result = iscrizioniCircuitiList.Select(iscrizioneCircuito => new SelectListItem
+            iscrizioniCircuitiList = iscrizioniCircuitiList.OrderBy(x => x.DataGara).ToList();
+
+            var result = new List<SelectListItem>();
+
+            for (int i = 0; i < iscrizioniCircuitiList.Count; i++)
             {
-                Value = iscrizioneCircuito.Id.ToString(),
-                Text = iscrizioneCircuito.NomeGP
-            }).ToList();
+                result.Add(new SelectListItem
+                {
+                    Value = iscrizioniCircuitiList[i].Id.ToString(),
+                    Text = (i+1).ToString() + " - " + iscrizioniCircuitiList[i].NomeGP
+                });
+            }            
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -179,8 +186,18 @@ namespace FantaF1.Controllers
 
             var grandPrixList = _orchestrator.IscrizioniCircuitoCampionatoAction.GetAllIscrizioniForCampionatoReale(idCampionato);
 
-            var result = grandPrixList.Select(grandPrix => new SelectListItem
-            { Value = grandPrix.Id.ToString(), Text = grandPrix.NomeGP }).OrderBy(x => x.Text).ToList();
+            grandPrixList = grandPrixList.OrderBy(x => x.DataGara).ToList();
+
+            var result = new List<SelectListItem>();
+
+            for (int i = 0; i < grandPrixList.Count; i++)
+            {
+                result.Add(new SelectListItem
+                {
+                    Value = grandPrixList[i].Id.ToString(),
+                    Text = (i+1).ToString() + " - " + grandPrixList[i].NomeGP
+                });
+            }
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }

@@ -54,7 +54,7 @@ function LoadCalcolaPronosticiGara() {
                 showTick: true
             });
 
-            $("#FantaCampionatiList").selectpicker("val", "");
+            $(".selectPick").selectpicker("val", "");
         }
     }
     AsyncValidation(oParams);
@@ -127,10 +127,10 @@ function CheckFileType(e) {
         processData: false,
         data: formData,
         success: function (response) {
-            if (response.Data == "Ok")
+            if (response == "Ok")
                 alert("Partecipanti iscritti correttamente al FantaF1");
             else
-                alert(response.Data);
+                alert(response);
         }
     });
 
@@ -183,10 +183,10 @@ function SendResultRace() {
         "dataType": "json",
         "Type": "POST",
         "CallBackFn": function (response) {
-            if (response.Data == "Ok")
+            if (response == "Ok")
                 alert("Risultato gara registrato correttamente");
             else
-                alert(response.Data);
+                alert(response);
         }
     }
     AsyncValidation(oParams);
@@ -224,10 +224,10 @@ function CheckFileTypePronostici(e) {
             processData: false,
             data: formData,
             success: function (response) {
-                if (response.Data == "Ok")
+                if (response == "Ok")
                     alert("Pronostici gara inseriti correttamente");
                 else
-                    alert(response.Data);
+                    alert(response);
             }
         });
     }    
