@@ -1,5 +1,6 @@
 ﻿using FantaF1DataAccessDB;
 using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace FantaF1.Action.Interfaces
 {
@@ -11,5 +12,6 @@ namespace FantaF1.Action.Interfaces
         int GetRegolamentoIdFromIdFantaCampionato(int fantaCampionatoId);
         List<FantaCampionati> GetFantaCampionatiList();
         FantaCampionati GetFantacampionatoFromId(int idFantaCampionato);
+        List<SelectListItem> GetFantaCampionatiSelectListWithIdCampionatoReale();
     }
 }

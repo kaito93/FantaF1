@@ -121,7 +121,7 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
                 }
 
                 var pronosticoGara = pronostici.FirstOrDefault(x =>
-                    x.CircuitoId == iscrizioneCircuito.CircuitoId && x.UtenteId == utenteId);
+                    x.GaraId == iscrizioneCircuito.Id && x.UtenteId == utenteId);
 
                 var risultatoPronostico =
                     risultatiPronosticiUtenti.FirstOrDefault(x =>

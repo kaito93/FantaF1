@@ -18,7 +18,6 @@ namespace FantaF1DataAccessDB
         public Circuiti()
         {
             this.IscrizioniCircuitiCampionato = new HashSet<IscrizioniCircuitiCampionato>();
-            this.PronosticoUtenteGara = new HashSet<PronosticoUtenteGara>();
         }
     
         public int Id { get; set; }
@@ -28,7 +27,5 @@ namespace FantaF1DataAccessDB
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IscrizioniCircuitiCampionato> IscrizioniCircuitiCampionato { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PronosticoUtenteGara> PronosticoUtenteGara { get; set; }
     }
 }

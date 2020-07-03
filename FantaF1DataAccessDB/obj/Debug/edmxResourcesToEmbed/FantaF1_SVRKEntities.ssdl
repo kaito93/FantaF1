@@ -111,7 +111,7 @@
     <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="UtenteId" Type="int" Nullable="false" />
     <Property Name="FantaCampionatoId" Type="int" Nullable="false" />
-    <Property Name="CircuitoId" Type="int" Nullable="false" />
+    <Property Name="GaraId" Type="int" Nullable="false" />
     <Property Name="PrimoClassificatoPilotaId" Type="int" Nullable="false" />
     <Property Name="SecondoClassificatoPilotaId" Type="int" Nullable="false" />
     <Property Name="TerzoClassificatoPilotaId" Type="int" Nullable="false" />
@@ -1161,18 +1161,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_PronosticoUtenteGara_Circuiti">
-    <End Role="Circuiti" Type="Self.Circuiti" Multiplicity="1" />
-    <End Role="PronosticoUtenteGara" Type="Self.PronosticoUtenteGara" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Circuiti">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PronosticoUtenteGara">
-        <PropertyRef Name="CircuitoId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_PronosticoUtenteGara_FantaCampionati">
     <End Role="FantaCampionati" Type="Self.FantaCampionati" Multiplicity="1" />
     <End Role="PronosticoUtenteGara" Type="Self.PronosticoUtenteGara" Multiplicity="*" />
@@ -1182,6 +1170,18 @@
       </Principal>
       <Dependent Role="PronosticoUtenteGara">
         <PropertyRef Name="FantaCampionatoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PronosticoUtenteGara_IscrizioniCircuitiCampionato">
+    <End Role="IscrizioniCircuitiCampionato" Type="Self.IscrizioniCircuitiCampionato" Multiplicity="1" />
+    <End Role="PronosticoUtenteGara" Type="Self.PronosticoUtenteGara" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IscrizioniCircuitiCampionato">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PronosticoUtenteGara">
+        <PropertyRef Name="GaraId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1595,12 +1595,12 @@
       <End Role="Piloti" EntitySet="Piloti" />
       <End Role="PronosticoUtenteFantaCampionato" EntitySet="PronosticoUtenteFantaCampionato" />
     </AssociationSet>
-    <AssociationSet Name="FK_PronosticoUtenteGara_Circuiti" Association="Self.FK_PronosticoUtenteGara_Circuiti">
-      <End Role="Circuiti" EntitySet="Circuiti" />
-      <End Role="PronosticoUtenteGara" EntitySet="PronosticoUtenteGara" />
-    </AssociationSet>
     <AssociationSet Name="FK_PronosticoUtenteGara_FantaCampionati" Association="Self.FK_PronosticoUtenteGara_FantaCampionati">
       <End Role="FantaCampionati" EntitySet="FantaCampionati" />
+      <End Role="PronosticoUtenteGara" EntitySet="PronosticoUtenteGara" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PronosticoUtenteGara_IscrizioniCircuitiCampionato" Association="Self.FK_PronosticoUtenteGara_IscrizioniCircuitiCampionato">
+      <End Role="IscrizioniCircuitiCampionato" EntitySet="IscrizioniCircuitiCampionato" />
       <End Role="PronosticoUtenteGara" EntitySet="PronosticoUtenteGara" />
     </AssociationSet>
     <AssociationSet Name="FK_PronosticoUtenteGara_Piloti" Association="Self.FK_PronosticoUtenteGara_Piloti">

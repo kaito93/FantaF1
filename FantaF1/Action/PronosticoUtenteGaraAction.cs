@@ -17,13 +17,13 @@ namespace FantaF1.Action
             _databaseAction = databaseAction;
             _pronosticiUtentiGara = databaseAction.GetPronosticiUtenteGara();
         }
-        public void SavePronosticiInDatabase(IEnumerable<PronosticoStructure> pronosticiList, int circuitoId, int fantaCampionatoId, List<Piloti> pilotiList, List<Utenti> utentiList)
+        public void SavePronosticiInDatabase(IEnumerable<PronosticoStructure> pronosticiList, int garaId, int fantaCampionatoId, List<Piloti> pilotiList, List<Utenti> utentiList)
         {
             foreach (var pronostico in pronosticiList)
             {
                 var pronosticoDb = new PronosticoUtenteGara
                 {
-                    CircuitoId = circuitoId,
+                    GaraId = garaId,
                     PrimoClassificatoPilotaId = GetPilotaIdFromNameAndSurname(pronostico.PilotaPrimoClassificato, pilotiList),
                     SecondoClassificatoPilotaId = GetPilotaIdFromNameAndSurname(pronostico.PilotaSecondoClassificato, pilotiList),
                     TerzoClassificatoPilotaId = GetPilotaIdFromNameAndSurname(pronostico.PilotaTerzoClassificato, pilotiList),
@@ -40,9 +40,9 @@ namespace FantaF1.Action
 
         }
 
-        public List<PronosticoUtenteGara> GetPronosticoUtenteGaraFromFantaCampionatoIdAndCircuitoId(int fantaCampionatoId, int circuitoId)
+        public List<PronosticoUtenteGara> GetPronosticoUtenteGaraFromFantaCampionatoIdAndCircuitoId(int fantaCampionatoId, int garaId)
         {
-            return _pronosticiUtentiGara.FindAll(x => x.FantaCampionatoId == fantaCampionatoId && x.CircuitoId == circuitoId);
+            return _pronosticiUtentiGara.FindAll(x => x.FantaCampionatoId == fantaCampionatoId && x.GaraId == garaId);
 
         }
 
@@ -73,7 +73,7 @@ namespace FantaF1.Action
                     {
                         var pronosticoParsed = new PronosticoStructure
                         {
-                            InserimentoPronostico = DateTime.Parse(pronostico?[0]),
+                            InserimentoPronostico = DateTime.Parse(pronostico?[0].Split(' ')[0]),
                             IdUtente = pronostico?[1],
                             PilotaPrimoClassificato = pronostico?[2],
                             PilotaSecondoClassificato = pronostico?[3],

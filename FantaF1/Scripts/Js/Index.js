@@ -25,6 +25,13 @@ function LoadPronosticiUtentiSection() {
         "Type": "GET",
         "CallBackFn": function (result) {
             document.getElementById("bodyContent").innerHTML = result.responseText;
+            $(".selectPick").selectpicker({
+                noneSelectedText: "Non selezionato",
+                noneResultsText: "Nessun risultato",
+                showTick: true
+            });
+
+            $(".selectPick").selectpicker("val", "");
         }
     }
     AsyncValidation(oParams);
@@ -190,31 +197,40 @@ function singleFileSelectedPronostici(elem) {
 }
 
 function CheckFileTypePronostici(e) {
+
     e.preventDefault();
 
-    var formData = new FormData();
-    var uploaders = $('input[type="file"]:visible');
+    var fantaCampName = $("#InserisciCampionato")[0].selectedOptions[0].text;
+    var iscr = $("#IscrizioneGP")[0].selectedOptions[0].value;
 
-    for (var u = 0; u < uploaders.length; u++) {
-        if (uploaders[u].files[0] != null) {
-            formData.append("fileCsv", uploaders[u].files[0], uploaders[u].files[0].name);
-        }
+    if (iscr == "") {
+        alert("Seleziona almeno una gara!");
     }
+    else {
+        var formData = new FormData();
+        var uploaders = $('input[type="file"]:visible');
 
-    $.ajax({
-        url: "/Home/LoadPronostici",
-        type: "POST",
-        contentType: false,
-        dataType: "json",
-        processData: false,
-        data: formData,
-        success: function (response) {
-            if (response.Data == "Ok")
-                alert("Pronostici gara inseriti correttamente");
-            else
-                alert(response.Data);
+        for (var u = 0; u < uploaders.length; u++) {
+            if (uploaders[u].files[0] != null) {
+                formData.append("fileCsv", uploaders[u].files[0], iscr + "-" + fantaCampName + "-" + uploaders[u].files[0].name);
+            }
         }
-    });
+
+        $.ajax({
+            url: "/Home/LoadPronostici",
+            type: "POST",
+            contentType: false,
+            dataType: "json",
+            processData: false,
+            data: formData,
+            success: function (response) {
+                if (response.Data == "Ok")
+                    alert("Pronostici gara inseriti correttamente");
+                else
+                    alert(response.Data);
+            }
+        });
+    }    
 }
 
 function ClickOnButtonCalcolaRisultatiPronostici() {

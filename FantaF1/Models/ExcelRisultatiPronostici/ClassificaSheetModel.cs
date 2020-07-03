@@ -64,7 +64,7 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
 
             var punteggio = iscrizioniCircuiti
                 .Select(iscrizioneCircuito => pronostici.FirstOrDefault(x =>
-                    x.CircuitoId == iscrizioneCircuito.CircuitoId && x.UtenteId == utenteId))
+                    x.GaraId == iscrizioneCircuito.Id && x.UtenteId == utenteId))
                 .Select(pronosticoGara =>
                     risultatiPronosticiUtenti.FirstOrDefault(x =>
                         pronosticoGara != null && x.PronosticoId == pronosticoGara.Id))
@@ -129,7 +129,7 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
 
             var punteggio = iscrizioniCircuiti
                 .Select(iscrizioneCircuito => pronostici.FirstOrDefault(x =>
-                    x.CircuitoId == iscrizioneCircuito.CircuitoId && x.UtenteId == utenteId))
+                    x.GaraId == iscrizioneCircuito.Id && x.UtenteId == utenteId))
                 .Select(pronosticoGara =>
                     risultatiPronosticiUtenti.FirstOrDefault(x =>
                         pronosticoGara != null && x.PronosticoId == pronosticoGara.Id))

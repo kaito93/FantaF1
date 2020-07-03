@@ -14,6 +14,12 @@ namespace FantaF1DataAccessDB
     
     public partial class IscrizioniCircuitiCampionato
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public IscrizioniCircuitiCampionato()
+        {
+            this.PronosticoUtenteGara = new HashSet<PronosticoUtenteGara>();
+        }
+    
         public int Id { get; set; }
         public int CircuitoId { get; set; }
         public int CampionatoId { get; set; }
@@ -24,5 +30,7 @@ namespace FantaF1DataAccessDB
         public virtual CampionatiMondiali CampionatiMondiali { get; set; }
         public virtual Circuiti Circuiti { get; set; }
         public virtual RisultatoGaraReale RisultatoGaraReale { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PronosticoUtenteGara> PronosticoUtenteGara { get; set; }
     }
 }

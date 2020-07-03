@@ -36,12 +36,12 @@
     <EntitySetMapping Name="IscrizioniCircuitiCampionato">
       <EntityTypeMapping TypeName="FantaF1_SVRKModel.IscrizioniCircuitiCampionato">
         <MappingFragment StoreEntitySet="IscrizioniCircuitiCampionato">
-          <ScalarProperty Name="NomeGP" ColumnName="NomeGP" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="CircuitoId" ColumnName="CircuitoId" />
           <ScalarProperty Name="CampionatoId" ColumnName="CampionatoId" />
           <ScalarProperty Name="RisultatiId" ColumnName="RisultatiId" />
           <ScalarProperty Name="DataGara" ColumnName="DataGara" />
+          <ScalarProperty Name="NomeGP" ColumnName="NomeGP" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -120,7 +120,7 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="UtenteId" ColumnName="UtenteId" />
           <ScalarProperty Name="FantaCampionatoId" ColumnName="FantaCampionatoId" />
-          <ScalarProperty Name="CircuitoId" ColumnName="CircuitoId" />
+          <ScalarProperty Name="GaraId" ColumnName="GaraId" />
           <ScalarProperty Name="PrimoClassificatoPilotaId" ColumnName="PrimoClassificatoPilotaId" />
           <ScalarProperty Name="SecondoClassificatoPilotaId" ColumnName="SecondoClassificatoPilotaId" />
           <ScalarProperty Name="TerzoClassificatoPilotaId" ColumnName="TerzoClassificatoPilotaId" />
@@ -134,7 +134,6 @@
     <EntitySetMapping Name="RegoleCampionatoMondiale">
       <EntityTypeMapping TypeName="FantaF1_SVRKModel.RegoleCampionatoMondiale">
         <MappingFragment StoreEntitySet="RegoleCampionatoMondiale">
-          <ScalarProperty Name="PunteggioDiciassettesimoClassificato" ColumnName="PunteggioDiciassettesimoClassificato" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="PunteggioPrimoClassificato" ColumnName="PunteggioPrimoClassificato" />
           <ScalarProperty Name="PunteggioSecondoClassificato" ColumnName="PunteggioSecondoClassificato" />
@@ -152,6 +151,7 @@
           <ScalarProperty Name="PunteggioQuattordicesimoClassificato" ColumnName="PunteggioQuattordicesimoClassificato" />
           <ScalarProperty Name="PunteggioQuindicesimoClassificato" ColumnName="PunteggioQuindicesimoClassificato" />
           <ScalarProperty Name="PunteggioSedicesimoClassificato" ColumnName="PunteggioSedicesimoClassificato" />
+          <ScalarProperty Name="PunteggioDiciassettesimoClassificato" ColumnName="PunteggioDiciassettesimoClassificato" />
           <ScalarProperty Name="PunteggioDiciottesimoClassificato" ColumnName="PunteggioDiciottesimoClassificato" />
           <ScalarProperty Name="PunteggioDiciannovesimoClassificato" ColumnName="PunteggioDiciannovesimoClassificato" />
           <ScalarProperty Name="PunteggioVentesimoClassificato" ColumnName="PunteggioVentesimoClassificato" />

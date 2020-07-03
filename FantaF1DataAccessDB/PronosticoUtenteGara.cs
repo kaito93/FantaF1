@@ -23,7 +23,7 @@ namespace FantaF1DataAccessDB
         public int Id { get; set; }
         public int UtenteId { get; set; }
         public int FantaCampionatoId { get; set; }
-        public int CircuitoId { get; set; }
+        public int GaraId { get; set; }
         public int PrimoClassificatoPilotaId { get; set; }
         public int SecondoClassificatoPilotaId { get; set; }
         public int TerzoClassificatoPilotaId { get; set; }
@@ -32,8 +32,8 @@ namespace FantaF1DataAccessDB
         public int DFNPilotaId { get; set; }
         public System.DateTime Inserimento { get; set; }
     
-        public virtual Circuiti Circuiti { get; set; }
         public virtual FantaCampionati FantaCampionati { get; set; }
+        public virtual IscrizioniCircuitiCampionato IscrizioniCircuitiCampionato { get; set; }
         public virtual Piloti Piloti { get; set; }
         public virtual Piloti Piloti1 { get; set; }
         public virtual Piloti Piloti2 { get; set; }

@@ -2,6 +2,7 @@
 using FantaF1DataAccessDB;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Mvc;
 
 namespace FantaF1.Action
 {
@@ -59,6 +60,22 @@ namespace FantaF1.Action
         public FantaCampionati GetFantacampionatoFromId(int idFantaCampionato)
         {
             return _fantaCampionati.FirstOrDefault(x => x.Id == idFantaCampionato);
+        }
+
+        public List<SelectListItem> GetFantaCampionatiSelectListWithIdCampionatoReale()
+        {
+            var listItem = new List<SelectListItem>();
+
+            foreach (var fantaCampionato in _fantaCampionati)
+            {
+                listItem.Add( new SelectListItem
+                {
+                    Text = fantaCampionato.Nome,
+                    Value = fantaCampionato.CampionatoRealeId.ToString()
+                });
+            }
+
+            return listItem;
         }
     }
 }

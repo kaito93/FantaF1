@@ -22,7 +22,7 @@ namespace FantaF1.Controllers
 
             return View();
         }
-
+        
         public ActionResult LoadIscrizioniUtenti()
         {
             return PartialView("_IscrizioniUtenti");
@@ -30,7 +30,16 @@ namespace FantaF1.Controllers
 
         public ActionResult LoadPronosticiUtenti()
         {
-            return PartialView("_PronosticiUtenti");
+            InitializeAll();
+
+            var model = new RisultatoGaraViewModel
+            {
+                Campionato = _orchestrator.FantaCampionatiAction.GetFantaCampionatiSelectListWithIdCampionatoReale(),
+                Circuiti = new List<SelectListItem>(),
+                Piloti = _orchestrator.PilotiAction.GetAllPilotiSelectItem()
+            };
+
+            return PartialView("_PronosticiUtenti", model);
         }
 
         public ActionResult LoadCalcolaPronosticiGara()
@@ -125,7 +134,7 @@ namespace FantaF1.Controllers
 
                 var splitName = result.FileName.Split('-');
 
-                var idCircuito = int.Parse(splitName[0]);
+                var idGara = int.Parse(splitName[0]);
 
                 var idFantaCampionato =
                     _orchestrator.FantaCampionatiAction.GetFantaCampionatoIdFromName(splitName[1].Trim());
@@ -137,7 +146,7 @@ namespace FantaF1.Controllers
 
                 var utentiList = _orchestrator.UtentiAction.GetUtentiList();
 
-                _orchestrator.PronosticoUtenteGaraAction.SavePronosticiInDatabase(pronostici, idCircuito,
+                _orchestrator.PronosticoUtenteGaraAction.SavePronosticiInDatabase(pronostici, idGara,
                     idFantaCampionato, pilotiList, utentiList);
 
                 res = new JsonResult { Data = "Ok" };
@@ -229,8 +238,6 @@ namespace FantaF1.Controllers
         {
             InitializeAll();
 
-            var circuitoId = _orchestrator.IscrizioniCircuitoCampionatoAction.GetIdCircuitoFromIscrizioneCircuitoCampionatoRealeId(iscrizioneCircuitoCampionatoReale);
-
             var campionatoId = _orchestrator.IscrizioniCircuitoCampionatoAction.GetIdCampionatoFromIscrizioneCircuitoCampionatoRealeId(iscrizioneCircuitoCampionatoReale);
 
             var listFantaCampionatiDaAggiornare = _orchestrator.FantaCampionatiAction.GetFantaCampionatiListFromCampionatoId(campionatoId);
@@ -250,7 +257,7 @@ namespace FantaF1.Controllers
             {
                 #region Risultato pronostici gara
 
-                var pronosticiUtenteGara = _orchestrator.PronosticoUtenteGaraAction.GetPronosticoUtenteGaraFromFantaCampionatoIdAndCircuitoId(fantaCampionato.Id, circuitoId);
+                var pronosticiUtenteGara = _orchestrator.PronosticoUtenteGaraAction.GetPronosticoUtenteGaraFromFantaCampionatoIdAndCircuitoId(fantaCampionato.Id, iscrizioneCircuitoCampionatoReale);
 
                 var regolamentoFantaCampionato = _orchestrator.RegoleFantaCampionatoAction.GetRegoleFantaCampionatoFromIdRegole(fantaCampionato.RegoleId);
 

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4B00FB5A-40A1-46D3-BF31-BB22D163DCD5}</ProjectGuid>
+    <ProjectGuid>{318F1592-B77C-426A-B7EE-DD4F92389D79}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FantaF1DataAccessDB</RootNamespace>
@@ -51,96 +51,96 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CampionatiMondiali.cs">
-      <DependentUpon>FantaF1DataModel.tt</DependentUpon>
+      <DependentUpon>FantaF1_SVRKEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Circuiti.cs">
-      <DependentUpon>FantaF1DataModel.tt</DependentUpon>
+      <DependentUpon>FantaF1_SVRKEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="FantaCampionati.cs">
-      <DependentUpon>FantaF1DataModel.tt</DependentUpon>
+      <DependentUpon>FantaF1_SVRKEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="FantaF1DataModel.Context.cs">
+    <Compile Include="FantaF1_SVRKEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>FantaF1DataModel.Context.tt</DependentUpon>
+      <DependentUpon>FantaF1_SVRKEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="FantaF1DataModel.cs">
+    <Compile Include="FantaF1_SVRKEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>FantaF1DataModel.tt</DependentUpon>
+      <DependentUpon>FantaF1_SVRKEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="FantaF1DataModel.Designer.cs">
+    <Compile Include="FantaF1_SVRKEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>FantaF1DataModel.edmx</DependentUpon>
+      <DependentUpon>FantaF1_SVRKEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="IscrizioniCircuitiCampionato.cs">
-      <DependentUpon>FantaF1DataModel.tt</DependentUpon>
+      <DependentUpon>FantaF1_SVRKEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="IscrizioniPilotiCampionato.cs">
-      <DependentUpon>FantaF1DataModel.tt</DependentUpon>
+      <DependentUpon>FantaF1_SVRKEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="IscrizioniScuderieCampionato.cs">
-      <DependentUpon>FantaF1DataModel.tt</DependentUpon>
+      <DependentUpon>FantaF1_SVRKEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="IscrizioniUtentiFantaCampionato.cs">
-      <DependentUpon>FantaF1DataModel.tt</DependentUpon>
+      <DependentUpon>FantaF1_SVRKEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Piloti.cs">
-      <DependentUpon>FantaF1DataModel.tt</DependentUpon>
+      <DependentUpon>FantaF1_SVRKEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="PronosticoUtenteFantaCampionato.cs">
-      <DependentUpon>FantaF1DataModel.tt</DependentUpon>
+      <DependentUpon>FantaF1_SVRKEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="PronosticoUtenteGara.cs">
-      <DependentUpon>FantaF1DataModel.tt</DependentUpon>
+      <DependentUpon>FantaF1_SVRKEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegoleCampionatoMondiale.cs">
-      <DependentUpon>FantaF1DataModel.tt</DependentUpon>
+      <DependentUpon>FantaF1_SVRKEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="RegoleFantaCampionato.cs">
-      <DependentUpon>FantaF1DataModel.tt</DependentUpon>
+      <DependentUpon>FantaF1_SVRKEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="RisultatoDFNGaraReale.cs">
-      <DependentUpon>FantaF1DataModel.tt</DependentUpon>
+      <DependentUpon>FantaF1_SVRKEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="RisultatoGaraReale.cs">
-      <DependentUpon>FantaF1DataModel.tt</DependentUpon>
+      <DependentUpon>FantaF1_SVRKEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="RisultatoPronostico.cs">
-      <DependentUpon>FantaF1DataModel.tt</DependentUpon>
+      <DependentUpon>FantaF1_SVRKEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Scuderie.cs">
-      <DependentUpon>FantaF1DataModel.tt</DependentUpon>
+      <DependentUpon>FantaF1_SVRKEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Utenti.cs">
-      <DependentUpon>FantaF1DataModel.tt</DependentUpon>
+      <DependentUpon>FantaF1_SVRKEntities.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="FantaF1DataModel.edmx">
+    <EntityDeploy Include="FantaF1_SVRKEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>FantaF1DataModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>FantaF1_SVRKEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <None Include="FantaF1DataModel.edmx.diagram">
-      <DependentUpon>FantaF1DataModel.edmx</DependentUpon>
+    <None Include="FantaF1_SVRKEntities.edmx.diagram">
+      <DependentUpon>FantaF1_SVRKEntities.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="FantaF1DataModel.Context.tt">
+    <Content Include="FantaF1_SVRKEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>FantaF1DataModel.Context.cs</LastGenOutput>
-      <DependentUpon>FantaF1DataModel.edmx</DependentUpon>
+      <LastGenOutput>FantaF1_SVRKEntities.Context.cs</LastGenOutput>
+      <DependentUpon>FantaF1_SVRKEntities.edmx</DependentUpon>
     </Content>
-    <Content Include="FantaF1DataModel.tt">
+    <Content Include="FantaF1_SVRKEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>FantaF1DataModel.edmx</DependentUpon>
-      <LastGenOutput>FantaF1DataModel.cs</LastGenOutput>
+      <DependentUpon>FantaF1_SVRKEntities.edmx</DependentUpon>
+      <LastGenOutput>FantaF1_SVRKEntities.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

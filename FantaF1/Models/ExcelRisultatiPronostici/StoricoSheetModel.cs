@@ -96,7 +96,7 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
                 stringsBuilder.Append(AddEmptySpaces(str));
 
                 var pronosticoGara = pronostici.FirstOrDefault(x =>
-                    x.CircuitoId == iscrizioneCircuito.CircuitoId && x.UtenteId == utenteId);
+                    x.GaraId == iscrizioneCircuito.Id && x.UtenteId == utenteId);
 
                 var risultatoPronostico =
                     risultatiPronosticiUtenti.FirstOrDefault(x =>
@@ -134,7 +134,7 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
             foreach (var iscrizioneCircuito in iscrizioniCircuiti)
             {
                 var pronosticoGara = pronostici.FirstOrDefault(x =>
-                    x.CircuitoId == iscrizioneCircuito.CircuitoId && x.UtenteId == utenteId);
+                    x.GaraId == iscrizioneCircuito.Id && x.UtenteId == utenteId);
 
                 var risultatoPronostico =
                     risultatiPronosticiUtenti.FirstOrDefault(x =>

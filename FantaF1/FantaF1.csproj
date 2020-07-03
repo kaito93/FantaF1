@@ -296,7 +296,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FantaF1DataAccessDB\FantaF1DataAccessDB.csproj">
-      <Project>{4b00fb5a-40a1-46d3-bf31-bb22d163dcd5}</Project>
+      <Project>{318f1592-b77c-426a-b7ee-dd4f92389d79}</Project>
       <Name>FantaF1DataAccessDB</Name>
     </ProjectReference>
   </ItemGroup>
