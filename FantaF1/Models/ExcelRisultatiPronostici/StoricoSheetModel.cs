@@ -9,7 +9,12 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
 {
     public class StoricoSheetModel
     {
-        private List<StoricoSheetStructure> StoricoSheetStructure { get; set; }
+        public List<StoricoSheetStructure> StoricoSheetStructure { get; set; }
+
+        public StoricoSheetModel()
+        {
+            StoricoSheetStructure = new List<StoricoSheetStructure>();
+        }
 
         public StoricoSheetModel(IEnumerable<Utenti> utentiIscritti,
             IReadOnlyCollection<PronosticoUtenteGara> pronostici,
@@ -26,11 +31,11 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
                 StoricoSheetStructure.Add(new StoricoSheetStructure
                 {
                     Id = utente.Id.ToString(),
-                    FantaUtente = utente.Nome + " " + utente.Cognome,
-                    RisultatiPunteggi = CalcolaPunteggiParziali(pronostici, iscritioniCircuitiCampionato,
+                    Fanta_Utente = utente.Nome + " " + utente.Cognome,
+                    Risultati_Punteggi = CalcolaPunteggiParziali(pronostici, iscritioniCircuitiCampionato,
                         idCampionatoReale, utente.Id, circuitiList, risultatiPronosticiUtenti),
-                    BonusMondiale = iscrizioniUtentiFantaCampionato.FirstOrDefault(x => x.UtenteId == utente.Id)?.PunteggioCampionatoMondiale.ToString(), //CalcolaPunteggioMondiale(),
-                    PunteggioGare = CalcolaPunteggioTotale(pronostici, iscritioniCircuitiCampionato,
+                    Bonus_Mondiale = iscrizioniUtentiFantaCampionato.FirstOrDefault(x => x.UtenteId == utente.Id)?.PunteggioCampionatoMondiale.ToString(), //CalcolaPunteggioMondiale(),
+                    Punteggio_Gare = CalcolaPunteggioTotale(pronostici, iscritioniCircuitiCampionato,
                         idCampionatoReale, utente.Id, risultatiPronosticiUtenti)
                 });
                 //}

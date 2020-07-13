@@ -35,7 +35,7 @@ namespace FantaF1.Action
 
         public List<IscrizioniPilotiCampionato> GetClassificaPilotiFromIdCampionato(int idCampionato)
         {
-            return _iscrizioniPilotiCampionato.FindAll(x => x.CampionatoId == idCampionato).OrderBy(x => x.Punteggio).ToList();
+            return _iscrizioniPilotiCampionato.FindAll(x => x.CampionatoId == idCampionato).OrderByDescending(x => x.Punteggio).ToList();
         }
 
         private static int CalcolaPunteggio(int posizioneFinale, RegoleCampionatoMondiale regoleCampionato, bool giroVeloce, bool polePosition)

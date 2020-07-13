@@ -9,7 +9,12 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
 {
     public class PronosticiSheetModel
     {
-        private List<PronosticiSheetStructure> PronosticoSheetStructure { get; set; }
+        public List<PronosticiSheetStructure> PronosticoSheetStructure { get; set; }
+
+        public PronosticiSheetModel()
+        {
+            PronosticoSheetStructure = new List<PronosticiSheetStructure>();
+        }
 
         public PronosticiSheetModel(List<Piloti> pilotiList,
             List<Utenti> utentiIscritti, List<PronosticoUtenteGara> pronosticiUtenti,
@@ -26,12 +31,12 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
                 PronosticoSheetStructure.Add(new PronosticiSheetStructure
                 {
                     Id = utente.Id.ToString(),
-                    FantaUtente = utente.Nome + " " + utente.Cognome,
+                    Fanta_Utente = utente.Nome + " " + utente.Cognome,
                     Risultato = RetrieveListPronosticoGara(pronosticiUtenti, pilotiList,
                         iscrizioniCircuitiCampionato,
                         idCampionatoReale, utente.Id, circuitiList, risultatiPronosticiUtenti,
                         regolamentoFantaCampionato),
-                    PunteggioTotale = CalculateTotalResult(risultatiPronosticiUtenti, pronosticiUtenti, utente.Id)
+                    Punteggio_Totale = CalculateTotalResult(risultatiPronosticiUtenti, pronosticiUtenti, utente.Id)
                         .ToString()
                 });
                 //}

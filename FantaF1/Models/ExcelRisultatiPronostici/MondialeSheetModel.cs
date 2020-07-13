@@ -8,7 +8,12 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
 {
     public class MondialeSheetModel
     {
-        private List<MondialeSheetStructure> MondialeSheetStructure { get; set; }
+        public List<MondialeSheetStructure> MondialeSheetStructure { get; set; }
+
+        public MondialeSheetModel()
+        {
+            MondialeSheetStructure = new List<MondialeSheetStructure>();
+        }
 
         public MondialeSheetModel(IEnumerable<Utenti> utentiIscritti, RegoleFantaCampionato regolamentoFantaCampionato,
             List<IscrizioniUtentiFantaCampionato> iscrizioniUtentiFantaCampionato,
@@ -25,10 +30,10 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
                 MondialeSheetStructure.Add(new MondialeSheetStructure
                 {
                     Id = utente.Id.ToString(),
-                    FantaUtente = utente.Nome + " " + utente.Cognome,
-                    RisultatoPronostico = RetrieveListPronosticoMondiale(utente.Id, pronosticiUtentiFantaCampionato, iscrizioniUtentiFantaCampionato, pilotiList, scuderieList, regolamentoFantaCampionato, classificaPiloti, classificaScuderie),
+                    Fanta_Utente = utente.Nome + " " + utente.Cognome,
+                    Risultato_Pronostico = RetrieveListPronosticoMondiale(utente.Id, pronosticiUtentiFantaCampionato, iscrizioniUtentiFantaCampionato, pilotiList, scuderieList, regolamentoFantaCampionato, classificaPiloti, classificaScuderie),
                     Malus = ControlloCambioPronosticoMondiale(utente.Id, iscrizioniUtentiFantaCampionato, regolamentoFantaCampionato, dataTermineIscrizioni),
-                    PunteggioMondiale = CalculateTotalResult(utente.Id, iscrizioniUtentiFantaCampionato)
+                    Punteggio_Mondiale = CalculateTotalResult(utente.Id, iscrizioniUtentiFantaCampionato)
                         .ToString()
                 });
                 //}

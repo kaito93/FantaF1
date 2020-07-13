@@ -238,8 +238,10 @@ namespace FantaF1.Controllers
 
                 var pilotiList = _orchestrator.PilotiAction.GetPilotiList();
 
+                var scuderieList = _orchestrator.ScuderieAction.GetListScuderie();
+
                 _orchestrator.IscrizioniScuderieCampionatoAction.UpdatePunteggioScuderie(result.IdCampionato,
-                    iscrizioniPilotiCampionato, pilotiList);
+                    iscrizioniPilotiCampionato, pilotiList, scuderieList);
 
                 res = new JsonResult { Data = "Ok" };
             }

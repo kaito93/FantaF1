@@ -9,3 +9,4 @@ C:\Users\samuele.guida\source\repos\kaito93\FantaF1\FantaF1DataAccessDB\obj\Debu
 C:\Users\samuele.guida\source\repos\kaito93\FantaF1\FantaF1DataAccessDB\obj\Debug\FantaF1DataAccessDB.csproj.CopyComplete
 C:\Users\samuele.guida\source\repos\kaito93\FantaF1\FantaF1DataAccessDB\obj\Debug\FantaF1DataAccessDB.dll
 C:\Users\samuele.guida\source\repos\kaito93\FantaF1\FantaF1DataAccessDB\obj\Debug\FantaF1DataAccessDB.pdb
+C:\Users\samuele.guida\source\repos\kaito93\FantaF1\FantaF1DataAccessDB\obj\Debug\FantaF1DataAccessDB.csprojAssemblyReference.cache

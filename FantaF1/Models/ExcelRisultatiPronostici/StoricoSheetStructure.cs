@@ -3,9 +3,9 @@
     public class StoricoSheetStructure
     {
         public string Id { get; set; }
-        public string FantaUtente { get; set; }
-        public string RisultatiPunteggi { get; set; }
-        public string PunteggioGare { get; set; }
-        public string BonusMondiale { get; set; }
+        public string Fanta_Utente { get; set; }
+        public string Risultati_Punteggi { get; set; }
+        public string Punteggio_Gare { get; set; }
+        public string Bonus_Mondiale { get; set; }
     }
 }

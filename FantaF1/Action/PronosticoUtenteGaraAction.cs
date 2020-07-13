@@ -19,6 +19,8 @@ namespace FantaF1.Action
         }
         public void SavePronosticiInDatabase(IEnumerable<PronosticoStructure> pronosticiList, int garaId, int fantaCampionatoId, List<Piloti> pilotiList, List<Utenti> utentiList)
         {
+            var errors = new List<string>();
+
             foreach (var pronostico in pronosticiList)
             {
                 if (GetUtenteIdFromName(pronostico.IdUtente, utentiList) != -1)
@@ -39,16 +41,22 @@ namespace FantaF1.Action
                             FantaCampionatoId = fantaCampionatoId
                         };
 
-                        _databaseAction.SavePronosticoUtenteGara(pronosticoDb);
+                        _pronosticiUtentiGara = _databaseAction.SavePronosticoUtenteGara(pronosticoDb);
                     }
                     else
-                        throw new Exception("Pronostico gara per utente " + pronostico.IdUtente + " già inserito");
+                        errors.Add("Pronostico gara per utente " + pronostico.IdUtente + " già inserito");
                 }
 
                 else
-                    throw new Exception("Utente " + pronostico.IdUtente + " non trovato");                
+                    errors.Add("Utente " + pronostico.IdUtente + " non trovato");
             }
 
+            if (errors.Count > 0)
+            {
+                var messageError = errors.Aggregate(string.Empty, (current, error) => current + error +"\n");
+                throw new Exception(messageError);
+            }
+                
         }
 
         public List<PronosticoUtenteGara> GetPronosticoUtenteGaraFromFantaCampionatoIdAndCircuitoId(int fantaCampionatoId, int garaId)
@@ -118,7 +126,7 @@ namespace FantaF1.Action
         private static int GetUtenteIdFromName(string name, IEnumerable<Utenti> utenti)
         {
             var result = utenti.FirstOrDefault(x =>
-                name.ToLower().Contains(x.Nome.ToLower()) && name.ToLower().Contains(x.Cognome.ToLower()));
+                name.ToLower().Contains(x.Nome.TrimEnd().ToLower()) && name.ToLower().Contains(x.Cognome.TrimEnd().ToLower()));
 
             if (result != null)
                 return result.Id;

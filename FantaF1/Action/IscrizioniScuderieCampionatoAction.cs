@@ -1,4 +1,5 @@
-﻿using FantaF1.Action.Interfaces;
+﻿using System;
+using FantaF1.Action.Interfaces;
 using FantaF1DataAccessDB;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,35 +16,36 @@ namespace FantaF1.Action
             _iscrizioniScuderieCampionato = databaseAction.GetIscrizioniScuderieCampionato();
         }
 
-        public void UpdatePunteggioScuderie(int idCampionatoReale, List<IscrizioniPilotiCampionato> iscrizioniPilotiCampionato, List<Piloti> pilotiList)
+        public void UpdatePunteggioScuderie(int idCampionatoReale, List<IscrizioniPilotiCampionato> iscrizioniPilotiCampionato, List<Piloti> pilotiList, List<Scuderie> scuderieList)
         {
-            foreach (var iscrizionePilota in iscrizioniPilotiCampionato)
+            foreach (var scuderia in scuderieList)
             {
-                var scuderia = pilotiList.FirstOrDefault(x => x.Id == iscrizionePilota.PilotaId);
+                if (scuderia.Id == 12) continue;
 
-                if (scuderia == null) continue;
+                var pilots = pilotiList.FindAll(x => x.ScuderiaId == scuderia.Id);
+
+                try
                 {
-                    var scuderiaId = scuderia.ScuderiaId;
-
-                    if (scuderiaId == 12) continue;
-
-                    var pilots = pilotiList.FindAll(x => x.ScuderiaId == scuderiaId);
-
                     foreach (var pilot in pilots.Where(pilot => iscrizioniPilotiCampionato.FirstOrDefault(x => x.PilotaId == pilot.Id) == null))
                         pilots.Remove(pilot);
-
-                    var punteggioScuderia = pilots
-                        .Select(pilota => iscrizioniPilotiCampionato.FirstOrDefault(x => x.PilotaId == pilota.Id))
-                        .Where(result => result != null).Sum(result => result.Punteggio);
-
-                    _iscrizioniScuderieCampionato = _databaseAction.UpdateIscrizioneScuderiaCampionato(idCampionatoReale, scuderiaId, punteggioScuderia);
                 }
+                catch (Exception e)
+                {
+                    //ignore
+                }
+
+                var punteggioScuderia = pilots
+                    .Select(pilota => iscrizioniPilotiCampionato.FirstOrDefault(x => x.PilotaId == pilota.Id))
+                    .Where(result => result != null).Sum(result => result.Punteggio);
+
+                _iscrizioniScuderieCampionato = _databaseAction.UpdateIscrizioneScuderiaCampionato(idCampionatoReale, scuderia.Id, punteggioScuderia);
+
             }
         }
 
         public List<IscrizioniScuderieCampionato> GetClassificaScuderieFromCampionatoId(int idCampionato)
         {
-            return _iscrizioniScuderieCampionato.FindAll(x => x.CampionatoId == idCampionato).OrderBy(x => x.Punteggio)
+            return _iscrizioniScuderieCampionato.FindAll(x => x.CampionatoId == idCampionato).OrderByDescending(x => x.Punteggio)
                 .ToList();
         }
     }

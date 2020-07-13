@@ -6,7 +6,7 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
 {
     public class UtentiIscritti
     {
-        private List<UtentiIscrittiStructure> Proposals { get; set; }
+        public List<UtentiIscrittiStructure> Proposals { get; set; }
 
         private static readonly List<NpoiColumnExcel> Asset = new List<NpoiColumnExcel>(new List<NpoiColumnExcel>
             {
@@ -15,6 +15,11 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
                 , new NpoiColumnExcel { Text = "Cognome", ColumnWidth = 6700, TextAlign = HorizontalAlignment.Center, NumberFormat = "" }
                 , new NpoiColumnExcelDateTime { Text = "Data Iscrizione", ColumnWidth = 5000, TextAlign = HorizontalAlignment.Center, NumberFormat = "dd-mm-yyyy" }
             });
+
+        public UtentiIscritti()
+        {
+            Proposals = new List<UtentiIscrittiStructure>();
+        }
 
         public UtentiIscritti(IEnumerable<Utenti> utentiIscritti)
         {
@@ -27,7 +32,7 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
                     Id = utente.Id.ToString(),
                     Nome = utente.Nome,
                     Cognome = utente.Cognome,
-                    DataIscrizione = utente.Data_Registrazione.ToShortDateString()
+                    Data_Iscrizione = utente.Data_Registrazione.ToShortDateString()
                 });
             }
         }

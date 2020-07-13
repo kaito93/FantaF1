@@ -7,7 +7,12 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
 {
     public class ClassificaSheetModel
     {
-        private List<ClassificaSheetStructure> ClassificaSheetStructure { get; set; }
+        public List<ClassificaSheetStructure> ClassificaSheetStructure { get; set; }
+
+        public ClassificaSheetModel()
+        {
+            ClassificaSheetStructure = new List<ClassificaSheetStructure>();
+        }
 
         public ClassificaSheetModel(List<Utenti> utentiIscritti, IReadOnlyCollection<PronosticoUtenteGara> pronosticiUtenti,
             IReadOnlyCollection<RisultatoPronostico> risultatiPronosticiUtenti, List<IscrizioniCircuitiCampionato> iscrizioniCircuitiCampionato, int idCampionatoReale)
@@ -18,7 +23,7 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
 
             foreach (var fantautente in ClassificaSheetStructure)
             {
-                var posizione = penultimaClassifica?.FirstOrDefault(x => x.FantaUtente == fantautente.FantaUtente)?.Posizione;
+                var posizione = penultimaClassifica?.FirstOrDefault(x => x.Fanta_Utente == fantautente.Fanta_Utente)?.Posizione;
 
                 if (posizione == null) continue;
 
@@ -86,13 +91,13 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
                 //{
                 ClassificaSheetStructure.Add(new ClassificaSheetStructure
                 {
-                    FantaUtente = utente.Nome + " " + utente.Cognome,
+                    Fanta_Utente = utente.Nome + " " + utente.Cognome,
                     Punti = CalcolaPunteggioTotale(pronostici, iscritioniCircuitiCampionato, idCampionatoReale, utente.Id, risultatiPronosticiUtenti)
                 });
                 //}
             }
 
-            ClassificaSheetStructure = ClassificaSheetStructure.OrderByDescending(x => x.Punti).ToList();
+            ClassificaSheetStructure = ClassificaSheetStructure.OrderByDescending(x => int.Parse(x.Punti)).ToList();
 
             for (var posizione = 0; posizione < ClassificaSheetStructure.Count; posizione++)
                 ClassificaSheetStructure[posizione].Posizione = (posizione + 1).ToString();
@@ -105,7 +110,7 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
         {
             var response = utentiIscritti.Select(utente => new ClassificaSheetStructure
             {
-                FantaUtente = utente.Nome + " " + utente.Cognome,
+                Fanta_Utente = utente.Nome + " " + utente.Cognome,
                 Punti = CalcolaPunteggioTotalePenultima(pronostici, iscritioniCircuitiCampionato, idCampionatoReale,
                     utente.Id, risultatiPronosticiUtenti)
             }).ToList();

@@ -235,7 +235,7 @@ function CheckFileTypePronostici(e) {
 
 function ClickOnButtonCalcolaRisultatiPronostici() {
 
-    var iscr = $("#CircuitiList").selectedOptions[0].value;
+    var iscr = $("#CircuitiList")[0].selectedOptions[0].value;
 
     if (iscr == "") {
         alert("Seleziona almeno una gara!");
@@ -285,7 +285,7 @@ $(document).on("change", "#FantaCampionatiList", function () {
 
 
             if (result.responseJSON.length > 0) {
-                $(result).each(function () {
+                $(result.responseJSON).each(function () {
                     $("<option value='" + this.Value + "'>" + this.Text + "</option>").appendTo(circuiti);
                 });
             }

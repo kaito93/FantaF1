@@ -7,7 +7,12 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
 {
     public class SuperClassificaSheetModel
     {
-        private List<SuperClassificaSheetStructure> SuperClassificaSheetStructure { get; set; }
+        public List<SuperClassificaSheetStructure> SuperClassificaSheetStructure { get; set; }
+
+        public SuperClassificaSheetModel()
+        {
+            SuperClassificaSheetStructure = new List<SuperClassificaSheetStructure>();
+        }
 
         public SuperClassificaSheetModel(IEnumerable<Utenti> utentiIscritti, IReadOnlyCollection<PronosticoUtenteGara> pronosticiUtenti,
             IReadOnlyCollection<RisultatoPronostico> risultatiPronosticiUtenti,
@@ -29,13 +34,13 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
                 //{
                 SuperClassificaSheetStructure.Add(new SuperClassificaSheetStructure
                 {
-                    FantaUtente = utente.Nome + " " + utente.Cognome,
+                    Fanta_Utente = utente.Nome + " " + utente.Cognome,
                     Punti = CalcolaPunteggioTotale(pronosticiUtenti, iscrizioniCircuitiCampionato, idCampionatoReale, utente.Id, risultatiPronosticiUtenti, punti)
                 });
                 //}
             }
 
-            SuperClassificaSheetStructure = SuperClassificaSheetStructure.OrderByDescending(x => x.Punti).ToList();
+            SuperClassificaSheetStructure = SuperClassificaSheetStructure.OrderByDescending(x => int.Parse(x.Punti)).ToList();
 
             for (var posizione = 0; posizione < SuperClassificaSheetStructure.Count; posizione++)
                 SuperClassificaSheetStructure[posizione].Posizione = (posizione + 1).ToString();
