@@ -23,7 +23,6 @@ namespace FantaF1DataAccessDB
         public int Id { get; set; }
         public int UtenteId { get; set; }
         public int FantaCampionatoId { get; set; }
-        public int GaraId { get; set; }
         public int PrimoClassificatoPilotaId { get; set; }
         public int SecondoClassificatoPilotaId { get; set; }
         public int TerzoClassificatoPilotaId { get; set; }
@@ -31,6 +30,7 @@ namespace FantaF1DataAccessDB
         public int GiroVelocePilotaId { get; set; }
         public int DFNPilotaId { get; set; }
         public System.DateTime Inserimento { get; set; }
+        public int GaraId { get; set; }
     
         public virtual FantaCampionati FantaCampionati { get; set; }
         public virtual IscrizioniCircuitiCampionato IscrizioniCircuitiCampionato { get; set; }
@@ -43,5 +43,6 @@ namespace FantaF1DataAccessDB
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RisultatoPronostico> RisultatoPronostico { get; set; }
         public virtual Utenti Utenti { get; set; }
+        public virtual IscrizioniCircuitiCampionato IscrizioniCircuitiCampionato1 { get; set; }
     }
 }

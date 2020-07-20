@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\samuele.guida\source\repos\kaito93\FantaF1\FantaF1DataAccessDB\FantaF1_SVRKEntities.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\kaito\source\repos\kaito93\FantaF1\FantaF1DataAccessDB\FantaF1_SVRKEntities.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

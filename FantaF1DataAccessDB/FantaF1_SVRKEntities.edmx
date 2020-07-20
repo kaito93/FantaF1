@@ -1696,6 +1696,7 @@
           <NavigationProperty Name="Circuiti" Relationship="Self.FK_IscrizioneCircuito" FromRole="IscrizioniCircuitiCampionato" ToRole="Circuiti" />
           <NavigationProperty Name="RisultatoGaraReale" Relationship="Self.FK_IscrizioniCircuitiCampionato_RisultatoGaraReale" FromRole="IscrizioniCircuitiCampionato" ToRole="RisultatoGaraReale" />
           <NavigationProperty Name="PronosticoUtenteGara" Relationship="Self.FK_PronosticoUtenteGara_IscrizioniCircuitiCampionato" FromRole="IscrizioniCircuitiCampionato" ToRole="PronosticoUtenteGara" />
+          <NavigationProperty Name="PronosticoUtenteGara1" Relationship="FantaF1_SVRKModel.FK_PronosticoUtenteGara_IscrizioniCircuitiCampionato1" FromRole="IscrizioniCircuitiCampionato" ToRole="PronosticoUtenteGara" />
         </EntityType>
         <EntityType Name="IscrizioniPilotiCampionato">
           <Key>
@@ -1853,7 +1854,6 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="UtenteId" Type="Int32" Nullable="false" />
           <Property Name="FantaCampionatoId" Type="Int32" Nullable="false" />
-          <Property Name="GaraId" Type="Int32" Nullable="false" />
           <Property Name="PrimoClassificatoPilotaId" Type="Int32" Nullable="false" />
           <Property Name="SecondoClassificatoPilotaId" Type="Int32" Nullable="false" />
           <Property Name="TerzoClassificatoPilotaId" Type="Int32" Nullable="false" />
@@ -1871,6 +1871,8 @@
           <NavigationProperty Name="Piloti5" Relationship="Self.FK_PronosticoUtenteGara_Piloti5" FromRole="PronosticoUtenteGara" ToRole="Piloti" />
           <NavigationProperty Name="RisultatoPronostico" Relationship="Self.FK_PronosticoRisultato" FromRole="PronosticoUtenteGara" ToRole="RisultatoPronostico" />
           <NavigationProperty Name="Utenti" Relationship="Self.FK_PronosticoUtenteGara_Utenti" FromRole="PronosticoUtenteGara" ToRole="Utenti" />
+          <Property Name="GaraId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="IscrizioniCircuitiCampionato1" Relationship="FantaF1_SVRKModel.FK_PronosticoUtenteGara_IscrizioniCircuitiCampionato1" FromRole="PronosticoUtenteGara" ToRole="IscrizioniCircuitiCampionato" />
         </EntityType>
         <EntityType Name="RegoleCampionatoMondiale">
           <Key>
@@ -3448,7 +3450,23 @@
             <End Role="RisultatoDFNGaraReale" EntitySet="RisultatoDFNGaraReale" />
             <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
           </AssociationSet>
+          <AssociationSet Name="FK_PronosticoUtenteGara_IscrizioniCircuitiCampionato1" Association="FantaF1_SVRKModel.FK_PronosticoUtenteGara_IscrizioniCircuitiCampionato1">
+            <End Role="IscrizioniCircuitiCampionato" EntitySet="IscrizioniCircuitiCampionato" />
+            <End Role="PronosticoUtenteGara" EntitySet="PronosticoUtenteGara" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_PronosticoUtenteGara_IscrizioniCircuitiCampionato1">
+          <End Type="FantaF1_SVRKModel.IscrizioniCircuitiCampionato" Role="IscrizioniCircuitiCampionato" Multiplicity="1" />
+          <End Type="FantaF1_SVRKModel.PronosticoUtenteGara" Role="PronosticoUtenteGara" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IscrizioniCircuitiCampionato">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PronosticoUtenteGara">
+              <PropertyRef Name="GaraId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3571,10 +3589,10 @@
           <EntitySetMapping Name="PronosticoUtenteGara">
             <EntityTypeMapping TypeName="FantaF1_SVRKModel.PronosticoUtenteGara">
               <MappingFragment StoreEntitySet="PronosticoUtenteGara">
+                <ScalarProperty Name="GaraId" ColumnName="GaraId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UtenteId" ColumnName="UtenteId" />
                 <ScalarProperty Name="FantaCampionatoId" ColumnName="FantaCampionatoId" />
-                <ScalarProperty Name="GaraId" ColumnName="GaraId" />
                 <ScalarProperty Name="PrimoClassificatoPilotaId" ColumnName="PrimoClassificatoPilotaId" />
                 <ScalarProperty Name="SecondoClassificatoPilotaId" ColumnName="SecondoClassificatoPilotaId" />
                 <ScalarProperty Name="TerzoClassificatoPilotaId" ColumnName="TerzoClassificatoPilotaId" />

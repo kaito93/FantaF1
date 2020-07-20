@@ -106,6 +106,7 @@
         <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoRisultato" ManuallyRouted="false" />
         <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoUtenteGara_Utenti" ManuallyRouted="false" />
         <AssociationConnector Association="FantaF1_SVRKModel.FK_RisultatoDFN" ManuallyRouted="false" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoUtenteGara_IscrizioniCircuitiCampionato1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
