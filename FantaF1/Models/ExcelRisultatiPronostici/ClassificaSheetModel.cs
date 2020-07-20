@@ -115,7 +115,7 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
                     utente.Id, risultatiPronosticiUtenti)
             }).ToList();
 
-            response = response.OrderByDescending(x => x.Punti).ToList();
+            response = response.OrderByDescending(x => int.Parse(x.Punti)).ToList();
 
             for (var posizione = 0; posizione < response.Count; posizione++)
                 response[posizione].Posizione = (posizione + 1).ToString();
