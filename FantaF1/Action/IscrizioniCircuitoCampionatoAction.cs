@@ -85,5 +85,13 @@ namespace FantaF1.Action
             var iscrizioniWithResults = _iscrizioniCircuitiCampionato.FindAll(x => x.CampionatoId == idCampionato);
             return iscrizioniWithResults;
         }
+
+        public List<IscrizioniCircuitiCampionato> GetIscrizioniForCampionatoRealeWithoutResults(int idCampionato)
+        {
+            var iscrizioni = GetAllIscrizioniForCampionatoReale(idCampionato);
+
+            return iscrizioni.Where(iscrizione => iscrizione.RisultatiId == null).ToList();
+
+        }
     }
 }

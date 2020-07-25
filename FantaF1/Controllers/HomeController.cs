@@ -22,7 +22,7 @@ namespace FantaF1.Controllers
 
             return View();
         }
-        
+
         public ActionResult LoadIscrizioniUtenti()
         {
             return PartialView("_IscrizioniUtenti");
@@ -91,9 +91,9 @@ namespace FantaF1.Controllers
                 result.Add(new SelectListItem
                 {
                     Value = iscrizioniCircuitiList[i].Id.ToString(),
-                    Text = (i+1).ToString() + " - " + iscrizioniCircuitiList[i].NomeGP
+                    Text = (i + 1).ToString() + " - " + iscrizioniCircuitiList[i].NomeGP
                 });
-            }            
+            }
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -184,7 +184,7 @@ namespace FantaF1.Controllers
         {
             InitializeAll();
 
-            var grandPrixList = _orchestrator.IscrizioniCircuitoCampionatoAction.GetAllIscrizioniForCampionatoReale(idCampionato);
+            var grandPrixList = _orchestrator.IscrizioniCircuitoCampionatoAction.GetIscrizioniForCampionatoRealeWithoutResults(idCampionato);
 
             grandPrixList = grandPrixList.OrderBy(x => x.DataGara).ToList();
 
@@ -195,7 +195,7 @@ namespace FantaF1.Controllers
                 result.Add(new SelectListItem
                 {
                     Value = grandPrixList[i].Id.ToString(),
-                    Text = (i+1).ToString() + " - " + grandPrixList[i].NomeGP
+                    Text = (i + 1).ToString() + " - " + grandPrixList[i].NomeGP
                 });
             }
 
