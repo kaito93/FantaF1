@@ -510,48 +510,55 @@ namespace FantaF1.Action.ReportAction
 
         private void CreateRowHeader(IWorkbook oWorkbook, ISheet oSheet, int rowIndex, List<NpoiColumnExcel> columns, DataTable dataTable)
         {
-            var row = oSheet.CreateRow(rowIndex);
-
-            var styleHeader = oWorkbook.CreateCellStyle();
-
-            var fontHeader = _createFont(oWorkbook);
-
-            fontHeader.FontHeightInPoints = 9;
-            fontHeader.FontName = "Verdana";
-            fontHeader.Boldweight = (short)FontBoldWeight.Bold;
-
-            styleHeader.SetFont(fontHeader);
-            styleHeader.VerticalAlignment = VerticalAlignment.Center;
-            styleHeader.Alignment = HorizontalAlignment.Center;
-            _setColor(oWorkbook, fontHeader, 255, 255, 255);
-
-            _setFillForegroundColor(oWorkbook, styleHeader, 51, 102, 255);
-
-            styleHeader.FillPattern = FillPattern.SolidForeground;
-
-            for (var colIndex = 0; colIndex < columns.Count; colIndex++)
+            try
             {
-                var column = columns.ToList().FirstOrDefault(x =>
-                    x.Text.ToLower() == dataTable.Columns[colIndex].ColumnName.Replace('_', ' ').ToLower());
+                var row = oSheet.CreateRow(rowIndex);
 
-                if (column == null)
-                    continue;
+                var styleHeader = oWorkbook.CreateCellStyle();
 
-                column.Style = new[]
+                var fontHeader = _createFont(oWorkbook);
+
+                fontHeader.FontHeightInPoints = 9;
+                fontHeader.FontName = "Verdana";
+                fontHeader.Boldweight = (short)FontBoldWeight.Bold;
+
+                styleHeader.SetFont(fontHeader);
+                styleHeader.VerticalAlignment = VerticalAlignment.Center;
+                styleHeader.Alignment = HorizontalAlignment.Center;
+                _setColor(oWorkbook, fontHeader, 255, 255, 255);
+
+                _setFillForegroundColor(oWorkbook, styleHeader, 51, 102, 255);
+
+                styleHeader.FillPattern = FillPattern.SolidForeground;
+
+                for (var colIndex = 0; colIndex < columns.Count; colIndex++)
                 {
+                    var column = columns.ToList().FirstOrDefault(x =>
+                        x.Text.ToLower() == dataTable.Columns[colIndex].ColumnName.Replace('_', ' ').ToLower());
+
+                    if (column == null)
+                        continue;
+
+                    column.Style = new[]
+                    {
                     CreateStyle(oWorkbook, column.TextAlign, 255, 255, 255, column.NumberFormat),
                     CreateStyle(oWorkbook, column.TextAlign, 245, 245, 245, column.NumberFormat)
                 };
 
-                var headerCell = row.CreateCell(colIndex);
+                    var headerCell = row.CreateCell(colIndex);
 
-                headerCell.SetCellValue(column.Text);
-                headerCell.CellStyle = styleHeader;
+                    headerCell.SetCellValue(column.Text);
+                    headerCell.CellStyle = styleHeader;
 
-                oSheet.SetColumnWidth(colIndex, column.ColumnWidth);
+                    oSheet.SetColumnWidth(colIndex, Math.Min(column.ColumnWidth,255*256));
 
+
+                }
+            }
+            catch (Exception e) {
 
             }
+            
         }
 
         //private static void CreateRowsColumns(ISheet oSheet, int firstRow, int lastRow, int firstCol, int lastCol)
