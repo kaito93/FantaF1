@@ -86,6 +86,9 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
             var iscrizioniCircuiti =
                 iscritioniCircuitiCampionato.FindAll(x => x.CampionatoId == idCampionatoReale && x.RisultatiId != null);
 
+            // Per problema dimensione cella excel
+            iscrizioniCircuiti.RemoveRange(0, 7);
+
             var primoPilota = string.Empty;
             var secondoPilota = string.Empty;
             var terzoPilota = string.Empty;

@@ -16,13 +16,14 @@ namespace FantaF1.Action
             _iscrizioniScuderieCampionato = databaseAction.GetIscrizioniScuderieCampionato();
         }
 
-        public void UpdatePunteggioScuderie(int idCampionatoReale, List<IscrizioniPilotiCampionato> iscrizioniPilotiCampionato, List<Piloti> pilotiList, List<Scuderie> scuderieList)
+        public void UpdatePunteggioScuderie(int idCampionatoReale, List<IscrizioniPilotiCampionato> iscrizioniPilotiCampionato, List<Scuderie> scuderieList, List<IscrizioniPilotiScuderie> iscrizioniPilotiScuderie)
         {
             foreach (var scuderia in scuderieList)
             {
                 if (scuderia.Id == 12) continue;
 
-                var pilots = pilotiList.FindAll(x => x.ScuderiaId == scuderia.Id);
+                //var pilots = pilotiList.FindAll(x => x.ScuderiaId == scuderia.Id);
+                var pilots = iscrizioniPilotiScuderie.FindAll(x => x.ScuderiaId == scuderia.Id);
 
                 try
                 {

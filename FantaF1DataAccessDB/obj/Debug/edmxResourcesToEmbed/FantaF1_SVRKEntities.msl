@@ -83,7 +83,6 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Nome" ColumnName="Nome" />
           <ScalarProperty Name="Cognome" ColumnName="Cognome" />
-          <ScalarProperty Name="ScuderiaId" ColumnName="ScuderiaId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -117,10 +116,10 @@
     <EntitySetMapping Name="PronosticoUtenteGara">
       <EntityTypeMapping TypeName="FantaF1_SVRKModel.PronosticoUtenteGara">
         <MappingFragment StoreEntitySet="PronosticoUtenteGara">
+          <ScalarProperty Name="GaraId" ColumnName="GaraId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="UtenteId" ColumnName="UtenteId" />
           <ScalarProperty Name="FantaCampionatoId" ColumnName="FantaCampionatoId" />
-          <ScalarProperty Name="GaraId" ColumnName="GaraId" />
           <ScalarProperty Name="PrimoClassificatoPilotaId" ColumnName="PrimoClassificatoPilotaId" />
           <ScalarProperty Name="SecondoClassificatoPilotaId" ColumnName="SecondoClassificatoPilotaId" />
           <ScalarProperty Name="TerzoClassificatoPilotaId" ColumnName="TerzoClassificatoPilotaId" />
@@ -288,6 +287,17 @@
           <ScalarProperty Name="Cognome" ColumnName="Cognome" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Data_Registrazione" ColumnName="Data_Registrazione" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IscrizioniPilotiScuderie">
+      <EntityTypeMapping TypeName="FantaF1_SVRKModel.IscrizioniPilotiScuderie">
+        <MappingFragment StoreEntitySet="IscrizioniPilotiScuderie">
+          <ScalarProperty Name="DataFineContratto" ColumnName="DataFineContratto" />
+          <ScalarProperty Name="DataInizioContratto" ColumnName="DataInizioContratto" />
+          <ScalarProperty Name="ScuderiaId" ColumnName="ScuderiaId" />
+          <ScalarProperty Name="PilotaId" ColumnName="PilotaId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

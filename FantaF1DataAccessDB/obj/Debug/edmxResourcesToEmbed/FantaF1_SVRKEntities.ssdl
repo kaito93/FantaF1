@@ -49,6 +49,16 @@
     <Property Name="CampionatoId" Type="int" Nullable="false" />
     <Property Name="Punteggio" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="IscrizioniPilotiScuderie">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PilotaId" Type="int" Nullable="false" />
+    <Property Name="ScuderiaId" Type="int" Nullable="false" />
+    <Property Name="DataInizioContratto" Type="date" Nullable="false" />
+    <Property Name="DataFineContratto" Type="date" Nullable="false" />
+  </EntityType>
   <EntityType Name="IscrizioniScuderieCampionato">
     <Key>
       <PropertyRef Name="Id" />
@@ -76,7 +86,6 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nome" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Cognome" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="ScuderiaId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="PronosticoUtenteFantaCampionato">
     <Key>
@@ -108,7 +117,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UtenteId" Type="int" Nullable="false" />
     <Property Name="FantaCampionatoId" Type="int" Nullable="false" />
     <Property Name="GaraId" Type="int" Nullable="false" />
@@ -390,6 +399,30 @@
       </Principal>
       <Dependent Role="IscrizioniCircuitiCampionato">
         <PropertyRef Name="RisultatiId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IscrizioniPilotiScuderie_Piloti">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="1" />
+    <End Role="IscrizioniPilotiScuderie" Type="Self.IscrizioniPilotiScuderie" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="IscrizioniPilotiScuderie">
+        <PropertyRef Name="PilotaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IscrizioniPilotiScuderie_Scuderie">
+    <End Role="Scuderie" Type="Self.Scuderie" Multiplicity="1" />
+    <End Role="IscrizioniPilotiScuderie" Type="Self.IscrizioniPilotiScuderie" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Scuderie">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="IscrizioniPilotiScuderie">
+        <PropertyRef Name="ScuderiaId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -897,18 +930,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_PilotaScuderia">
-    <End Role="Scuderie" Type="Self.Scuderie" Multiplicity="1" />
-    <End Role="Piloti" Type="Self.Piloti" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Scuderie">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Piloti">
-        <PropertyRef Name="ScuderiaId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_PronosticoDecimaScuderia">
     <End Role="Scuderie" Type="Self.Scuderie" Multiplicity="1" />
     <End Role="PronosticoUtenteFantaCampionato" Type="Self.PronosticoUtenteFantaCampionato" Multiplicity="*" />
@@ -1287,6 +1308,7 @@
     <EntitySet Name="FantaCampionati" EntityType="Self.FantaCampionati" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IscrizioniCircuitiCampionato" EntityType="Self.IscrizioniCircuitiCampionato" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IscrizioniPilotiCampionato" EntityType="Self.IscrizioniPilotiCampionato" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IscrizioniPilotiScuderie" EntityType="Self.IscrizioniPilotiScuderie" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IscrizioniScuderieCampionato" EntityType="Self.IscrizioniScuderieCampionato" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IscrizioniUtentiFantaCampionato" EntityType="Self.IscrizioniUtentiFantaCampionato" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Piloti" EntityType="Self.Piloti" Schema="dbo" store:Type="Tables" />
@@ -1338,6 +1360,14 @@
     <AssociationSet Name="FK_IscrizioniCircuitiCampionato_RisultatoGaraReale" Association="Self.FK_IscrizioniCircuitiCampionato_RisultatoGaraReale">
       <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
       <End Role="IscrizioniCircuitiCampionato" EntitySet="IscrizioniCircuitiCampionato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IscrizioniPilotiScuderie_Piloti" Association="Self.FK_IscrizioniPilotiScuderie_Piloti">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="IscrizioniPilotiScuderie" EntitySet="IscrizioniPilotiScuderie" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IscrizioniPilotiScuderie_Scuderie" Association="Self.FK_IscrizioniPilotiScuderie_Scuderie">
+      <End Role="Scuderie" EntitySet="Scuderie" />
+      <End Role="IscrizioniPilotiScuderie" EntitySet="IscrizioniPilotiScuderie" />
     </AssociationSet>
     <AssociationSet Name="FK_Pilota01DFN" Association="Self.FK_Pilota01DFN">
       <End Role="Piloti" EntitySet="Piloti" />
@@ -1506,10 +1536,6 @@
     <AssociationSet Name="FK_PilotaPolePosition" Association="Self.FK_PilotaPolePosition">
       <End Role="Piloti" EntitySet="Piloti" />
       <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PilotaScuderia" Association="Self.FK_PilotaScuderia">
-      <End Role="Scuderie" EntitySet="Scuderie" />
-      <End Role="Piloti" EntitySet="Piloti" />
     </AssociationSet>
     <AssociationSet Name="FK_PronosticoDecimaScuderia" Association="Self.FK_PronosticoDecimaScuderia">
       <End Role="Scuderie" EntitySet="Scuderie" />

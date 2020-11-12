@@ -9,5 +9,7 @@ namespace FantaF1.Action.Interfaces
         int GetPilotaIdFromNameAndSurname(string nameSurname);
         List<Piloti> GetPilotiList();
         IEnumerable<SelectListItem> GetAllPilotiSelectItem();
+        IEnumerable<SelectListItem> GetPilotiFromIdSelectItem(IEnumerable<int> piloti);
+        List<Piloti> GetPilotiFromIdList(IEnumerable<int> pilotisId);
     }
 }

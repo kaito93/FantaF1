@@ -15,5 +15,6 @@ namespace FantaF1.Action.Interfaces
         List<IscrizioniCircuitiCampionato> GetIscrizioniWithResultsForCampionatoReale(int idCampionato);
         List<IscrizioniCircuitiCampionato> GetAllIscrizioniForCampionatoReale(int idCampionato);
         List<IscrizioniCircuitiCampionato> GetIscrizioniForCampionatoRealeWithoutResults(int idCampionato);
+        IscrizioniCircuitiCampionato GetIscrizioneForId(int idIscrizione);
     }
 }

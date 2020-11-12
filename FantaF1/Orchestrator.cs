@@ -13,6 +13,7 @@ namespace FantaF1
         public IIscrizioniPilotiCampionatoAction IscrizioniPilotiCampionatoAction { get; set; }
         public IIscrizioniScuderieCampionatoAction IscrizioniScuderieCampionatoAction { get; set; }
         public IIscrizioniUtentiFantaCampionatoAction IscrizioniUtentiFantaCampionatoAction { get; set; }
+        public IIscrizioniPilotiScuderieAction IscrizioniPilotiScuderieAction { get; set; }
         public IPilotiAction PilotiAction { get; set; }
         public IPronosticoUtenteFantaCampionatoAction PronosticoUtenteFantaCampionatoAction { get; set; }
         public IPronosticoUtenteGaraAction PronosticoUtenteGaraAction { get; set; }
@@ -23,7 +24,7 @@ namespace FantaF1
         public IRisultatoPronosticoAction RisultatoPronosticoAction { get; set; }
         public IScuderieAction ScuderieAction { get; set; }
         public IUtentiAction UtentiAction { get; set; }
-
+        
         #endregion
 
         public Orchestrator(IDatabaseAction databaseAction)
@@ -40,6 +41,7 @@ namespace FantaF1
             IscrizioniPilotiCampionatoAction = new IscrizioniPilotiCampionatoAction(databaseAction);
             IscrizioniScuderieCampionatoAction = new IscrizioniScuderieCampionatoAction(databaseAction);
             IscrizioniUtentiFantaCampionatoAction = new IscrizioniUtentiFantaCampionatoAction(databaseAction);
+            IscrizioniPilotiScuderieAction = new IscrizioniPilotiScuderieAction(databaseAction);
             PilotiAction = new PilotiAction(databaseAction);
             PronosticoUtenteFantaCampionatoAction = new PronosticoUtenteFantaCampionatoAction(databaseAction);
             PronosticoUtenteGaraAction = new PronosticoUtenteGaraAction(databaseAction);

@@ -201,7 +201,7 @@ function CheckFileTypePronostici(e) {
     e.preventDefault();
 
     var fantaCampName = $("#InserisciCampionato")[0].selectedOptions[0].text;
-    var iscr = $("#IscrizioneGP")[0].selectedOptions[0].value;
+    var iscr = $("#IscrizioneGPUtenti")[0].selectedOptions[0].value;
 
     if (iscr == "") {
         alert("Seleziona almeno una gara!");
@@ -363,6 +363,78 @@ $(document).on("change", "#InserisciCampionato", function () {
                 $("#IscrizioneGP").selectpicker('refresh');
                 $("#IscrizioneGP").selectpicker("val", "");
             }, 100);
+        }
+    }
+
+    AsyncValidation(oParams);
+
+});
+
+$(document).on("change", "#InserisciCampionatoUtente", function () {
+
+    var odat = JSON.stringify({ idCampionato: this.selectedOptions[0].value });
+
+    var oParams = {
+        "Url": "/Home/RetrieveGrandPrixForCampionatoReale",
+        "oData": odat,
+        "dataType": "json",
+        "Type": "POST",
+        "CallBackFn": function (result) {
+
+            var gp = $("#IscrizioneGPUtente");
+
+            gp.find("option").remove();
+            gp.find("selectedOptions").remove();
+
+            if (result.responseJSON.length > 0) {
+                $(result.responseJSON).each(function () {
+                    $("<option value='" + this.Value + "'>" + this.Text + "</option>").appendTo(gp);
+                });
+            }
+
+            $(".selectPick").selectpicker({
+                noneSelectedText: "Non selezionato",
+                noneResultsText: "Nessun risultato",
+                showTick: true
+            });
+
+            setTimeout(function () {
+                $("#IscrizioneGPUtente").selectpicker('refresh');
+                $("#IscrizioneGPUtente").selectpicker("val", "");
+            }, 100);
+        }
+    }
+
+    AsyncValidation(oParams);
+
+});
+
+$(document).on("change", "#IscrizioneGP", function () {
+
+    var odat = JSON.stringify({ idGara: this.selectedOptions[0].value });
+
+    var oParams = {
+        "Url": "/Home/RetrievePilotiForGaraReale",
+        "oData": odat,
+        "dataType": "json",
+        "Type": "POST",
+        "CallBackFn": function (result) {
+
+            document.getElementById("PilotiSection").innerHTML = result.responseText;
+
+            $(".selectPick").selectpicker({
+                noneSelectedText: "Non selezionato",
+                noneResultsText: "Nessun risultato",
+                showTick: true
+            });
+
+            setTimeout(function () {
+                for (var i = 1; i < 21; i++) {
+                    $("#Pilota"+i).selectpicker('refresh');
+                    $("#Pilota"+i).selectpicker("val", "");
+                }
+            }, 100);
+
         }
     }
 

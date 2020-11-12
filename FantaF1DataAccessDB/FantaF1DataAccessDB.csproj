@@ -80,6 +80,9 @@
     <Compile Include="IscrizioniPilotiCampionato.cs">
       <DependentUpon>FantaF1_SVRKEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="IscrizioniPilotiScuderie.cs">
+      <DependentUpon>FantaF1_SVRKEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="IscrizioniScuderieCampionato.cs">
       <DependentUpon>FantaF1_SVRKEntities.tt</DependentUpon>
     </Compile>

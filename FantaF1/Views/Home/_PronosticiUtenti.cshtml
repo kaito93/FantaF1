@@ -2,10 +2,10 @@
 
 <div id="pronosticiutenti">
     <div id="CampionatoId">
-        <b>Fanta Campionato:</b> @Html.DropDownList("InserisciCampionato", Model.Campionato, new { @class = "selectPick" })
+        <b>Fanta Campionato:</b> @Html.DropDownList("InserisciCampionatoUtente", Model.Campionato, new { @class = "selectPick" })
     </div>
     <div id="iscrizioneId">
-        <b>Grand Prix:</b> @Html.DropDownList("IscrizioneGP", Model.Circuiti, new { @class = "selectPick" })
+        <b>Grand Prix:</b> @Html.DropDownList("IscrizioneGPUtente", Model.Circuiti, new { @class = "selectPick" })
     </div>
     <p>
         <input type="file" id="fileLoadedPronostici" onchange="singleFileSelectedPronostici(this)" />

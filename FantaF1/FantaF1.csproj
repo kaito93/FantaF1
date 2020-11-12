@@ -164,6 +164,7 @@
     <Compile Include="Action\Interfaces\IFantaCampionatiAction.cs" />
     <Compile Include="Action\Interfaces\IIscrizioniCircuitoCampionatoAction.cs" />
     <Compile Include="Action\Interfaces\IIscrizioniPilotiCampionatoAction.cs" />
+    <Compile Include="Action\Interfaces\IIscrizioniPilotiScuderieAction.cs" />
     <Compile Include="Action\Interfaces\IIscrizioniScuderieCampionatoAction.cs" />
     <Compile Include="Action\Interfaces\IIscrizioniUtentiFantaCampionatoAction.cs" />
     <Compile Include="Action\Interfaces\IPilotiAction.cs" />
@@ -178,6 +179,7 @@
     <Compile Include="Action\Interfaces\IUtentiAction.cs" />
     <Compile Include="Action\IscrizioniCircuitoCampionatoAction.cs" />
     <Compile Include="Action\IscrizioniPilotiCampionatoAction.cs" />
+    <Compile Include="Action\IscrizioniPilotiScuderieAction.cs" />
     <Compile Include="Action\IscrizioniScuderieCampionatoAction.cs" />
     <Compile Include="Action\IscrizioniUtentiFantaCampionatoAction.cs" />
     <Compile Include="Action\PilotiAction.cs" />
@@ -277,6 +279,7 @@
     <Content Include="Views\Home\_PronosticiUtenti.cshtml" />
     <Content Include="Views\Home\_CalcolaPronosticiGara.cshtml" />
     <Content Include="Views\Home\_ScaricaRisultatiPronosticiGP.cshtml" />
+    <Content Include="Views\Home\_PilotiForGara.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

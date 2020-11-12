@@ -35,8 +35,7 @@ namespace FantaF1.Controllers
             var model = new RisultatoGaraViewModel
             {
                 Campionato = _orchestrator.FantaCampionatiAction.GetFantaCampionatiSelectListWithIdCampionatoReale(),
-                Circuiti = new List<SelectListItem>(),
-                Piloti = _orchestrator.PilotiAction.GetAllPilotiSelectItem()
+                Circuiti = new List<SelectListItem>()                
             };
 
             return PartialView("_PronosticiUtenti", model);
@@ -149,7 +148,11 @@ namespace FantaF1.Controllers
                 var pronostici =
                     _orchestrator.PronosticoUtenteGaraAction.LoadPronosticiFromFileCsv(uploadedFiles.FirstOrDefault());
 
-                var pilotiList = _orchestrator.PilotiAction.GetPilotiList();
+                var dateGara = _orchestrator.IscrizioniCircuitoCampionatoAction.GetIscrizioneForId(idGara).DataGara;
+
+                var idPiloti = _orchestrator.IscrizioniPilotiScuderieAction.GetIDPilotiForGara(dateGara);
+
+                var pilotiList = _orchestrator.PilotiAction.GetPilotiFromIdList(idPiloti);
 
                 var utentiList = _orchestrator.UtentiAction.GetUtentiList();
 
@@ -202,6 +205,19 @@ namespace FantaF1.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        public PartialViewResult RetrievePilotiForGaraReale(int idGara)
+        {
+            InitializeAll();
+            var giornoGara = _orchestrator.IscrizioniCircuitoCampionatoAction.GetIscrizioneForId(idGara).DataGara;
+            var pilotiId = _orchestrator.IscrizioniPilotiScuderieAction.GetIDPilotiForGara(giornoGara);
+            var model = new RisultatoGaraViewModel
+            {
+                Piloti = _orchestrator.PilotiAction.GetPilotiFromIdSelectItem(pilotiId)
+            };
+
+            return PartialView("_PilotiForGara",model);
+        }
+
         [HttpPost]
         public JsonResult SetRaceResult(RaceResultObj[] listResultRace)
         {
@@ -240,8 +256,10 @@ namespace FantaF1.Controllers
 
                 var scuderieList = _orchestrator.ScuderieAction.GetListScuderie();
 
+                var iscrizioniPilotiScuderie = _orchestrator.IscrizioniPilotiScuderieAction.GetAllIscrizioniPilotiScuderie();
+
                 _orchestrator.IscrizioniScuderieCampionatoAction.UpdatePunteggioScuderie(result.IdCampionato,
-                    iscrizioniPilotiCampionato, pilotiList, scuderieList);
+                    iscrizioniPilotiCampionato, scuderieList, iscrizioniPilotiScuderie);
 
                 res = new JsonResult { Data = "Ok" };
             }

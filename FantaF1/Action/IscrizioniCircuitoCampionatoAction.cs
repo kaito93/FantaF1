@@ -2,6 +2,7 @@
 using FantaF1DataAccessDB;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace FantaF1.Action
 {
@@ -92,6 +93,11 @@ namespace FantaF1.Action
 
             return iscrizioni.Where(iscrizione => iscrizione.RisultatiId == null).ToList();
 
+        }
+
+        public IscrizioniCircuitiCampionato GetIscrizioneForId(int idIscrizione)
+        {
+            return _iscrizioniCircuitiCampionato.FirstOrDefault(x => x.Id == idIscrizione);
         }
     }
 }

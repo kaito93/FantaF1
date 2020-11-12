@@ -38,6 +38,12 @@ namespace FantaF1.Action
         {
             return _database.IscrizioniPilotiCampionato.ToList();
         }
+
+        public List<IscrizioniPilotiScuderie> GetIscrizioniPilotiScuderie()
+        {
+            return _database.IscrizioniPilotiScuderie.ToList();
+        }
+
         public List<IscrizioniScuderieCampionato> GetIscrizioniScuderieCampionato()
         {
             return _database.IscrizioniScuderieCampionato.ToList();

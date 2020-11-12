@@ -35,5 +35,25 @@ namespace FantaF1.Action
             return _piloti.Select(pilota => new SelectListItem
             { Text = pilota.Nome + " " + pilota.Cognome, Value = pilota.Id.ToString() }).ToList();
         }
+
+        public IEnumerable<SelectListItem> GetPilotiFromIdSelectItem(IEnumerable<int> piloti)
+        {
+            return (from pilotaId in piloti
+                    select _piloti.FirstOrDefault(x => x.Id == pilotaId)
+                    into pilot
+                    where pilot != null
+                    select new SelectListItem {Text = pilot.Nome + " " + pilot.Cognome, Value = pilot.Id.ToString()})
+                .ToList().OrderBy(x => int.Parse(x.Value));
+        }
+
+        public List<Piloti> GetPilotiFromIdList(IEnumerable<int> pilotisId)
+        {
+            return (from pilotaId in pilotisId
+                select _piloti.FirstOrDefault(x => x.Id == pilotaId)
+                into pilot
+                where pilot != null
+                select pilot).ToList();
+
+        }
     }
 }

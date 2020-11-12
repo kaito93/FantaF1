@@ -48,5 +48,6 @@ namespace FantaF1.Action.Interfaces
 
         List<IscrizioniUtentiFantaCampionato> UpdateIscrizioneWithNewPronostico(int idIscrizione,
             int idNewPronostico);
+        List<IscrizioniPilotiScuderie> GetIscrizioniPilotiScuderie();
     }
 }
