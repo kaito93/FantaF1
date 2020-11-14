@@ -193,15 +193,15 @@ function SendResultRace() {
 }
 
 function singleFileSelectedPronostici(elem) {
-    document.getElementById("CsvPathPronostici").value = document.getElementById(elem.id).value.split('\\')[document.getElementById(elem.id).value.split('\\').length - 1];
+    //document.getElementById("CsvPathPronostici").value = document.getElementById(elem.id).value.split('\\')[document.getElementById(elem.id).value.split('\\').length - 1];
 }
 
 function CheckFileTypePronostici(e) {
 
     e.preventDefault();
 
-    var fantaCampName = $("#InserisciCampionato")[0].selectedOptions[0].text;
-    var iscr = $("#IscrizioneGPUtenti")[0].selectedOptions[0].value;
+    var fantaCampName = $("#InserisciCampionatoUtente")[0].selectedOptions[0].text;
+    var iscr = $("#IscrizioneGPUtente")[0].selectedOptions[0].value;
 
     if (iscr == "") {
         alert("Seleziona almeno una gara!");
