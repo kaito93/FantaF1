@@ -2,39 +2,6 @@
     ViewBag.Title = "Home Page";
 }
 
-
-<button id="btniscriviutenti" onclick="javascript: ClickOnButtonIscriviGiocatori();">Iscrivi utenti</button>
-<div id="iscrizioniutenti" style="display:none">
-    <p>
-        File:
-        <input type="text" id="CsvPath" placeholder="Scegli un file..." disabled="disabled" style="max-width: 30%; display: inline; margin-left:3px;" />
-        <label for="fileLoaded"> Sfoglia</label>
-        <input type="file" id="fileLoaded" onchange="singleFileSelected(this)" />
-
-        <div>
-            <button id="sendFileCsvBtn" type="button" onclick="CheckFileType(event)">Carica</button>
-        </div>
-    </p>
-</div>
-
-
-<button id="btnSetResultRace" onclick="javascript: ClickOnButtonRisultatiGara();">Inserisci Risultati Gara</button>
-<div id="insertResultRace" style="display:none">
+<div id="bodyContent">
 
 </div>
-
-<button id="btnInserisciPronostici" onclick="javascript: ClickOnButtonInserisciPronostici();">Pronostici utenti</button>
-<div id="pronosticiutenti" style="display:none">
-    <p>
-        File:
-        <input type="text" id="CsvPathPronostici" placeholder="Scegli un file..." disabled="disabled" style="max-width: 30%; display: inline; margin-left:3px;" />
-        <label for="fileLoaded"> Sfoglia</label>
-        <input type="file" id="fileLoadedPronostici" onchange="singleFileSelectedPronostici(this)" />
-
-        <div>
-            <button id="sendFileCsvBtnPronostici" type="button" onclick="CheckFileTypePronostici(event)">Carica</button>
-        </div>
-    </p>
-</div>
-
-<button id="btnCalcolaRisultatiPronostici" onclick="javascript: ClickOnButtonCalcolaRisultatiPronostici();">Calcola pronostici utenti</button>

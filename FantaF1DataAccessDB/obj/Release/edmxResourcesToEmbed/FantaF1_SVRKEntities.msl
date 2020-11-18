@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FantaF1_SVRKModelStoreContainer" CdmEntityContainer="FantaF1_SVRKEntities">
+    <EntitySetMapping Name="CampionatiMondiali">
+      <EntityTypeMapping TypeName="FantaF1_SVRKModel.CampionatiMondiali">
+        <MappingFragment StoreEntitySet="CampionatiMondiali">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Anno" ColumnName="Anno" />
+          <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+          <ScalarProperty Name="RegoleId" ColumnName="RegoleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Circuiti">
+      <EntityTypeMapping TypeName="FantaF1_SVRKModel.Circuiti">
+        <MappingFragment StoreEntitySet="Circuiti">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Nazione" ColumnName="Nazione" />
+          <ScalarProperty Name="Lunghezza_m_" ColumnName="Lunghezza(m)" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FantaCampionati">
+      <EntityTypeMapping TypeName="FantaF1_SVRKModel.FantaCampionati">
+        <MappingFragment StoreEntitySet="FantaCampionati">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Anno" ColumnName="Anno" />
+          <ScalarProperty Name="CampionatoRealeId" ColumnName="CampionatoRealeId" />
+          <ScalarProperty Name="RegoleId" ColumnName="RegoleId" />
+          <ScalarProperty Name="DataTerminePronostici" ColumnName="DataTerminePronostici" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IscrizioniCircuitiCampionato">
+      <EntityTypeMapping TypeName="FantaF1_SVRKModel.IscrizioniCircuitiCampionato">
+        <MappingFragment StoreEntitySet="IscrizioniCircuitiCampionato">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CircuitoId" ColumnName="CircuitoId" />
+          <ScalarProperty Name="CampionatoId" ColumnName="CampionatoId" />
+          <ScalarProperty Name="RisultatiId" ColumnName="RisultatiId" />
+          <ScalarProperty Name="DataGara" ColumnName="DataGara" />
+          <ScalarProperty Name="NomeGP" ColumnName="NomeGP" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IscrizioniPilotiCampionato">
+      <EntityTypeMapping TypeName="FantaF1_SVRKModel.IscrizioniPilotiCampionato">
+        <MappingFragment StoreEntitySet="IscrizioniPilotiCampionato">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PilotaId" ColumnName="PilotaId" />
+          <ScalarProperty Name="CampionatoId" ColumnName="CampionatoId" />
+          <ScalarProperty Name="Punteggio" ColumnName="Punteggio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IscrizioniScuderieCampionato">
+      <EntityTypeMapping TypeName="FantaF1_SVRKModel.IscrizioniScuderieCampionato">
+        <MappingFragment StoreEntitySet="IscrizioniScuderieCampionato">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ScuderiaId" ColumnName="ScuderiaId" />
+          <ScalarProperty Name="CampionatoId" ColumnName="CampionatoId" />
+          <ScalarProperty Name="Punteggio" ColumnName="Punteggio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IscrizioniUtentiFantaCampionato">
+      <EntityTypeMapping TypeName="FantaF1_SVRKModel.IscrizioniUtentiFantaCampionato">
+        <MappingFragment StoreEntitySet="IscrizioniUtentiFantaCampionato">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UtenteId" ColumnName="UtenteId" />
+          <ScalarProperty Name="CampionatoId" ColumnName="CampionatoId" />
+          <ScalarProperty Name="PronosticoCampionatoId" ColumnName="PronosticoCampionatoId" />
+          <ScalarProperty Name="PunteggioCampionatoMondiale" ColumnName="PunteggioCampionatoMondiale" />
+          <ScalarProperty Name="DataPronosticoMondiale" ColumnName="DataPronosticoMondiale" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Piloti">
+      <EntityTypeMapping TypeName="FantaF1_SVRKModel.Piloti">
+        <MappingFragment StoreEntitySet="Piloti">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Cognome" ColumnName="Cognome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PronosticoUtenteFantaCampionato">
+      <EntityTypeMapping TypeName="FantaF1_SVRKModel.PronosticoUtenteFantaCampionato">
+        <MappingFragment StoreEntitySet="PronosticoUtenteFantaCampionato">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PrimoClassificatoPilotaId" ColumnName="PrimoClassificatoPilotaId" />
+          <ScalarProperty Name="SecondoClassificatoPilotaId" ColumnName="SecondoClassificatoPilotaId" />
+          <ScalarProperty Name="TerzoClassificatoPilotaId" ColumnName="TerzoClassificatoPilotaId" />
+          <ScalarProperty Name="QuartoClassificatoPilotaId" ColumnName="QuartoClassificatoPilotaId" />
+          <ScalarProperty Name="QuintoClassificatoPilotaId" ColumnName="QuintoClassificatoPilotaId" />
+          <ScalarProperty Name="SestoClassificatoPilotaId" ColumnName="SestoClassificatoPilotaId" />
+          <ScalarProperty Name="SettimoClassificatoPilotaId" ColumnName="SettimoClassificatoPilotaId" />
+          <ScalarProperty Name="OttavoClassificatoPilotaId" ColumnName="OttavoClassificatoPilotaId" />
+          <ScalarProperty Name="NonoClassificatoPilotaId" ColumnName="NonoClassificatoPilotaId" />
+          <ScalarProperty Name="DecimoClassificatoPilotaId" ColumnName="DecimoClassificatoPilotaId" />
+          <ScalarProperty Name="PrimaClassificataScuderiaId" ColumnName="PrimaClassificataScuderiaId" />
+          <ScalarProperty Name="SecondaClassificataScuderiaId" ColumnName="SecondaClassificataScuderiaId" />
+          <ScalarProperty Name="TerzaClassificataScuderiaId" ColumnName="TerzaClassificataScuderiaId" />
+          <ScalarProperty Name="QuartaClassificataScuderiaId" ColumnName="QuartaClassificataScuderiaId" />
+          <ScalarProperty Name="QuintaClassificataScuderiaId" ColumnName="QuintaClassificataScuderiaId" />
+          <ScalarProperty Name="SestaClassificataScuderiaId" ColumnName="SestaClassificataScuderiaId" />
+          <ScalarProperty Name="SettimaClassificataScuderiaId" ColumnName="SettimaClassificataScuderiaId" />
+          <ScalarProperty Name="OttavaClassificataScuderiaId" ColumnName="OttavaClassificataScuderiaId" />
+          <ScalarProperty Name="NonaClassificataScuderiaId" ColumnName="NonaClassificataScuderiaId" />
+          <ScalarProperty Name="DecimaClassificataScuderiaId" ColumnName="DecimaClassificataScuderiaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PronosticoUtenteGara">
+      <EntityTypeMapping TypeName="FantaF1_SVRKModel.PronosticoUtenteGara">
+        <MappingFragment StoreEntitySet="PronosticoUtenteGara">
+          <ScalarProperty Name="GaraId" ColumnName="GaraId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UtenteId" ColumnName="UtenteId" />
+          <ScalarProperty Name="FantaCampionatoId" ColumnName="FantaCampionatoId" />
+          <ScalarProperty Name="PrimoClassificatoPilotaId" ColumnName="PrimoClassificatoPilotaId" />
+          <ScalarProperty Name="SecondoClassificatoPilotaId" ColumnName="SecondoClassificatoPilotaId" />
+          <ScalarProperty Name="TerzoClassificatoPilotaId" ColumnName="TerzoClassificatoPilotaId" />
+          <ScalarProperty Name="PolePositionPilotaId" ColumnName="PolePositionPilotaId" />
+          <ScalarProperty Name="GiroVelocePilotaId" ColumnName="GiroVelocePilotaId" />
+          <ScalarProperty Name="DFNPilotaId" ColumnName="DFNPilotaId" />
+          <ScalarProperty Name="Inserimento" ColumnName="Inserimento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RegoleCampionatoMondiale">
+      <EntityTypeMapping TypeName="FantaF1_SVRKModel.RegoleCampionatoMondiale">
+        <MappingFragment StoreEntitySet="RegoleCampionatoMondiale">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PunteggioPrimoClassificato" ColumnName="PunteggioPrimoClassificato" />
+          <ScalarProperty Name="PunteggioSecondoClassificato" ColumnName="PunteggioSecondoClassificato" />
+          <ScalarProperty Name="PunteggioTerzoClassificato" ColumnName="PunteggioTerzoClassificato" />
+          <ScalarProperty Name="PunteggioQuartoClassificato" ColumnName="PunteggioQuartoClassificato" />
+          <ScalarProperty Name="PunteggioQuintoClassificato" ColumnName="PunteggioQuintoClassificato" />
+          <ScalarProperty Name="PunteggioSestoClassificato" ColumnName="PunteggioSestoClassificato" />
+          <ScalarProperty Name="PunteggioSettimoClassificato" ColumnName="PunteggioSettimoClassificato" />
+          <ScalarProperty Name="PunteggioOttavoClassificato" ColumnName="PunteggioOttavoClassificato" />
+          <ScalarProperty Name="PunteggioNonoClassificato" ColumnName="PunteggioNonoClassificato" />
+          <ScalarProperty Name="PunteggioDecimoClassificato" ColumnName="PunteggioDecimoClassificato" />
+          <ScalarProperty Name="PunteggioUndicesimoClassificato" ColumnName="PunteggioUndicesimoClassificato" />
+          <ScalarProperty Name="PunteggioDodicesimoClassificato" ColumnName="PunteggioDodicesimoClassificato" />
+          <ScalarProperty Name="PunteggioTredicesimoClassificato" ColumnName="PunteggioTredicesimoClassificato" />
+          <ScalarProperty Name="PunteggioQuattordicesimoClassificato" ColumnName="PunteggioQuattordicesimoClassificato" />
+          <ScalarProperty Name="PunteggioQuindicesimoClassificato" ColumnName="PunteggioQuindicesimoClassificato" />
+          <ScalarProperty Name="PunteggioSedicesimoClassificato" ColumnName="PunteggioSedicesimoClassificato" />
+          <ScalarProperty Name="PunteggioDiciassettesimoClassificato" ColumnName="PunteggioDiciassettesimoClassificato" />
+          <ScalarProperty Name="PunteggioDiciottesimoClassificato" ColumnName="PunteggioDiciottesimoClassificato" />
+          <ScalarProperty Name="PunteggioDiciannovesimoClassificato" ColumnName="PunteggioDiciannovesimoClassificato" />
+          <ScalarProperty Name="PunteggioVentesimoClassificato" ColumnName="PunteggioVentesimoClassificato" />
+          <ScalarProperty Name="PunteggioGiroVeloce" ColumnName="PunteggioGiroVeloce" />
+          <ScalarProperty Name="PunteggioPolePosition" ColumnName="PunteggioPolePosition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RegoleFantaCampionato">
+      <EntityTypeMapping TypeName="FantaF1_SVRKModel.RegoleFantaCampionato">
+        <MappingFragment StoreEntitySet="RegoleFantaCampionato">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PunteggioPrimoClassificato" ColumnName="PunteggioPrimoClassificato" />
+          <ScalarProperty Name="PunteggioSecondoClassificato" ColumnName="PunteggioSecondoClassificato" />
+          <ScalarProperty Name="PunteggioTerzoClassificato" ColumnName="PunteggioTerzoClassificato" />
+          <ScalarProperty Name="PunteggioGiroVeloce" ColumnName="PunteggioGiroVeloce" />
+          <ScalarProperty Name="PunteggioPolePosition" ColumnName="PunteggioPolePosition" />
+          <ScalarProperty Name="PunteggioDFN" ColumnName="PunteggioDFN" />
+          <ScalarProperty Name="ComboPodio" ColumnName="ComboPodio" />
+          <ScalarProperty Name="ComboTotale" ColumnName="ComboTotale" />
+          <ScalarProperty Name="PunteggioPodio" ColumnName="PunteggioPodio" />
+          <ScalarProperty Name="PunteggioTotale" ColumnName="PunteggioTotale" />
+          <ScalarProperty Name="PunteggioPrimoPilotaMondiale" ColumnName="PunteggioPrimoPilotaMondiale" />
+          <ScalarProperty Name="PunteggioSecondoPilotaMondiale" ColumnName="PunteggioSecondoPilotaMondiale" />
+          <ScalarProperty Name="PunteggioTerzoPilotaMondiale" ColumnName="PunteggioTerzoPilotaMondiale" />
+          <ScalarProperty Name="PunteggioQuartoPilotaMondiale" ColumnName="PunteggioQuartoPilotaMondiale" />
+          <ScalarProperty Name="PunteggioQuintoPilotaMondiale" ColumnName="PunteggioQuintoPilotaMondiale" />
+          <ScalarProperty Name="PunteggioSestoPilotaMondiale" ColumnName="PunteggioSestoPilotaMondiale" />
+          <ScalarProperty Name="PunteggioSettimoPilotaMondiale" ColumnName="PunteggioSettimoPilotaMondiale" />
+          <ScalarProperty Name="PunteggioOttavoPilotaMondiale" ColumnName="PunteggioOttavoPilotaMondiale" />
+          <ScalarProperty Name="PunteggioNonoPilotaMondiale" ColumnName="PunteggioNonoPilotaMondiale" />
+          <ScalarProperty Name="PunteggioDecimoPilotaMondiale" ColumnName="PunteggioDecimoPilotaMondiale" />
+          <ScalarProperty Name="PunteggioPrimaScuderiaMondiale" ColumnName="PunteggioPrimaScuderiaMondiale" />
+          <ScalarProperty Name="PunteggioSecondaScuderiaMondiale" ColumnName="PunteggioSecondaScuderiaMondiale" />
+          <ScalarProperty Name="PunteggioTerzaScuderiaMondiale" ColumnName="PunteggioTerzaScuderiaMondiale" />
+          <ScalarProperty Name="PunteggioQuartaScuderiaMondiale" ColumnName="PunteggioQuartaScuderiaMondiale" />
+          <ScalarProperty Name="PunteggioQuintaScuderiaMondiale" ColumnName="PunteggioQuintaScuderiaMondiale" />
+          <ScalarProperty Name="PunteggioSestaScuderiaMondiale" ColumnName="PunteggioSestaScuderiaMondiale" />
+          <ScalarProperty Name="PunteggioSettimaScuderiaMondiale" ColumnName="PunteggioSettimaScuderiaMondiale" />
+          <ScalarProperty Name="PunteggioOttavaScuderiaMondiale" ColumnName="PunteggioOttavaScuderiaMondiale" />
+          <ScalarProperty Name="PunteggioNonaScuderiaMondiale" ColumnName="PunteggioNonaScuderiaMondiale" />
+          <ScalarProperty Name="PunteggioDecimaScuderiaMondiale" ColumnName="PunteggioDecimaScuderiaMondiale" />
+          <ScalarProperty Name="PunteggioMalusCambioPronosticoMondiale" ColumnName="PunteggioMalusCambioPronosticoMondiale" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RisultatoDFNGaraReale">
+      <EntityTypeMapping TypeName="FantaF1_SVRKModel.RisultatoDFNGaraReale">
+        <MappingFragment StoreEntitySet="RisultatoDFNGaraReale">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PilotaId01" ColumnName="PilotaId01" />
+          <ScalarProperty Name="PilotaId02" ColumnName="PilotaId02" />
+          <ScalarProperty Name="PilotaId03" ColumnName="PilotaId03" />
+          <ScalarProperty Name="PilotaId04" ColumnName="PilotaId04" />
+          <ScalarProperty Name="PilotaId05" ColumnName="PilotaId05" />
+          <ScalarProperty Name="PilotaId06" ColumnName="PilotaId06" />
+          <ScalarProperty Name="PilotaId07" ColumnName="PilotaId07" />
+          <ScalarProperty Name="PilotaId08" ColumnName="PilotaId08" />
+          <ScalarProperty Name="PilotaId09" ColumnName="PilotaId09" />
+          <ScalarProperty Name="PilotaId10" ColumnName="PilotaId10" />
+          <ScalarProperty Name="PilotaId11" ColumnName="PilotaId11" />
+          <ScalarProperty Name="PilotaId12" ColumnName="PilotaId12" />
+          <ScalarProperty Name="PilotaId13" ColumnName="PilotaId13" />
+          <ScalarProperty Name="PilotaId14" ColumnName="PilotaId14" />
+          <ScalarProperty Name="PilotaId15" ColumnName="PilotaId15" />
+          <ScalarProperty Name="PilotaId16" ColumnName="PilotaId16" />
+          <ScalarProperty Name="PilotaId17" ColumnName="PilotaId17" />
+          <ScalarProperty Name="PilotaId18" ColumnName="PilotaId18" />
+          <ScalarProperty Name="PilotaId19" ColumnName="PilotaId19" />
+          <ScalarProperty Name="PilotaId20" ColumnName="PilotaId20" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RisultatoGaraReale">
+      <EntityTypeMapping TypeName="FantaF1_SVRKModel.RisultatoGaraReale">
+        <MappingFragment StoreEntitySet="RisultatoGaraReale">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PilotaId01" ColumnName="PilotaId01" />
+          <ScalarProperty Name="PilotaId02" ColumnName="PilotaId02" />
+          <ScalarProperty Name="PilotaId03" ColumnName="PilotaId03" />
+          <ScalarProperty Name="PilotaId04" ColumnName="PilotaId04" />
+          <ScalarProperty Name="PilotaId05" ColumnName="PilotaId05" />
+          <ScalarProperty Name="PilotaId06" ColumnName="PilotaId06" />
+          <ScalarProperty Name="PilotaId07" ColumnName="PilotaId07" />
+          <ScalarProperty Name="PilotaId08" ColumnName="PilotaId08" />
+          <ScalarProperty Name="PilotaId09" ColumnName="PilotaId09" />
+          <ScalarProperty Name="PilotaId10" ColumnName="PilotaId10" />
+          <ScalarProperty Name="PilotaId11" ColumnName="PilotaId11" />
+          <ScalarProperty Name="PilotaId12" ColumnName="PilotaId12" />
+          <ScalarProperty Name="PilotaId13" ColumnName="PilotaId13" />
+          <ScalarProperty Name="PilotaId14" ColumnName="PilotaId14" />
+          <ScalarProperty Name="PilotaId15" ColumnName="PilotaId15" />
+          <ScalarProperty Name="PilotaId16" ColumnName="PilotaId16" />
+          <ScalarProperty Name="PilotaId17" ColumnName="PilotaId17" />
+          <ScalarProperty Name="PilotaId18" ColumnName="PilotaId18" />
+          <ScalarProperty Name="PilotaId19" ColumnName="PilotaId19" />
+          <ScalarProperty Name="PilotaId20" ColumnName="PilotaId20" />
+          <ScalarProperty Name="PilotaIdGiroVeloce" ColumnName="PilotaIdGiroVeloce" />
+          <ScalarProperty Name="PilotaIdPolePosition" ColumnName="PilotaIdPolePosition" />
+          <ScalarProperty Name="RisultatoDFNId" ColumnName="RisultatoDFNId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RisultatoPronostico">
+      <EntityTypeMapping TypeName="FantaF1_SVRKModel.RisultatoPronostico">
+        <MappingFragment StoreEntitySet="RisultatoPronostico">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PronosticoId" ColumnName="PronosticoId" />
+          <ScalarProperty Name="RisultatoPrimoClassificato" ColumnName="RisultatoPrimoClassificato" />
+          <ScalarProperty Name="RisultatoSecondoClassificato" ColumnName="RisultatoSecondoClassificato" />
+          <ScalarProperty Name="RisultatoTerzoClassificato" ColumnName="RisultatoTerzoClassificato" />
+          <ScalarProperty Name="RisultatoPolePosition" ColumnName="RisultatoPolePosition" />
+          <ScalarProperty Name="RisultatoGiroVeloce" ColumnName="RisultatoGiroVeloce" />
+          <ScalarProperty Name="RisultatoDFN" ColumnName="RisultatoDFN" />
+          <ScalarProperty Name="PunteggioComplessivoPronostico" ColumnName="PunteggioComplessivoPronostico" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Scuderie">
+      <EntityTypeMapping TypeName="FantaF1_SVRKModel.Scuderie">
+        <MappingFragment StoreEntitySet="Scuderie">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Nazionalita" ColumnName="Nazionalita" />
+          <ScalarProperty Name="NomeCorto" ColumnName="NomeCorto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Utenti">
+      <EntityTypeMapping TypeName="FantaF1_SVRKModel.Utenti">
+        <MappingFragment StoreEntitySet="Utenti">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Cognome" ColumnName="Cognome" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Data_Registrazione" ColumnName="Data_Registrazione" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IscrizioniPilotiScuderie">
+      <EntityTypeMapping TypeName="FantaF1_SVRKModel.IscrizioniPilotiScuderie">
+        <MappingFragment StoreEntitySet="IscrizioniPilotiScuderie">
+          <ScalarProperty Name="DataFineContratto" ColumnName="DataFineContratto" />
+          <ScalarProperty Name="DataInizioContratto" ColumnName="DataInizioContratto" />
+          <ScalarProperty Name="ScuderiaId" ColumnName="ScuderiaId" />
+          <ScalarProperty Name="PilotaId" ColumnName="PilotaId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

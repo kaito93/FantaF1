@@ -1,0 +1,29 @@
+﻿@model FantaF1.Models.RisultatoGaraViewModel
+
+<br />
+<b>Piloti:</b>
+<br />
+
+@for (var posizione = 1; posizione < 21; posizione++)
+{
+    <div class="col-md-12 row" id="Posizione@(posizione)" style="margin-bottom: 15px;">
+
+        <div class="col-md-3" id="PilotaPosizione@(posizione)" style="float: left;">
+            @posizione°: @Html.DropDownList("Pilota" + posizione, Model.Piloti, new { @class = "selectPick" })
+        </div>
+        <div class="col-md-3" id="PilotaPolePosition@(posizione)" style="padding-top:30px; float:left">
+            Pole Position <input type="checkbox" id="PilotaPolePositionInput@(posizione)" />
+        </div>
+        <div class="col-md-3" id="PilotaGiroVeloce@(posizione)" style="padding-top:30px; float:left">
+            Giro Veloce <input type="checkbox" id="PilotaGiroVeloceInput@(posizione)" />
+        </div>
+        <div class="col-md-3" id="PilotaDFN@(posizione)" style="padding-top:30px; float: left;">
+            DFN <input type="checkbox" id="PilotaDFNInput@(posizione)" />
+        </div>
+    </div>
+
+}
+
+<div class="offset-md-4">
+    <a id="InsertResultRace" href="javascript: SendResultRace();" class="btn btn-primary active" role="button" aria-pressed="true">Inserisci risultati gara</a>
+</div>

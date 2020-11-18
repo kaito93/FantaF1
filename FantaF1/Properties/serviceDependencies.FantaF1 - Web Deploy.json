@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/fantaf1dbserver/databases/FantaF1_SVRK",
+      "type": "mssql.azure",
+      "connectionId": "FantaF1_SVRKEntities",
+      "secretStore": "AzureAppSettings"
+    }
+  }
+}

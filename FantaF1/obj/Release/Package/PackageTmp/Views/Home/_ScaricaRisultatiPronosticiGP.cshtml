@@ -1,0 +1,19 @@
+﻿@model FantaF1.Models.CalcolaPronosticiGaraViewModel
+
+<style>
+    .selectPick {
+        background-color: lightblue;
+    }
+</style>
+
+<div class="col-md-3" style="float: left;">
+    <span>Seleziona fanta campionato</span>
+    @Html.DropDownList("FantaCampionati", Model.FantaCampionatiList, new { @class = "selectPick" })
+</div>
+
+<div class="col-md-5" style="float: left; padding-top: 10px;">
+    <a id="buttonCalcola" href="javascript: ClickOnButtonScaricaRisultatiPronostici();" class="btn btn-primary active disabled" role="button" aria-pressed="true" aria-disabled="true">Scarica risultati pronostici utenti</a>
+</div>
+
+
+

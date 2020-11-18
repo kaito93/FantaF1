@@ -1,0 +1,12 @@
+﻿<div id="iscrizioniutenti">
+    <p>
+        File:
+        <input type="text" id="CsvPath" placeholder="Scegli un file..." disabled="disabled" style="max-width: 30%; display: inline; margin-left:3px;" />
+        <label for="fileLoaded"> Sfoglia</label>
+        <input type="file" id="fileLoaded" onchange="singleFileSelected(this)" />
+
+        <div>
+            <button id="sendFileCsvBtn" type="button" onclick="CheckFileType(event)">Carica</button>
+        </div>
+    </p>
+</div>

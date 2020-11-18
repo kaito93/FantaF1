@@ -1,0 +1,38 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "restored": true,
+      "restoreTime": "2020-11-18T13:17:06.1880084Z"
+    }
+  },
+  "parameters": {
+    "FantaF1.resourceGroupName": {
+      "Type": "resourceGroup",
+      "Value": "FantaF1"
+    },
+    "FantaF1.resourceName": {
+      "Type": null,
+      "Value": "FantaF1"
+    },
+    "mssql1.subscriptionId": {
+      "Type": "subscription",
+      "Value": "496a4eb8-fe9e-4760-af55-50a2d6063950"
+    },
+    "FantaF1.resourceGroupLocation": {
+      "Type": null,
+      "Value": "francecentral"
+    },
+    "mssql1.resourceGroupName": {
+      "Type": "resourceGroup",
+      "Value": "FantaF1"
+    },
+    "subscriptionId": {
+      "Type": "subscription",
+      "Value": "496a4eb8-fe9e-4760-af55-50a2d6063950"
+    },
+    "FantaF1.subscriptionId": {
+      "Type": "subscription",
+      "Value": "496a4eb8-fe9e-4760-af55-50a2d6063950"
+    }
+  }
+}
