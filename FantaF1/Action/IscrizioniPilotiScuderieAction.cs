@@ -29,7 +29,10 @@ namespace FantaF1.Action
                 DateTime.Compare(giornoGara, x.DataInizioContratto) > 0 &&
                 DateTime.Compare(x.DataFineContratto, giornoGara) > 0);
             
-            return pilotiIscrittiForGara.Select(pilota => pilota.PilotaId).ToList();
+
+            var pilotiIscr= pilotiIscrittiForGara.Select(pilota => pilota.PilotaId).ToList();
+            pilotiIscr.Add(23);
+            return pilotiIscr;
         }
     }
 }

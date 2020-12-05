@@ -210,6 +210,7 @@ namespace FantaF1.Controllers
             InitializeAll();
             var giornoGara = _orchestrator.IscrizioniCircuitoCampionatoAction.GetIscrizioneForId(idGara).DataGara;
             var pilotiId = _orchestrator.IscrizioniPilotiScuderieAction.GetIDPilotiForGara(giornoGara);
+            pilotiId.Remove(23);
             var model = new RisultatoGaraViewModel
             {
                 Piloti = _orchestrator.PilotiAction.GetPilotiFromIdSelectItem(pilotiId)
@@ -252,8 +253,6 @@ namespace FantaF1.Controllers
                     _orchestrator.IscrizioniPilotiCampionatoAction
                         .GetAllIscrizioniPilotiCampionatoForCampionatoMondialeId(result.IdCampionato);
 
-                var pilotiList = _orchestrator.PilotiAction.GetPilotiList();
-
                 var scuderieList = _orchestrator.ScuderieAction.GetListScuderie();
 
                 var iscrizioniPilotiScuderie = _orchestrator.IscrizioniPilotiScuderieAction.GetAllIscrizioniPilotiScuderie();
@@ -275,51 +274,78 @@ namespace FantaF1.Controllers
         {
             InitializeAll();
 
-            var campionatoId = _orchestrator.IscrizioniCircuitoCampionatoAction.GetIdCampionatoFromIscrizioneCircuitoCampionatoRealeId(iscrizioneCircuitoCampionatoReale);
+            JsonResult res = null;
 
-            var listFantaCampionatiDaAggiornare = _orchestrator.FantaCampionatiAction.GetFantaCampionatiListFromCampionatoId(campionatoId);
-
-            var idRisultato = _orchestrator.IscrizioniCircuitoCampionatoAction.GetIdRisultatoFromIscrizioneCircuitoCampionatoRealeId(iscrizioneCircuitoCampionatoReale);
-
-            if (idRisultato == null)
-                throw new Exception("Non è presente il risultato di gara per il pronostico che si sta cercando di calcolare");
-
-            var idResult = (int)idRisultato;
-
-            var risultatoGara = _orchestrator.RisultatoGaraRealeAction.GetRisultatoGaraFromIdRisultato(idResult);
-
-            var risultatoDfnGara = _orchestrator.RisultatoDfnGaraRealeAction.GetRisultatoDfnFromIdRisultatoDfn(risultatoGara.RisultatoDFNId);
-
-            foreach (var fantaCampionato in listFantaCampionatiDaAggiornare)
+            try
             {
-                #region Risultato pronostici gara
+                var campionatoId =
+                    _orchestrator.IscrizioniCircuitoCampionatoAction
+                        .GetIdCampionatoFromIscrizioneCircuitoCampionatoRealeId(iscrizioneCircuitoCampionatoReale);
 
-                var pronosticiUtenteGara = _orchestrator.PronosticoUtenteGaraAction.GetPronosticoUtenteGaraFromFantaCampionatoIdAndCircuitoId(fantaCampionato.Id, iscrizioneCircuitoCampionatoReale);
+                var listFantaCampionatiDaAggiornare =
+                    _orchestrator.FantaCampionatiAction.GetFantaCampionatiListFromCampionatoId(campionatoId);
 
-                var regolamentoFantaCampionato = _orchestrator.RegoleFantaCampionatoAction.GetRegoleFantaCampionatoFromIdRegole(fantaCampionato.RegoleId);
+                var idRisultato =
+                    _orchestrator.IscrizioniCircuitoCampionatoAction
+                        .GetIdRisultatoFromIscrizioneCircuitoCampionatoRealeId(iscrizioneCircuitoCampionatoReale);
 
-                _orchestrator.RisultatoPronosticoAction.CreateAndSaveRisultatoPronostico(pronosticiUtenteGara, risultatoGara, regolamentoFantaCampionato, risultatoDfnGara);
+                if (idRisultato == null)
+                    throw new Exception(
+                        "Non è presente il risultato di gara per il pronostico che si sta cercando di calcolare");
 
-                #endregion
+                var idResult = (int) idRisultato;
 
-                #region Aggiornamento punteggio mondiale
+                var risultatoGara = _orchestrator.RisultatoGaraRealeAction.GetRisultatoGaraFromIdRisultato(idResult);
 
-                var classificaPiloti =
-                    _orchestrator.IscrizioniPilotiCampionatoAction.GetClassificaPilotiFromIdCampionato(campionatoId);
+                var risultatoDfnGara =
+                    _orchestrator.RisultatoDfnGaraRealeAction.GetRisultatoDfnFromIdRisultatoDfn(risultatoGara
+                        .RisultatoDFNId);
 
-                var classificaScuderie =
-                    _orchestrator.IscrizioniScuderieCampionatoAction.GetClassificaScuderieFromCampionatoId(campionatoId);
+                foreach (var fantaCampionato in listFantaCampionatiDaAggiornare)
+                {
+                    #region Risultato pronostici gara
 
-                var pronosticiMondialeList = _orchestrator.PronosticoUtenteFantaCampionatoAction.GetAllPronostici();
+                    var pronosticiUtenteGara =
+                        _orchestrator.PronosticoUtenteGaraAction
+                            .GetPronosticoUtenteGaraFromFantaCampionatoIdAndCircuitoId(fantaCampionato.Id,
+                                iscrizioneCircuitoCampionatoReale);
 
-                _orchestrator.IscrizioniUtentiFantaCampionatoAction.UpdatePunteggioPronosticoMondiale(classificaPiloti, classificaScuderie, pronosticiMondialeList, fantaCampionato.Id, regolamentoFantaCampionato, fantaCampionato.DataTerminePronostici);
+                    var regolamentoFantaCampionato =
+                        _orchestrator.RegoleFantaCampionatoAction.GetRegoleFantaCampionatoFromIdRegole(fantaCampionato
+                            .RegoleId);
 
-                #endregion
+                    _orchestrator.RisultatoPronosticoAction.CreateAndSaveRisultatoPronostico(pronosticiUtenteGara,
+                        risultatoGara, regolamentoFantaCampionato, risultatoDfnGara);
 
-                GenerateResultsExcel(fantaCampionato.Id);
+                    #endregion
+
+                    #region Aggiornamento punteggio mondiale
+
+                    var classificaPiloti =
+                        _orchestrator.IscrizioniPilotiCampionatoAction
+                            .GetClassificaPilotiFromIdCampionato(campionatoId);
+
+                    var classificaScuderie =
+                        _orchestrator.IscrizioniScuderieCampionatoAction.GetClassificaScuderieFromCampionatoId(
+                            campionatoId);
+
+                    var pronosticiMondialeList = _orchestrator.PronosticoUtenteFantaCampionatoAction.GetAllPronostici();
+
+                    _orchestrator.IscrizioniUtentiFantaCampionatoAction.UpdatePunteggioPronosticoMondiale(
+                        classificaPiloti, classificaScuderie, pronosticiMondialeList, fantaCampionato.Id,
+                        regolamentoFantaCampionato, fantaCampionato.DataTerminePronostici);
+
+                    #endregion
+
+                    res = new JsonResult { Data = "Calcoli effettuati correttamente" };
+                }
             }
-
-            return null;
+            catch (Exception ex)
+            {
+                res = new JsonResult { Data = ex.Message };
+            }
+            
+            return res;
         }
 
         public void GenerateResultsExcel(int fantaCampionatoId)
