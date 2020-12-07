@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a11f39d7522643eabdb2a082206f38e8" Name="Diagram1" ZoomLevel="35">
+      <Diagram DiagramId="a11f39d7522643eabdb2a082206f38e8" Name="Diagram1" ZoomLevel="101">
         <EntityTypeShape EntityType="FantaF1_SVRKModel.CampionatiMondiali" Width="1.5" PointX="3.75" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="FantaF1_SVRKModel.Circuiti" Width="1.5" PointX="10.5" PointY="15.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FantaF1_SVRKModel.FantaCampionati" Width="1.5" PointX="12.75" PointY="15.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FantaF1_SVRKModel.IscrizioniCircuitiCampionato" Width="1.5" PointX="12.75" PointY="21.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="FantaF1_SVRKModel.IscrizioniPilotiCampionato" Width="1.5" PointX="5.25" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FantaF1_SVRKModel.IscrizioniPilotiCampionato" Width="2.125" PointX="5.25" PointY="16.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FantaF1_SVRKModel.IscrizioniScuderieCampionato" Width="1.5" PointX="6" PointY="13.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FantaF1_SVRKModel.IscrizioniUtentiFantaCampionato" Width="1.5" PointX="15" PointY="21.375" IsExpanded="true" />
         <EntityTypeShape EntityType="FantaF1_SVRKModel.Piloti" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
@@ -106,9 +106,10 @@
         <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoUtenteGara_Utenti" ManuallyRouted="false" />
         <AssociationConnector Association="FantaF1_SVRKModel.FK_RisultatoDFN" ManuallyRouted="false" />
         <AssociationConnector Association="FantaF1_SVRKModel.FK_PronosticoUtenteGara_IscrizioniCircuitiCampionato1" />
-        <EntityTypeShape EntityType="FantaF1_SVRKModel.IscrizioniPilotiScuderie" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FantaF1_SVRKModel.IscrizioniPilotiScuderie" Width="2" PointX="0.75" PointY="0.75" />
         <AssociationConnector Association="FantaF1_SVRKModel.FK_IscrizioniPilotiScuderie_Piloti" />
         <AssociationConnector Association="FantaF1_SVRKModel.FK_IscrizioniPilotiScuderie_Scuderie" />
+        <AssociationConnector Association="FantaF1_SVRKModel.FK_IscrizionePilota1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

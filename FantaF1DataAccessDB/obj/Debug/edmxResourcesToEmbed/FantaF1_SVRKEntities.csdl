@@ -58,11 +58,11 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="PilotaId" Type="Int32" Nullable="false" />
     <Property Name="CampionatoId" Type="Int32" Nullable="false" />
     <Property Name="Punteggio" Type="Int32" Nullable="false" />
     <NavigationProperty Name="CampionatiMondiali" Relationship="Self.FK_IscrizioneCampionatoPilota" FromRole="IscrizioniPilotiCampionato" ToRole="CampionatiMondiali" />
-    <NavigationProperty Name="Piloti" Relationship="Self.FK_IscrizionePilota" FromRole="IscrizioniPilotiCampionato" ToRole="Piloti" />
+    <Property Name="IscrizionePilotaScuderiaId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="IscrizioniPilotiScuderie" Relationship="FantaF1_SVRKModel.FK_IscrizionePilota1" FromRole="IscrizioniPilotiCampionato" ToRole="IscrizioniPilotiScuderie" />
   </EntityType>
   <EntityType Name="IscrizioniScuderieCampionato">
     <Key>
@@ -94,7 +94,6 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Cognome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="IscrizioniPilotiCampionato" Relationship="Self.FK_IscrizionePilota" FromRole="Piloti" ToRole="IscrizioniPilotiCampionato" />
     <NavigationProperty Name="RisultatoDFNGaraReale" Relationship="Self.FK_Pilota01DFN" FromRole="Piloti" ToRole="RisultatoDFNGaraReale" />
     <NavigationProperty Name="RisultatoGaraReale" Relationship="Self.FK_Pilota01Posizione" FromRole="Piloti" ToRole="RisultatoGaraReale" />
     <NavigationProperty Name="RisultatoDFNGaraReale1" Relationship="Self.FK_Pilota02DFN" FromRole="Piloti" ToRole="RisultatoDFNGaraReale" />
@@ -547,18 +546,6 @@
       </Principal>
       <Dependent Role="PronosticoUtenteGara">
         <PropertyRef Name="GaraId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_IscrizionePilota">
-    <End Role="Piloti" Type="Self.Piloti" Multiplicity="1" />
-    <End Role="IscrizioniPilotiCampionato" Type="Self.IscrizioniPilotiCampionato" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Piloti">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="IscrizioniPilotiCampionato">
-        <PropertyRef Name="PilotaId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1492,10 +1479,6 @@
       <End Role="IscrizioniCircuitiCampionato" EntitySet="IscrizioniCircuitiCampionato" />
       <End Role="PronosticoUtenteGara" EntitySet="PronosticoUtenteGara" />
     </AssociationSet>
-    <AssociationSet Name="FK_IscrizionePilota" Association="Self.FK_IscrizionePilota">
-      <End Role="Piloti" EntitySet="Piloti" />
-      <End Role="IscrizioniPilotiCampionato" EntitySet="IscrizioniPilotiCampionato" />
-    </AssociationSet>
     <AssociationSet Name="FK_IscrizioneScuderia" Association="Self.FK_IscrizioneScuderia">
       <End Role="Scuderie" EntitySet="Scuderie" />
       <End Role="IscrizioniScuderieCampionato" EntitySet="IscrizioniScuderieCampionato" />
@@ -1801,6 +1784,10 @@
       <End Role="Scuderie" EntitySet="Scuderie" />
       <End Role="IscrizioniPilotiScuderie" EntitySet="IscrizioniPilotiScuderie" />
     </AssociationSet>
+    <AssociationSet Name="FK_IscrizionePilota1" Association="FantaF1_SVRKModel.FK_IscrizionePilota1">
+      <End Role="IscrizioniPilotiScuderie" EntitySet="IscrizioniPilotiScuderie" />
+      <End Role="IscrizioniPilotiCampionato" EntitySet="IscrizioniPilotiCampionato" />
+    </AssociationSet>
   </EntityContainer>
   <Association Name="FK_PronosticoUtenteGara_IscrizioniCircuitiCampionato1">
     <End Type="FantaF1_SVRKModel.IscrizioniCircuitiCampionato" Role="IscrizioniCircuitiCampionato" Multiplicity="1" />
@@ -1825,6 +1812,7 @@
     <Property Name="DataFineContratto" Type="DateTime" Nullable="false" Precision="0" />
     <NavigationProperty Name="Piloti" Relationship="FantaF1_SVRKModel.FK_IscrizioniPilotiScuderie_Piloti" FromRole="IscrizioniPilotiScuderie" ToRole="Piloti" />
     <NavigationProperty Name="Scuderie" Relationship="FantaF1_SVRKModel.FK_IscrizioniPilotiScuderie_Scuderie" FromRole="IscrizioniPilotiScuderie" ToRole="Scuderie" />
+    <NavigationProperty Name="IscrizioniPilotiCampionato" Relationship="FantaF1_SVRKModel.FK_IscrizionePilota1" FromRole="IscrizioniPilotiScuderie" ToRole="IscrizioniPilotiCampionato" />
   </EntityType>
   <Association Name="FK_IscrizioniPilotiScuderie_Piloti">
     <End Type="FantaF1_SVRKModel.Piloti" Role="Piloti" Multiplicity="1" />
@@ -1847,6 +1835,18 @@
       </Principal>
       <Dependent Role="IscrizioniPilotiScuderie">
         <PropertyRef Name="ScuderiaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IscrizionePilota1">
+    <End Type="FantaF1_SVRKModel.IscrizioniPilotiScuderie" Role="IscrizioniPilotiScuderie" Multiplicity="1" />
+    <End Type="FantaF1_SVRKModel.IscrizioniPilotiCampionato" Role="IscrizioniPilotiCampionato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IscrizioniPilotiScuderie">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="IscrizioniPilotiCampionato">
+        <PropertyRef Name="IscrizionePilotaScuderiaId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

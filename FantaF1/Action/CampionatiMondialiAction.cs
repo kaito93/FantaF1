@@ -1,4 +1,5 @@
-﻿using FantaF1.Action.Interfaces;
+﻿using System;
+using FantaF1.Action.Interfaces;
 using FantaF1DataAccessDB;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,14 +39,19 @@ namespace FantaF1.Action
             }).ToList();
         }
 
-        public int GetRegoleCampionatoIdFromCampionatoId(int idCampioanto)
+        public int GetRegoleCampionatoIdFromCampionatoId(int idCampionato)
         {
-            var result = _campionatiMondiali?.FirstOrDefault(x => x.Id == idCampioanto);
+            var result = _campionatiMondiali?.FirstOrDefault(x => x.Id == idCampionato);
 
             if (result != null)
                 return result.RegoleId;
 
             return -1;
+        }
+
+        public DateTime GetYearCampionatoMondialeFromCampionatoId(int idCampionato)
+        {
+            return new DateTime(int.Parse(_campionatiMondiali?.FirstOrDefault(x => x.Id == idCampionato).Anno),1,1);
         }
     }
 }

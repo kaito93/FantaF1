@@ -17,7 +17,6 @@ namespace FantaF1DataAccessDB
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Piloti()
         {
-            this.IscrizioniPilotiCampionato = new HashSet<IscrizioniPilotiCampionato>();
             this.RisultatoDFNGaraReale = new HashSet<RisultatoDFNGaraReale>();
             this.RisultatoGaraReale = new HashSet<RisultatoGaraReale>();
             this.RisultatoDFNGaraReale1 = new HashSet<RisultatoDFNGaraReale>();
@@ -83,8 +82,6 @@ namespace FantaF1DataAccessDB
         public string Nome { get; set; }
         public string Cognome { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<IscrizioniPilotiCampionato> IscrizioniPilotiCampionato { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RisultatoDFNGaraReale> RisultatoDFNGaraReale { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -183,7 +183,7 @@ function SendResultRace() {
         "dataType": "json",
         "Type": "POST",
         "CallBackFn": function (response) {
-            if (response == "Ok")
+            if (response.responseJSON == "Ok")
                 alert("Risultato gara registrato correttamente");
             else
                 alert(response);

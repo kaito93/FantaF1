@@ -48,8 +48,8 @@
     <EntitySetMapping Name="IscrizioniPilotiCampionato">
       <EntityTypeMapping TypeName="FantaF1_SVRKModel.IscrizioniPilotiCampionato">
         <MappingFragment StoreEntitySet="IscrizioniPilotiCampionato">
+          <ScalarProperty Name="IscrizionePilotaScuderiaId" ColumnName="IscrizionePilotaScuderiaId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="PilotaId" ColumnName="PilotaId" />
           <ScalarProperty Name="CampionatoId" ColumnName="CampionatoId" />
           <ScalarProperty Name="Punteggio" ColumnName="Punteggio" />
         </MappingFragment>

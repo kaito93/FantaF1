@@ -225,7 +225,7 @@ namespace FantaF1.Action
 
         public List<IscrizioniPilotiCampionato> UpdateIscrizionePilotaCampionato(int idCampionato, int idPilota, int punteggio)
         {
-            _database.IscrizioniPilotiCampionato.FirstOrDefault(x => x.CampionatoId == idCampionato && x.PilotaId == idPilota).Punteggio += punteggio;
+            _database.IscrizioniPilotiCampionato.FirstOrDefault(x => x.CampionatoId == idCampionato && x.IscrizioniPilotiScuderie.PilotaId == idPilota).Punteggio += punteggio;
             _database.SaveChanges();
             return _database.IscrizioniPilotiCampionato.ToList();
         }

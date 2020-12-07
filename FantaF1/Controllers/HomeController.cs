@@ -255,10 +255,19 @@ namespace FantaF1.Controllers
 
                 var scuderieList = _orchestrator.ScuderieAction.GetListScuderie();
 
-                var iscrizioniPilotiScuderie = _orchestrator.IscrizioniPilotiScuderieAction.GetAllIscrizioniPilotiScuderie();
+                var year =
+                    _orchestrator.CampionatiMondialiAction.GetYearCampionatoMondialeFromCampionatoId(
+                        result.IdCampionato);
+                
+                var iscrizioniPilotiScuderieInYear = _orchestrator.IscrizioniPilotiScuderieAction.GetAllIscrizioniPilotiScuderieForYear(year);
+
+                var iscrizioneCircuitoCampionato =
+                    _orchestrator.IscrizioniCircuitoCampionatoAction.GetIscrizioneForId(result.IdIscrizione);
+
+                var iscrizioniPilotiScuderieForGara = _orchestrator.IscrizioniPilotiScuderieAction.GetAllIscrizioniPilotiScuderieForGara(iscrizioneCircuitoCampionato.DataGara);
 
                 _orchestrator.IscrizioniScuderieCampionatoAction.UpdatePunteggioScuderie(result.IdCampionato,
-                    iscrizioniPilotiCampionato, scuderieList, iscrizioniPilotiScuderie);
+                    iscrizioniPilotiCampionato, scuderieList, iscrizioniPilotiScuderieInYear, iscrizioniPilotiScuderieForGara);
 
                 res = new JsonResult { Data = "Ok" };
             }

@@ -23,12 +23,24 @@ namespace FantaF1.Action
             return new List<IscrizioniPilotiScuderie>(_iscrizioniPilotiScuderie);
         }
 
-        public List<int> GetIDPilotiForGara(DateTime giornoGara)
+        public List<IscrizioniPilotiScuderie> GetAllIscrizioniPilotiScuderieForYear(DateTime year)
         {
-            var pilotiIscrittiForGara = _iscrizioniPilotiScuderie.FindAll(x =>
+            var endyear = year.AddYears(1).AddDays(-1);
+            return _iscrizioniPilotiScuderie.FindAll(x =>
+                DateTime.Compare(endyear, x.DataInizioContratto) > 0 &&
+                DateTime.Compare(x.DataFineContratto, year) > 0);
+        }
+
+        public List<IscrizioniPilotiScuderie> GetAllIscrizioniPilotiScuderieForGara(DateTime giornoGara)
+        {
+            return _iscrizioniPilotiScuderie.FindAll(x =>
                 DateTime.Compare(giornoGara, x.DataInizioContratto) > 0 &&
                 DateTime.Compare(x.DataFineContratto, giornoGara) > 0);
-            
+        }
+
+        public List<int> GetIDPilotiForGara(DateTime giornoGara)
+        {
+            var pilotiIscrittiForGara = GetAllIscrizioniPilotiScuderieForGara(giornoGara);
 
             var pilotiIscr= pilotiIscrittiForGara.Select(pilota => pilota.PilotaId).ToList();
             pilotiIscr.Add(23);

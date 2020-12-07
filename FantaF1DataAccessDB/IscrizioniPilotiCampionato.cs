@@ -15,11 +15,11 @@ namespace FantaF1DataAccessDB
     public partial class IscrizioniPilotiCampionato
     {
         public int Id { get; set; }
-        public int PilotaId { get; set; }
         public int CampionatoId { get; set; }
         public int Punteggio { get; set; }
+        public int IscrizionePilotaScuderiaId { get; set; }
     
         public virtual CampionatiMondiali CampionatiMondiali { get; set; }
-        public virtual Piloti Piloti { get; set; }
+        public virtual IscrizioniPilotiScuderie IscrizioniPilotiScuderie { get; set; }
     }
 }

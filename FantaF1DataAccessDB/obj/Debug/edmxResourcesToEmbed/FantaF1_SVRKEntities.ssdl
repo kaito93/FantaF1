@@ -45,7 +45,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="PilotaId" Type="int" Nullable="false" />
+    <Property Name="IscrizionePilotaScuderiaId" Type="int" Nullable="false" />
     <Property Name="CampionatoId" Type="int" Nullable="false" />
     <Property Name="Punteggio" Type="int" Nullable="false" />
   </EntityType>
@@ -355,14 +355,14 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_IscrizionePilota">
-    <End Role="Piloti" Type="Self.Piloti" Multiplicity="1" />
+    <End Role="IscrizioniPilotiScuderie" Type="Self.IscrizioniPilotiScuderie" Multiplicity="1" />
     <End Role="IscrizioniPilotiCampionato" Type="Self.IscrizioniPilotiCampionato" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Piloti">
+      <Principal Role="IscrizioniPilotiScuderie">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="IscrizioniPilotiCampionato">
-        <PropertyRef Name="PilotaId" />
+        <PropertyRef Name="IscrizionePilotaScuderiaId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1346,7 +1346,7 @@
       <End Role="IscrizioniCircuitiCampionato" EntitySet="IscrizioniCircuitiCampionato" />
     </AssociationSet>
     <AssociationSet Name="FK_IscrizionePilota" Association="Self.FK_IscrizionePilota">
-      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="IscrizioniPilotiScuderie" EntitySet="IscrizioniPilotiScuderie" />
       <End Role="IscrizioniPilotiCampionato" EntitySet="IscrizioniPilotiCampionato" />
     </AssociationSet>
     <AssociationSet Name="FK_IscrizioneScuderia" Association="Self.FK_IscrizioneScuderia">

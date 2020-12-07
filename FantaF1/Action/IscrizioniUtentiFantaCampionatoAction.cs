@@ -134,34 +134,34 @@ namespace FantaF1.Action
         {
             var punteggio = 0;
 
-            if (pronostico.PrimoClassificatoPilotaId == classificaPiloti[0].PilotaId)
+            if (pronostico.PrimoClassificatoPilotaId == classificaPiloti[0].IscrizioniPilotiScuderie.PilotaId)
                 punteggio += regolamento.PunteggioPrimoPilotaMondiale;
 
-            if (pronostico.SecondoClassificatoPilotaId == classificaPiloti[1].PilotaId)
+            if (pronostico.SecondoClassificatoPilotaId == classificaPiloti[1].IscrizioniPilotiScuderie.PilotaId)
                 punteggio += regolamento.PunteggioSecondoPilotaMondiale;
 
-            if (pronostico.TerzoClassificatoPilotaId == classificaPiloti[2].PilotaId)
+            if (pronostico.TerzoClassificatoPilotaId == classificaPiloti[2].IscrizioniPilotiScuderie.PilotaId)
                 punteggio += regolamento.PunteggioTerzoPilotaMondiale;
 
-            if (pronostico.QuartoClassificatoPilotaId == classificaPiloti[3].PilotaId)
+            if (pronostico.QuartoClassificatoPilotaId == classificaPiloti[3].IscrizioniPilotiScuderie.PilotaId)
                 punteggio += regolamento.PunteggioQuartoPilotaMondiale;
 
-            if (pronostico.QuintoClassificatoPilotaId == classificaPiloti[4].PilotaId)
+            if (pronostico.QuintoClassificatoPilotaId == classificaPiloti[4].IscrizioniPilotiScuderie.PilotaId)
                 punteggio += regolamento.PunteggioQuintoPilotaMondiale;
 
-            if (pronostico.SestoClassificatoPilotaId == classificaPiloti[5].PilotaId)
+            if (pronostico.SestoClassificatoPilotaId == classificaPiloti[5].IscrizioniPilotiScuderie.PilotaId)
                 punteggio += regolamento.PunteggioSestoPilotaMondiale;
 
-            if (pronostico.SettimoClassificatoPilotaId == classificaPiloti[6].PilotaId)
+            if (pronostico.SettimoClassificatoPilotaId == classificaPiloti[6].IscrizioniPilotiScuderie.PilotaId)
                 punteggio += regolamento.PunteggioSettimoPilotaMondiale;
 
-            if (pronostico.OttavoClassificatoPilotaId == classificaPiloti[7].PilotaId)
+            if (pronostico.OttavoClassificatoPilotaId == classificaPiloti[7].IscrizioniPilotiScuderie.PilotaId)
                 punteggio += regolamento.PunteggioOttavoPilotaMondiale;
 
-            if (pronostico.NonoClassificatoPilotaId == classificaPiloti[8].PilotaId)
+            if (pronostico.NonoClassificatoPilotaId == classificaPiloti[8].IscrizioniPilotiScuderie.PilotaId)
                 punteggio += regolamento.PunteggioNonoPilotaMondiale;
 
-            if (pronostico.DecimoClassificatoPilotaId == classificaPiloti[9].PilotaId)
+            if (pronostico.DecimoClassificatoPilotaId == classificaPiloti[9].IscrizioniPilotiScuderie.PilotaId)
                 punteggio += regolamento.PunteggioDecimoPilotaMondiale;
 
             return punteggio;

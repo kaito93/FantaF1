@@ -14,6 +14,12 @@ namespace FantaF1DataAccessDB
     
     public partial class IscrizioniPilotiScuderie
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public IscrizioniPilotiScuderie()
+        {
+            this.IscrizioniPilotiCampionato = new HashSet<IscrizioniPilotiCampionato>();
+        }
+    
         public int Id { get; set; }
         public int PilotaId { get; set; }
         public int ScuderiaId { get; set; }
@@ -22,5 +28,7 @@ namespace FantaF1DataAccessDB
     
         public virtual Piloti Piloti { get; set; }
         public virtual Scuderie Scuderie { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<IscrizioniPilotiCampionato> IscrizioniPilotiCampionato { get; set; }
     }
 }

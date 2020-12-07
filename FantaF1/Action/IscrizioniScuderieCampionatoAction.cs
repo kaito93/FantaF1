@@ -3,6 +3,8 @@ using FantaF1.Action.Interfaces;
 using FantaF1DataAccessDB;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using Microsoft.Ajax.Utilities;
 
 namespace FantaF1.Action
 {
@@ -16,30 +18,25 @@ namespace FantaF1.Action
             _iscrizioniScuderieCampionato = databaseAction.GetIscrizioniScuderieCampionato();
         }
 
-        public void UpdatePunteggioScuderie(int idCampionatoReale, List<IscrizioniPilotiCampionato> iscrizioniPilotiCampionato, List<Scuderie> scuderieList, List<IscrizioniPilotiScuderie> iscrizioniPilotiScuderie)
+        public void UpdatePunteggioScuderie(int idCampionatoReale, List<IscrizioniPilotiCampionato> iscrizioniPilotiCampionato, List<Scuderie> scuderieList, List<IscrizioniPilotiScuderie> iscrizioniPilotiScuderieYear, List<IscrizioniPilotiScuderie> iscrizioniPilotiScuderieGara)
         {
             foreach (var scuderia in scuderieList)
             {
                 if (scuderia.Id == 12) continue;
 
-                //var pilots = pilotiList.FindAll(x => x.ScuderiaId == scuderia.Id);
-                var pilots = iscrizioniPilotiScuderie.FindAll(x => x.ScuderiaId == scuderia.Id);
+                var pilots = iscrizioniPilotiScuderieYear.FindAll(x => x.ScuderiaId == scuderia.Id).DistinctBy(x => x.PilotaId).ToList();
 
-                try
-                {
-                    foreach (var pilot in pilots.Where(pilot => iscrizioniPilotiCampionato.FirstOrDefault(x => x.PilotaId == pilot.Id) == null))
-                        pilots.Remove(pilot);
-                }
-                catch (Exception e)
-                {
-                    //ignore
-                }
+                // EFETTUARE IL CONTROLLO SE UN PILOTA HA CORSO PER PIU' DI UNA SCUDERIA IN UN ANNO. (RUSSELL COMPARE CON 3 PUNTI PER LA WILLIAMS). SERVE CONTROLLO SUI PILOTI CHE HANNO CORSO VERAMENTE
 
-                var punteggioScuderia = pilots
-                    .Select(pilota => iscrizioniPilotiCampionato.FirstOrDefault(x => x.PilotaId == pilota.Id))
-                    .Where(result => result != null).Sum(result => result.Punteggio);
+                var pilotsInScuderia = pilots
+                    .Select(pilota => iscrizioniPilotiCampionato.FindAll(x =>
+                        x.IscrizioniPilotiScuderie.PilotaId == pilota.PilotaId &&
+                        x.IscrizioniPilotiScuderie.ScuderiaId == scuderia.Id));
 
-                _iscrizioniScuderieCampionato = _databaseAction.UpdateIscrizioneScuderiaCampionato(idCampionatoReale, scuderia.Id, punteggioScuderia);
+                var punteggio = pilotsInScuderia.Sum(pilotInScuderia =>
+                    pilotInScuderia.Where(result => result != null).Sum(result => result.Punteggio));
+
+                _iscrizioniScuderieCampionato = _databaseAction.UpdateIscrizioneScuderiaCampionato(idCampionatoReale, scuderia.Id, punteggio);
 
             }
         }

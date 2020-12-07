@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace FantaF1.Action.Interfaces
@@ -8,5 +9,6 @@ namespace FantaF1.Action.Interfaces
         void CreateCampionato(string year, string category);
         IEnumerable<SelectListItem> GetAllCampionatiMondialiSelectItem();
         int GetRegoleCampionatoIdFromCampionatoId(int idCampioanto);
+        DateTime GetYearCampionatoMondialeFromCampionatoId(int idCampionato);
     }
 }

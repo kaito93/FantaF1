@@ -130,43 +130,43 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
             switch (posizione)
             {
                 case "Primo":
-                    if (pronostico.PrimoClassificatoPilotaId == classificaPiloti[0].PilotaId)
+                    if (pronostico.PrimoClassificatoPilotaId == classificaPiloti[0].IscrizioniPilotiScuderie.PilotaId)
                         punteggio = regolamento.PunteggioPrimoPilotaMondiale;
                     break;
                 case "Secondo":
-                    if (pronostico.SecondoClassificatoPilotaId == classificaPiloti[1].PilotaId)
+                    if (pronostico.SecondoClassificatoPilotaId == classificaPiloti[1].IscrizioniPilotiScuderie.PilotaId)
                         punteggio = regolamento.PunteggioSecondoPilotaMondiale;
                     break;
                 case "Terzo":
-                    if (pronostico.TerzoClassificatoPilotaId == classificaPiloti[2].PilotaId)
+                    if (pronostico.TerzoClassificatoPilotaId == classificaPiloti[2].IscrizioniPilotiScuderie.PilotaId)
                         punteggio = regolamento.PunteggioTerzoPilotaMondiale;
                     break;
                 case "Quarto":
-                    if (pronostico.QuartoClassificatoPilotaId == classificaPiloti[3].PilotaId)
+                    if (pronostico.QuartoClassificatoPilotaId == classificaPiloti[3].IscrizioniPilotiScuderie.PilotaId)
                         punteggio = regolamento.PunteggioQuartoPilotaMondiale;
                     break;
                 case "Quinto":
-                    if (pronostico.QuintoClassificatoPilotaId == classificaPiloti[4].PilotaId)
+                    if (pronostico.QuintoClassificatoPilotaId == classificaPiloti[4].IscrizioniPilotiScuderie.PilotaId)
                         punteggio = regolamento.PunteggioQuintoPilotaMondiale;
                     break;
                 case "Sesto":
-                    if (pronostico.SestoClassificatoPilotaId == classificaPiloti[5].PilotaId)
+                    if (pronostico.SestoClassificatoPilotaId == classificaPiloti[5].IscrizioniPilotiScuderie.PilotaId)
                         punteggio = regolamento.PunteggioSestoPilotaMondiale;
                     break;
                 case "Settimo":
-                    if (pronostico.SettimoClassificatoPilotaId == classificaPiloti[6].PilotaId)
+                    if (pronostico.SettimoClassificatoPilotaId == classificaPiloti[6].IscrizioniPilotiScuderie.PilotaId)
                         punteggio = regolamento.PunteggioSettimoPilotaMondiale;
                     break;
                 case "Ottavo":
-                    if (pronostico.OttavoClassificatoPilotaId == classificaPiloti[7].PilotaId)
+                    if (pronostico.OttavoClassificatoPilotaId == classificaPiloti[7].IscrizioniPilotiScuderie.PilotaId)
                         punteggio = regolamento.PunteggioOttavoPilotaMondiale;
                     break;
                 case "Nono":
-                    if (pronostico.NonoClassificatoPilotaId == classificaPiloti[8].PilotaId)
+                    if (pronostico.NonoClassificatoPilotaId == classificaPiloti[8].IscrizioniPilotiScuderie.PilotaId)
                         punteggio = regolamento.PunteggioNonoPilotaMondiale;
                     break;
                 case "Decimo":
-                    if (pronostico.DecimoClassificatoPilotaId == classificaPiloti[9].PilotaId)
+                    if (pronostico.DecimoClassificatoPilotaId == classificaPiloti[9].IscrizioniPilotiScuderie.PilotaId)
                         punteggio = regolamento.PunteggioDecimoPilotaMondiale;
                     break;
             }

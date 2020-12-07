@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<parameters>
-  <parameter name="FantaF1_SVRKEntities-Web.config Connection String" description="FantaF1_SVRKEntities Stringa di connessione utilizzata in web.config per l'accesso al database da parte dell'applicazione." defaultValue="metadata=res://*/FantaF1_SVRKEntities.csdl|res://*/FantaF1_SVRKEntities.ssdl|res://*/FantaF1_SVRKEntities.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=DESKTOP-KTIJB46\SQLEXPRESS;initial catalog=FantaF1_SVRK;persist security info=True;user id=FantaF1Web;password=CiaoCiao01!;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="C:\\Users\\kaito\\source\\repos\\kaito93\\FantaF1\\FantaF1\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='FantaF1_SVRKEntities']/@connectionString" />
-  </parameter>
-</parameters>
