@@ -65,18 +65,10 @@ namespace FantaF1.Action
 
         public List<SelectListItem> GetFantaCampionatiSelectListWithIdCampionatoReale()
         {
-            var listItem = new List<SelectListItem>();
-
-            foreach (var fantaCampionato in _fantaCampionati)
-            {
-                listItem.Add(new SelectListItem
-                {
-                    Text = fantaCampionato.Nome,
-                    Value = fantaCampionato.CampionatoRealeId.ToString()
-                });
-            }
-
-            return listItem;
+            return (from fantaCampionato in _fantaCampionati
+                    where fantaCampionato.Anno == DateTime.Today.Year
+                    select new SelectListItem { Text = fantaCampionato.Nome + " - " + fantaCampionato.Anno, Value = fantaCampionato.CampionatoRealeId.ToString() })
+                .ToList();
         }
 
         public List<SelectListItem> GetActiveFantaCampionatiSelectList()

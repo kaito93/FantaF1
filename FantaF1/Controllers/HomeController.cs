@@ -52,12 +52,9 @@ namespace FantaF1.Controllers
         {
             InitializeAll();
 
-            var fantaCampionatiList = _orchestrator.FantaCampionatiAction.GetFantaCampionatiList();
+            var fantaCampionatiList = _orchestrator.FantaCampionatiAction.GetActiveFantaCampionatiSelectList();
 
-            var optionsResult = fantaCampionatiList.Select(fantaCampionato => new SelectListItem
-            { Value = fantaCampionato.Id.ToString(), Text = fantaCampionato.Nome }).ToList();
-
-            var model = new CalcolaPronosticiGaraViewModel { FantaCampionatiList = optionsResult, CircuitiList = new List<SelectListItem>() };
+            var model = new CalcolaPronosticiGaraViewModel { FantaCampionatiList = fantaCampionatiList, CircuitiList = new List<SelectListItem>() };
 
             return PartialView("_CalcolaPronosticiGara", model);
         }
@@ -66,12 +63,9 @@ namespace FantaF1.Controllers
         {
             InitializeAll();
 
-            var fantaCampionatiList = _orchestrator.FantaCampionatiAction.GetFantaCampionatiList();
+            var fantaCampionatiList = _orchestrator.FantaCampionatiAction.GetActiveFantaCampionatiSelectList();
 
-            var optionsResult = fantaCampionatiList.Select(fantaCampionato => new SelectListItem
-            { Value = fantaCampionato.Id.ToString(), Text = fantaCampionato.Nome }).ToList();
-
-            var model = new CalcolaPronosticiGaraViewModel { FantaCampionatiList = optionsResult, CircuitiList = new List<SelectListItem>() };
+            var model = new CalcolaPronosticiGaraViewModel { FantaCampionatiList = fantaCampionatiList, CircuitiList = new List<SelectListItem>() };
 
             return PartialView("_ScaricaRisultatiPronosticiGP", model);
         }

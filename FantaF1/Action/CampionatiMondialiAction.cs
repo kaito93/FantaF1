@@ -32,11 +32,13 @@ namespace FantaF1.Action
 
         public IEnumerable<SelectListItem> GetAllCampionatiMondialiSelectItem()
         {
-            return _campionatiMondiali.Select(campionatoMondiale => new SelectListItem
-            {
-                Text = campionatoMondiale.Categoria + " - " + campionatoMondiale.Anno,
-                Value = campionatoMondiale.Id.ToString()
-            }).ToList();
+            return (from campionatoMondiale in _campionatiMondiali
+                    where campionatoMondiale.Anno == DateTime.Today.Year.ToString()
+                    select new SelectListItem
+                    {
+                        Text = campionatoMondiale.Categoria + " - " + campionatoMondiale.Anno,
+                        Value = campionatoMondiale.Id.ToString()
+                    }).ToList();
         }
 
         public int GetRegoleCampionatoIdFromCampionatoId(int idCampionato)
@@ -51,7 +53,7 @@ namespace FantaF1.Action
 
         public DateTime GetYearCampionatoMondialeFromCampionatoId(int idCampionato)
         {
-            return new DateTime(int.Parse(_campionatiMondiali?.FirstOrDefault(x => x.Id == idCampionato).Anno),1,1);
+            return new DateTime(int.Parse(_campionatiMondiali?.FirstOrDefault(x => x.Id == idCampionato).Anno), 1, 1);
         }
     }
 }
