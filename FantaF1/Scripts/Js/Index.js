@@ -11,6 +11,18 @@ function LoadIscrizioniUtentiSection() {
         "Type": "GET",
         "CallBackFn": function (result) {
             document.getElementById("bodyContent").innerHTML = result.responseText;
+            $(".selectPick").selectpicker({
+                noneSelectedText: "Non selezionato",
+                noneResultsText: "Nessun risultato",
+                showTick: true
+            });
+
+            setTimeout(function () {
+                $("#InserisciFantaCampionato").selectpicker('refresh');
+                $("#InserisciFantaCampionato").selectpicker("val", "");
+            }, 100);
+
+            $(".InserisciFantaCampionato").selectpicker("val", "");
         }
     }
     AsyncValidation(oParams);
@@ -117,7 +129,9 @@ function CheckFileType(e) {
         }
     }
 
-    formData.append("idFantaCampionato", 4);
+    var idFanta = parseInt($("#InserisciFantaCampionato").val());
+
+    formData.append("idFantaCampionato", idFanta);
 
     $.ajax({
         url: "/Home/SetPartecipantiFantaCampionatoFromCsv",
@@ -230,7 +244,7 @@ function CheckFileTypePronostici(e) {
                     alert(response);
             }
         });
-    }    
+    }
 }
 
 function ClickOnButtonCalcolaRisultatiPronostici() {
@@ -430,8 +444,8 @@ $(document).on("change", "#IscrizioneGP", function () {
 
             setTimeout(function () {
                 for (var i = 1; i < 21; i++) {
-                    $("#Pilota"+i).selectpicker('refresh');
-                    $("#Pilota"+i).selectpicker("val", "");
+                    $("#Pilota" + i).selectpicker('refresh');
+                    $("#Pilota" + i).selectpicker("val", "");
                 }
             }, 100);
 

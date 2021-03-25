@@ -25,7 +25,14 @@ namespace FantaF1.Controllers
 
         public ActionResult LoadIscrizioniUtenti()
         {
-            return PartialView("_IscrizioniUtenti");
+
+            InitializeAll();
+            var model = new CalcolaPronosticiGaraViewModel
+            {
+                FantaCampionatiList = _orchestrator.FantaCampionatiAction.GetActiveFantaCampionatiSelectList()
+            };
+
+            return PartialView("_IscrizioniUtenti", model);
         }
 
         public ActionResult LoadPronosticiUtenti()
@@ -35,7 +42,7 @@ namespace FantaF1.Controllers
             var model = new RisultatoGaraViewModel
             {
                 Campionato = _orchestrator.FantaCampionatiAction.GetFantaCampionatiSelectListWithIdCampionatoReale(),
-                Circuiti = new List<SelectListItem>()                
+                Circuiti = new List<SelectListItem>()
             };
 
             return PartialView("_PronosticiUtenti", model);
@@ -216,7 +223,7 @@ namespace FantaF1.Controllers
                 Piloti = _orchestrator.PilotiAction.GetPilotiFromIdSelectItem(pilotiId)
             };
 
-            return PartialView("_PilotiForGara",model);
+            return PartialView("_PilotiForGara", model);
         }
 
         [HttpPost]
@@ -258,7 +265,7 @@ namespace FantaF1.Controllers
                 var year =
                     _orchestrator.CampionatiMondialiAction.GetYearCampionatoMondialeFromCampionatoId(
                         result.IdCampionato);
-                
+
                 var iscrizioniPilotiScuderieInYear = _orchestrator.IscrizioniPilotiScuderieAction.GetAllIscrizioniPilotiScuderieForYear(year);
 
                 var iscrizioneCircuitoCampionato =
@@ -302,7 +309,7 @@ namespace FantaF1.Controllers
                     throw new Exception(
                         "Non è presente il risultato di gara per il pronostico che si sta cercando di calcolare");
 
-                var idResult = (int) idRisultato;
+                var idResult = (int)idRisultato;
 
                 var risultatoGara = _orchestrator.RisultatoGaraRealeAction.GetRisultatoGaraFromIdRisultato(idResult);
 
@@ -353,7 +360,7 @@ namespace FantaF1.Controllers
             {
                 res = new JsonResult { Data = ex.Message };
             }
-            
+
             return res;
         }
 
@@ -425,10 +432,10 @@ namespace FantaF1.Controllers
             {
                 var utenteId = _orchestrator.UtentiAction.SaveUtenteInDatabase(registrazione);
                 var pronosticoUtenteFantaCampionatoId = _orchestrator.PronosticoUtenteFantaCampionatoAction.SavePronosticoFantaCampionatoInDatabase(registrazione, pilotiList, scuderieList);
-                if (utenteId != -1) // Salva nuovo pronostico
+                if (utenteId != -1) // Salva nuovo pronostico per nuovo giocatore
                     _orchestrator.IscrizioniUtentiFantaCampionatoAction.SaveIscrizioneUtenteFantaCampionatoInDatabase(idFantaCampionato, pronosticoUtenteFantaCampionatoId, utenteId);
                 else
-                { // Aggiorna pronostico già esistente
+                { // Usa utente già esistente
                     utenteId = _orchestrator.UtentiAction.GetUtenteIdFromNameAndSurname(registrazione.Nome, registrazione.Cognome);
                     _orchestrator.IscrizioniUtentiFantaCampionatoAction.UpdateIscrizioneUtenteFantaCampionato(utenteId, idFantaCampionato, pronosticoUtenteFantaCampionatoId);
                 }

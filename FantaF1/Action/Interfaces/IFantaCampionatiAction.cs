@@ -13,5 +13,6 @@ namespace FantaF1.Action.Interfaces
         List<FantaCampionati> GetFantaCampionatiList();
         FantaCampionati GetFantacampionatoFromId(int idFantaCampionato);
         List<SelectListItem> GetFantaCampionatiSelectListWithIdCampionatoReale();
+        List<SelectListItem> GetActiveFantaCampionatiSelectList();
     }
 }

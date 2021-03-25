@@ -116,10 +116,10 @@ namespace FantaF1.Action
             var result = _iscrizioniUtentiFantaCampionato
                 .FirstOrDefault(x => x.CampionatoId == idFantaCampionato && x.UtenteId == idUtente);
 
-            if (result == null) return;
-
-            var idIscrizioneUtente = result.Id;
-            _iscrizioniUtentiFantaCampionato = _databaseAction.UpdateIscrizioneWithNewPronostico(idIscrizioneUtente, idNuovoPronostico);
+            if (result == null)
+                SaveIscrizioneUtenteFantaCampionatoInDatabase(idFantaCampionato, idNuovoPronostico, idUtente);
+            else
+                _iscrizioniUtentiFantaCampionato = _databaseAction.UpdateIscrizioneWithNewPronostico(result.Id, idNuovoPronostico);
         }
 
 

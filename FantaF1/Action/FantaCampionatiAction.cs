@@ -1,4 +1,5 @@
-﻿using FantaF1.Action.Interfaces;
+﻿using System;
+using FantaF1.Action.Interfaces;
 using FantaF1DataAccessDB;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,7 +69,7 @@ namespace FantaF1.Action
 
             foreach (var fantaCampionato in _fantaCampionati)
             {
-                listItem.Add( new SelectListItem
+                listItem.Add(new SelectListItem
                 {
                     Text = fantaCampionato.Nome,
                     Value = fantaCampionato.CampionatoRealeId.ToString()
@@ -76,6 +77,14 @@ namespace FantaF1.Action
             }
 
             return listItem;
+        }
+
+        public List<SelectListItem> GetActiveFantaCampionatiSelectList()
+        {
+            return (from fantaCampionato in _fantaCampionati
+                    where fantaCampionato.Anno == DateTime.Today.Year
+                    select new SelectListItem { Text = fantaCampionato.Nome + " - " + fantaCampionato.Anno, Value = fantaCampionato.Id.ToString() })
+                .ToList();
         }
     }
 }

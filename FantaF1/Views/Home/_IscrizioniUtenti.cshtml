@@ -1,7 +1,16 @@
-﻿<div id="iscrizioniutenti">
+﻿@model FantaF1.Models.CalcolaPronosticiGaraViewModel
+
+<div id="iscrizioniutenti">
     <p>
+
+        <div id="CampionatoId">
+            <b>Fanta Campionato:</b> @Html.DropDownList("InserisciFantaCampionato", Model.FantaCampionatiList, new { @class = "selectPick" })
+        </div>
+        <br />
+        <br />
+
         File:
-        <input type="text" id="CsvPath" placeholder="Scegli un file..." disabled="disabled" style="max-width: 30%; display: inline; margin-left:3px;" />
+        <input type="text" id="CsvPath" placeholder="Scegli un file..." disabled="disabled" style="max-width: 30%; display: inline; margin-left: 3px;" />
         <label for="fileLoaded"> Sfoglia</label>
         <input type="file" id="fileLoaded" onchange="singleFileSelected(this)" />
 

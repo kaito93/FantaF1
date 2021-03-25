@@ -26,8 +26,6 @@ namespace FantaF1.Action
 
                 var pilots = iscrizioniPilotiScuderieYear.FindAll(x => x.ScuderiaId == scuderia.Id).DistinctBy(x => x.PilotaId).ToList();
 
-                // EFETTUARE IL CONTROLLO SE UN PILOTA HA CORSO PER PIU' DI UNA SCUDERIA IN UN ANNO. (RUSSELL COMPARE CON 3 PUNTI PER LA WILLIAMS). SERVE CONTROLLO SUI PILOTI CHE HANNO CORSO VERAMENTE
-
                 var pilotsInScuderia = pilots
                     .Select(pilota => iscrizioniPilotiCampionato.FindAll(x =>
                         x.IscrizioniPilotiScuderie.PilotaId == pilota.PilotaId &&
