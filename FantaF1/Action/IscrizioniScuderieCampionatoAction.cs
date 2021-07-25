@@ -22,19 +22,20 @@ namespace FantaF1.Action
         {
             foreach (var scuderia in scuderieList)
             {
-                if (scuderia.Id == 12) continue;
+                if (IsScuderiaInCampionato(scuderia, idCampionatoReale) && scuderia.Id != 12)
+                {
+                    var pilots = iscrizioniPilotiScuderieYear.FindAll(x => x.ScuderiaId == scuderia.Id).DistinctBy(x => x.PilotaId).ToList();
 
-                var pilots = iscrizioniPilotiScuderieYear.FindAll(x => x.ScuderiaId == scuderia.Id).DistinctBy(x => x.PilotaId).ToList();
+                    var pilotsInScuderia = pilots
+                        .Select(pilota => iscrizioniPilotiCampionato.FindAll(x =>
+                            x.IscrizioniPilotiScuderie.PilotaId == pilota.PilotaId &&
+                            x.IscrizioniPilotiScuderie.ScuderiaId == scuderia.Id));
 
-                var pilotsInScuderia = pilots
-                    .Select(pilota => iscrizioniPilotiCampionato.FindAll(x =>
-                        x.IscrizioniPilotiScuderie.PilotaId == pilota.PilotaId &&
-                        x.IscrizioniPilotiScuderie.ScuderiaId == scuderia.Id));
+                    var punteggio = pilotsInScuderia.Sum(pilotInScuderia =>
+                        pilotInScuderia.Where(result => result != null).Sum(result => result.Punteggio));
 
-                var punteggio = pilotsInScuderia.Sum(pilotInScuderia =>
-                    pilotInScuderia.Where(result => result != null).Sum(result => result.Punteggio));
-
-                _iscrizioniScuderieCampionato = _databaseAction.UpdateIscrizioneScuderiaCampionato(idCampionatoReale, scuderia.Id, punteggio);
+                    _iscrizioniScuderieCampionato = _databaseAction.UpdateIscrizioneScuderiaCampionato(idCampionatoReale, scuderia.Id, punteggio);
+                }
 
             }
         }
@@ -43,6 +44,14 @@ namespace FantaF1.Action
         {
             return _iscrizioniScuderieCampionato.FindAll(x => x.CampionatoId == idCampionato).OrderByDescending(x => x.Punteggio)
                 .ToList();
+        }
+
+        private bool IsScuderiaInCampionato(Scuderie scuderia, int idCampionato)
+        {
+            var resultIscrizione =
+                _iscrizioniScuderieCampionato.FirstOrDefault(x => x.ScuderiaId == scuderia.Id && x.CampionatoId == idCampionato);
+
+            return resultIscrizione != null;
         }
     }
 }

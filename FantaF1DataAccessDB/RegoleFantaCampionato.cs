@@ -46,5 +46,6 @@ namespace FantaF1DataAccessDB
         public int PunteggioNonaScuderiaMondiale { get; set; }
         public int PunteggioDecimaScuderiaMondiale { get; set; }
         public int PunteggioMalusCambioPronosticoMondiale { get; set; }
+        public Nullable<int> PunteggioPrimoPilotaSprintRace { get; set; }
     }
 }

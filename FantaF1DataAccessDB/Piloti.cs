@@ -76,6 +76,10 @@ namespace FantaF1DataAccessDB
             this.PronosticoUtenteGara4 = new HashSet<PronosticoUtenteGara>();
             this.PronosticoUtenteGara5 = new HashSet<PronosticoUtenteGara>();
             this.IscrizioniPilotiScuderie = new HashSet<IscrizioniPilotiScuderie>();
+            this.PronosticoUtenteGara6 = new HashSet<PronosticoUtenteGara>();
+            this.RisultatoGaraReale22 = new HashSet<RisultatoGaraReale>();
+            this.RisultatoGaraReale23 = new HashSet<RisultatoGaraReale>();
+            this.RisultatoGaraReale24 = new HashSet<RisultatoGaraReale>();
         }
     
         public int Id { get; set; }
@@ -200,5 +204,13 @@ namespace FantaF1DataAccessDB
         public virtual ICollection<PronosticoUtenteGara> PronosticoUtenteGara5 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IscrizioniPilotiScuderie> IscrizioniPilotiScuderie { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PronosticoUtenteGara> PronosticoUtenteGara6 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RisultatoGaraReale> RisultatoGaraReale22 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RisultatoGaraReale> RisultatoGaraReale23 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RisultatoGaraReale> RisultatoGaraReale24 { get; set; }
     }
 }

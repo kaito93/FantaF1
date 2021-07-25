@@ -8,6 +8,8 @@ namespace FantaF1.Models
         public IEnumerable<SelectListItem> Piloti { get; set; }
         public IEnumerable<SelectListItem> Circuiti { get; set; }
         public IEnumerable<SelectListItem> Campionato { get; set; }
+        public bool IsSprintRace { get; set; }
+        public IEnumerable<SelectListItem> PositionSprintRace { get; set; }
 
     }
 }

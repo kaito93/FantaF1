@@ -36,14 +36,14 @@ namespace FantaF1.Action.ReportAction
 
         }
 
-        public XmlNode GetReportByTypePronostici(List<Piloti> pilotiList, List<Utenti> utentiIscritti, List<PronosticoUtenteGara> pronosticiUtenti, List<RisultatoPronostico> risultatiPronosticiUtenti, List<IscrizioniCircuitiCampionato> iscrizioniCircuitiCampionato, int idCampionatoReale, List<Circuiti> circuitiList, RegoleFantaCampionato regolamentoFantaCampionato, TextWriter writer)
+        public XmlNode GetReportByTypePronostici(List<Piloti> pilotiList, List<Utenti> utentiIscritti, List<PronosticoUtenteGara> pronosticiUtenti, List<RisultatoPronostico> risultatiPronosticiUtenti, List<IscrizioniCircuitiCampionato> iscrizioniCircuitiCampionato, int idCampionatoReale, List<Circuiti> circuitiList, RegoleFantaCampionato regolamentoFantaCampionato, int idFantaCampionato, TextWriter writer)
         {
 
             XmlSerializer ser;
             object dat;
 
             ser = new XmlSerializer(typeof(PronosticiSheetModel));
-            dat = new PronosticiSheetModel(pilotiList, utentiIscritti, pronosticiUtenti, risultatiPronosticiUtenti, iscrizioniCircuitiCampionato, idCampionatoReale, circuitiList, regolamentoFantaCampionato);
+            dat = new PronosticiSheetModel(pilotiList, utentiIscritti, pronosticiUtenti, risultatiPronosticiUtenti, iscrizioniCircuitiCampionato, idCampionatoReale, circuitiList, regolamentoFantaCampionato, idFantaCampionato);
 
             ser.Serialize(writer, dat);
             writer.Close();

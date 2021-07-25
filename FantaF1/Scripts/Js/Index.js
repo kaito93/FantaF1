@@ -175,6 +175,8 @@ function SendResultRace() {
         var isDfn = $("#PilotaDFNInput" + i).prop("checked");
         var isGiroVeloce = $("#PilotaGiroVeloceInput" + i).prop("checked");
         var isPolePosition = $("#PilotaPolePositionInput" + i).prop("checked");
+        var posSprintRace = $("#PilotaSpr" + i).val();
+
 
         var oData = {
             IdIscrizione: iscrizioneId,
@@ -183,7 +185,8 @@ function SendResultRace() {
             PilotaId: pilotaId,
             DFN: isDfn,
             GiroVeloce: isGiroVeloce,
-            PolePosition: isPolePosition
+            PolePosition: isPolePosition,
+            SprintRacePosition: posSprintRace
         }
 
         dat.push(oData);
@@ -446,6 +449,11 @@ $(document).on("change", "#IscrizioneGP", function () {
                 for (var i = 1; i < 21; i++) {
                     $("#Pilota" + i).selectpicker('refresh');
                     $("#Pilota" + i).selectpicker("val", "");
+
+                    if ($("#PilotaSpr" + i)[0] != null) {
+                        $("#PilotaSpr" + i).selectpicker('refresh');
+                        $("#PilotaSpr" + i).selectpicker("val", "");
+                    }
                 }
             }, 100);
 

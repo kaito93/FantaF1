@@ -20,9 +20,9 @@ namespace FantaF1.Action
         {
             foreach (var risultato in resultRace)
             {
-                if (risultato.PilotaId == 22) continue;
+                if (risultato.PilotaId == 23) continue;
 
-                var punteggio = CalcolaPunteggio(risultato.PosizioneFinale, regoleCampionato, risultato.GiroVeloce, risultato.PolePosition);
+                var punteggio = CalcolaPunteggio(risultato.PosizioneFinale, regoleCampionato, risultato.GiroVeloce, risultato.PolePosition, risultato.SprintRacePosition);
 
                 _iscrizioniPilotiCampionato = _databaseAction.UpdateIscrizionePilotaCampionato(idCampionatoReale, risultato.PilotaId, punteggio);
             }
@@ -38,7 +38,7 @@ namespace FantaF1.Action
             return _iscrizioniPilotiCampionato.FindAll(x => x.CampionatoId == idCampionato).OrderByDescending(x => x.Punteggio).ToList();
         }
 
-        private static int CalcolaPunteggio(int posizioneFinale, RegoleCampionatoMondiale regoleCampionato, bool giroVeloce, bool polePosition)
+        private static int CalcolaPunteggio(int posizioneFinale, RegoleCampionatoMondiale regoleCampionato, bool giroVeloce, bool polePosition, string sprintRacePosition)
         {
             var punteggio = 0;
 
@@ -106,16 +106,29 @@ namespace FantaF1.Action
                     break;
             }
 
-            if (giroVeloce)
+            if (giroVeloce && posizioneFinale <= 10)
                 punteggio += regoleCampionato.PunteggioGiroVeloce;
 
             if (polePosition)
                 punteggio += regoleCampionato.PunteggioPolePosition;
 
+            switch (sprintRacePosition)
+            {
+                case "1SPR":
+                    punteggio += regoleCampionato.PunteggioPrimoSprintRace;
+                    break;
+                case "2SPR":
+                    punteggio += regoleCampionato.PunteggioSecondoSprintRace;
+                    break;
+                case "3SPR":
+                    punteggio += regoleCampionato.PunteggioTerzoSprintRace;
+                    break;
+            }
+
             return punteggio;
         }
 
-        
+
 
     }
 }

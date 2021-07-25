@@ -9,5 +9,6 @@
         public bool Dfn { get; set; }
         public bool GiroVeloce { get; set; }
         public bool PolePosition { get; set; }
+        public string SprintRacePosition { get; set; }
     }
 }

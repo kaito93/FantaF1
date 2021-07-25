@@ -44,6 +44,7 @@
           <Property Name="RisultatiId" Type="int" />
           <Property Name="DataGara" Type="datetime" Nullable="false" />
           <Property Name="NomeGP" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="HaSprintRace" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="IscrizioniPilotiCampionato">
           <Key>
@@ -133,6 +134,7 @@
           <Property Name="GiroVelocePilotaId" Type="int" Nullable="false" />
           <Property Name="DFNPilotaId" Type="int" Nullable="false" />
           <Property Name="Inserimento" Type="datetime" Nullable="false" />
+          <Property Name="PrimoClassificatoSprintRacePilotaId" Type="int" />
         </EntityType>
         <EntityType Name="RegoleCampionatoMondiale">
           <Key>
@@ -161,6 +163,9 @@
           <Property Name="PunteggioVentesimoClassificato" Type="int" Nullable="false" />
           <Property Name="PunteggioGiroVeloce" Type="int" Nullable="false" />
           <Property Name="PunteggioPolePosition" Type="int" Nullable="false" />
+          <Property Name="PunteggioPrimoSprintRace" Type="int" Nullable="false" />
+          <Property Name="PunteggioSecondoSprintRace" Type="int" Nullable="false" />
+          <Property Name="PunteggioTerzoSprintRace" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="RegoleFantaCampionato">
           <Key>
@@ -198,6 +203,7 @@
           <Property Name="PunteggioNonaScuderiaMondiale" Type="int" Nullable="false" />
           <Property Name="PunteggioDecimaScuderiaMondiale" Type="int" Nullable="false" />
           <Property Name="PunteggioMalusCambioPronosticoMondiale" Type="int" Nullable="false" />
+          <Property Name="PunteggioPrimoPilotaSprintRace" Type="int" />
         </EntityType>
         <EntityType Name="RisultatoDFNGaraReale">
           <Key>
@@ -253,6 +259,9 @@
           <Property Name="PilotaIdGiroVeloce" Type="int" />
           <Property Name="PilotaIdPolePosition" Type="int" />
           <Property Name="RisultatoDFNId" Type="int" Nullable="false" />
+          <Property Name="PilotaId01SprintRace" Type="int" />
+          <Property Name="PilotaId02SprintRace" Type="int" />
+          <Property Name="PilotaId03SprintRace" Type="int" />
         </EntityType>
         <EntityType Name="RisultatoPronostico">
           <Key>
@@ -267,6 +276,7 @@
           <Property Name="RisultatoGiroVeloce" Type="bit" Nullable="false" />
           <Property Name="RisultatoDFN" Type="bit" Nullable="false" />
           <Property Name="PunteggioComplessivoPronostico" Type="int" Nullable="false" />
+          <Property Name="PunteggioPrimoClassificatoSprintRace" Type="bit" />
         </EntityType>
         <EntityType Name="Scuderie">
           <Key>
@@ -1283,6 +1293,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PronosticoUtenteGara_Piloti6">
+          <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+          <End Role="PronosticoUtenteGara" Type="Self.PronosticoUtenteGara" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Piloti">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PronosticoUtenteGara">
+              <PropertyRef Name="PrimoClassificatoSprintRacePilotaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PronosticoUtenteGara_Utenti">
           <End Role="Utenti" Type="Self.Utenti" Multiplicity="1" />
           <End Role="PronosticoUtenteGara" Type="Self.PronosticoUtenteGara" Multiplicity="*" />
@@ -1304,6 +1326,42 @@
             </Principal>
             <Dependent Role="RisultatoGaraReale">
               <PropertyRef Name="RisultatoDFNId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RisultatoGaraReale_Piloti">
+          <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+          <End Role="RisultatoGaraReale" Type="Self.RisultatoGaraReale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Piloti">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RisultatoGaraReale">
+              <PropertyRef Name="PilotaId01SprintRace" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RisultatoGaraReale_Piloti1">
+          <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+          <End Role="RisultatoGaraReale" Type="Self.RisultatoGaraReale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Piloti">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RisultatoGaraReale">
+              <PropertyRef Name="PilotaId02SprintRace" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RisultatoGaraReale_Piloti2">
+          <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+          <End Role="RisultatoGaraReale" Type="Self.RisultatoGaraReale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Piloti">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RisultatoGaraReale">
+              <PropertyRef Name="PilotaId03SprintRace" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1658,12 +1716,28 @@
             <End Role="Piloti" EntitySet="Piloti" />
             <End Role="PronosticoUtenteGara" EntitySet="PronosticoUtenteGara" />
           </AssociationSet>
+          <AssociationSet Name="FK_PronosticoUtenteGara_Piloti6" Association="Self.FK_PronosticoUtenteGara_Piloti6">
+            <End Role="Piloti" EntitySet="Piloti" />
+            <End Role="PronosticoUtenteGara" EntitySet="PronosticoUtenteGara" />
+          </AssociationSet>
           <AssociationSet Name="FK_PronosticoUtenteGara_Utenti" Association="Self.FK_PronosticoUtenteGara_Utenti">
             <End Role="Utenti" EntitySet="Utenti" />
             <End Role="PronosticoUtenteGara" EntitySet="PronosticoUtenteGara" />
           </AssociationSet>
           <AssociationSet Name="FK_RisultatoDFN" Association="Self.FK_RisultatoDFN">
             <End Role="RisultatoDFNGaraReale" EntitySet="RisultatoDFNGaraReale" />
+            <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RisultatoGaraReale_Piloti" Association="Self.FK_RisultatoGaraReale_Piloti">
+            <End Role="Piloti" EntitySet="Piloti" />
+            <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RisultatoGaraReale_Piloti1" Association="Self.FK_RisultatoGaraReale_Piloti1">
+            <End Role="Piloti" EntitySet="Piloti" />
+            <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RisultatoGaraReale_Piloti2" Association="Self.FK_RisultatoGaraReale_Piloti2">
+            <End Role="Piloti" EntitySet="Piloti" />
             <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
           </AssociationSet>
         </EntityContainer>
@@ -1723,6 +1797,7 @@
           <NavigationProperty Name="RisultatoGaraReale" Relationship="Self.FK_IscrizioniCircuitiCampionato_RisultatoGaraReale" FromRole="IscrizioniCircuitiCampionato" ToRole="RisultatoGaraReale" />
           <NavigationProperty Name="PronosticoUtenteGara" Relationship="Self.FK_PronosticoUtenteGara_IscrizioniCircuitiCampionato" FromRole="IscrizioniCircuitiCampionato" ToRole="PronosticoUtenteGara" />
           <NavigationProperty Name="PronosticoUtenteGara1" Relationship="FantaF1_SVRKModel.FK_PronosticoUtenteGara_IscrizioniCircuitiCampionato1" FromRole="IscrizioniCircuitiCampionato" ToRole="PronosticoUtenteGara" />
+          <Property Name="HaSprintRace" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="IscrizioniPilotiCampionato">
           <Key>
@@ -1824,6 +1899,10 @@
           <NavigationProperty Name="PronosticoUtenteGara4" Relationship="Self.FK_PronosticoUtenteGara_Piloti4" FromRole="Piloti" ToRole="PronosticoUtenteGara" />
           <NavigationProperty Name="PronosticoUtenteGara5" Relationship="Self.FK_PronosticoUtenteGara_Piloti5" FromRole="Piloti" ToRole="PronosticoUtenteGara" />
           <NavigationProperty Name="IscrizioniPilotiScuderie" Relationship="FantaF1_SVRKModel.FK_IscrizioniPilotiScuderie_Piloti" FromRole="Piloti" ToRole="IscrizioniPilotiScuderie" />
+          <NavigationProperty Name="PronosticoUtenteGara6" Relationship="FantaF1_SVRKModel.FK_PronosticoUtenteGara_Piloti6" FromRole="Piloti" ToRole="PronosticoUtenteGara" />
+          <NavigationProperty Name="RisultatoGaraReale22" Relationship="FantaF1_SVRKModel.FK_RisultatoGaraReale_Piloti" FromRole="Piloti" ToRole="RisultatoGaraReale" />
+          <NavigationProperty Name="RisultatoGaraReale23" Relationship="FantaF1_SVRKModel.FK_RisultatoGaraReale_Piloti1" FromRole="Piloti" ToRole="RisultatoGaraReale" />
+          <NavigationProperty Name="RisultatoGaraReale24" Relationship="FantaF1_SVRKModel.FK_RisultatoGaraReale_Piloti2" FromRole="Piloti" ToRole="RisultatoGaraReale" />
         </EntityType>
         <EntityType Name="PronosticoUtenteFantaCampionato">
           <Key>
@@ -1897,6 +1976,8 @@
           <NavigationProperty Name="Utenti" Relationship="Self.FK_PronosticoUtenteGara_Utenti" FromRole="PronosticoUtenteGara" ToRole="Utenti" />
           <Property Name="GaraId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="IscrizioniCircuitiCampionato1" Relationship="FantaF1_SVRKModel.FK_PronosticoUtenteGara_IscrizioniCircuitiCampionato1" FromRole="PronosticoUtenteGara" ToRole="IscrizioniCircuitiCampionato" />
+          <Property Name="PrimoClassificatoSprintRacePilotaId" Type="Int32" />
+          <NavigationProperty Name="Piloti6" Relationship="FantaF1_SVRKModel.FK_PronosticoUtenteGara_Piloti6" FromRole="PronosticoUtenteGara" ToRole="Piloti" />
         </EntityType>
         <EntityType Name="RegoleCampionatoMondiale">
           <Key>
@@ -1926,6 +2007,9 @@
           <Property Name="PunteggioGiroVeloce" Type="Int32" Nullable="false" />
           <Property Name="PunteggioPolePosition" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CampionatiMondiali" Relationship="Self.FK_CampionatiMondiali_RegoleCampionatoMondiale" FromRole="RegoleCampionatoMondiale" ToRole="CampionatiMondiali" />
+          <Property Name="PunteggioPrimoSprintRace" Type="Int32" Nullable="false" />
+          <Property Name="PunteggioSecondoSprintRace" Type="Int32" Nullable="false" />
+          <Property Name="PunteggioTerzoSprintRace" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="RegoleFantaCampionato">
           <Key>
@@ -1963,6 +2047,7 @@
           <Property Name="PunteggioNonaScuderiaMondiale" Type="Int32" Nullable="false" />
           <Property Name="PunteggioDecimaScuderiaMondiale" Type="Int32" Nullable="false" />
           <Property Name="PunteggioMalusCambioPronosticoMondiale" Type="Int32" Nullable="false" />
+          <Property Name="PunteggioPrimoPilotaSprintRace" Type="Int32" />
         </EntityType>
         <EntityType Name="RisultatoDFNGaraReale">
           <Key>
@@ -2063,6 +2148,12 @@
           <NavigationProperty Name="Piloti20" Relationship="Self.FK_PilotaGiroVeloce" FromRole="RisultatoGaraReale" ToRole="Piloti" />
           <NavigationProperty Name="Piloti21" Relationship="Self.FK_PilotaPolePosition" FromRole="RisultatoGaraReale" ToRole="Piloti" />
           <NavigationProperty Name="RisultatoDFNGaraReale" Relationship="Self.FK_RisultatoDFN" FromRole="RisultatoGaraReale" ToRole="RisultatoDFNGaraReale" />
+          <Property Name="PilotaId01SprintRace" Type="Int32" />
+          <NavigationProperty Name="Piloti22" Relationship="FantaF1_SVRKModel.FK_RisultatoGaraReale_Piloti" FromRole="RisultatoGaraReale" ToRole="Piloti" />
+          <Property Name="PilotaId02SprintRace" Type="Int32" />
+          <Property Name="PilotaId03SprintRace" Type="Int32" />
+          <NavigationProperty Name="Piloti23" Relationship="FantaF1_SVRKModel.FK_RisultatoGaraReale_Piloti1" FromRole="RisultatoGaraReale" ToRole="Piloti" />
+          <NavigationProperty Name="Piloti24" Relationship="FantaF1_SVRKModel.FK_RisultatoGaraReale_Piloti2" FromRole="RisultatoGaraReale" ToRole="Piloti" />
         </EntityType>
         <EntityType Name="RisultatoPronostico">
           <Key>
@@ -2078,6 +2169,7 @@
           <Property Name="RisultatoDFN" Type="Boolean" Nullable="false" />
           <Property Name="PunteggioComplessivoPronostico" Type="Int32" Nullable="false" />
           <NavigationProperty Name="PronosticoUtenteGara" Relationship="Self.FK_PronosticoRisultato" FromRole="RisultatoPronostico" ToRole="PronosticoUtenteGara" />
+          <Property Name="PunteggioPrimoClassificatoSprintRace" Type="Boolean" />
         </EntityType>
         <EntityType Name="Scuderie">
           <Key>
@@ -3459,6 +3551,22 @@
             <End Role="IscrizioniPilotiScuderie" EntitySet="IscrizioniPilotiScuderie" />
             <End Role="IscrizioniPilotiCampionato" EntitySet="IscrizioniPilotiCampionato" />
           </AssociationSet>
+          <AssociationSet Name="FK_PronosticoUtenteGara_Piloti6" Association="FantaF1_SVRKModel.FK_PronosticoUtenteGara_Piloti6">
+            <End Role="Piloti" EntitySet="Piloti" />
+            <End Role="PronosticoUtenteGara" EntitySet="PronosticoUtenteGara" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RisultatoGaraReale_Piloti" Association="FantaF1_SVRKModel.FK_RisultatoGaraReale_Piloti">
+            <End Role="Piloti" EntitySet="Piloti" />
+            <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RisultatoGaraReale_Piloti1" Association="FantaF1_SVRKModel.FK_RisultatoGaraReale_Piloti1">
+            <End Role="Piloti" EntitySet="Piloti" />
+            <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RisultatoGaraReale_Piloti2" Association="FantaF1_SVRKModel.FK_RisultatoGaraReale_Piloti2">
+            <End Role="Piloti" EntitySet="Piloti" />
+            <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_PronosticoUtenteGara_IscrizioniCircuitiCampionato1">
           <End Type="FantaF1_SVRKModel.IscrizioniCircuitiCampionato" Role="IscrizioniCircuitiCampionato" Multiplicity="1" />
@@ -3521,6 +3629,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PronosticoUtenteGara_Piloti6">
+          <End Type="FantaF1_SVRKModel.Piloti" Role="Piloti" Multiplicity="0..1" />
+          <End Type="FantaF1_SVRKModel.PronosticoUtenteGara" Role="PronosticoUtenteGara" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Piloti">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PronosticoUtenteGara">
+              <PropertyRef Name="PrimoClassificatoSprintRacePilotaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RisultatoGaraReale_Piloti">
+          <End Type="FantaF1_SVRKModel.Piloti" Role="Piloti" Multiplicity="0..1" />
+          <End Type="FantaF1_SVRKModel.RisultatoGaraReale" Role="RisultatoGaraReale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Piloti">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RisultatoGaraReale">
+              <PropertyRef Name="PilotaId01SprintRace" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RisultatoGaraReale_Piloti1">
+          <End Type="FantaF1_SVRKModel.Piloti" Role="Piloti" Multiplicity="0..1" />
+          <End Type="FantaF1_SVRKModel.RisultatoGaraReale" Role="RisultatoGaraReale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Piloti">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RisultatoGaraReale">
+              <PropertyRef Name="PilotaId02SprintRace" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RisultatoGaraReale_Piloti2">
+          <End Type="FantaF1_SVRKModel.Piloti" Role="Piloti" Multiplicity="0..1" />
+          <End Type="FantaF1_SVRKModel.RisultatoGaraReale" Role="RisultatoGaraReale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Piloti">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RisultatoGaraReale">
+              <PropertyRef Name="PilotaId03SprintRace" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3562,6 +3718,7 @@
           <EntitySetMapping Name="IscrizioniCircuitiCampionato">
             <EntityTypeMapping TypeName="FantaF1_SVRKModel.IscrizioniCircuitiCampionato">
               <MappingFragment StoreEntitySet="IscrizioniCircuitiCampionato">
+                <ScalarProperty Name="HaSprintRace" ColumnName="HaSprintRace" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CircuitoId" ColumnName="CircuitoId" />
                 <ScalarProperty Name="CampionatoId" ColumnName="CampionatoId" />
@@ -3642,6 +3799,7 @@
           <EntitySetMapping Name="PronosticoUtenteGara">
             <EntityTypeMapping TypeName="FantaF1_SVRKModel.PronosticoUtenteGara">
               <MappingFragment StoreEntitySet="PronosticoUtenteGara">
+                <ScalarProperty Name="PrimoClassificatoSprintRacePilotaId" ColumnName="PrimoClassificatoSprintRacePilotaId" />
                 <ScalarProperty Name="GaraId" ColumnName="GaraId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UtenteId" ColumnName="UtenteId" />
@@ -3659,6 +3817,9 @@
           <EntitySetMapping Name="RegoleCampionatoMondiale">
             <EntityTypeMapping TypeName="FantaF1_SVRKModel.RegoleCampionatoMondiale">
               <MappingFragment StoreEntitySet="RegoleCampionatoMondiale">
+                <ScalarProperty Name="PunteggioTerzoSprintRace" ColumnName="PunteggioTerzoSprintRace" />
+                <ScalarProperty Name="PunteggioSecondoSprintRace" ColumnName="PunteggioSecondoSprintRace" />
+                <ScalarProperty Name="PunteggioPrimoSprintRace" ColumnName="PunteggioPrimoSprintRace" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="PunteggioPrimoClassificato" ColumnName="PunteggioPrimoClassificato" />
                 <ScalarProperty Name="PunteggioSecondoClassificato" ColumnName="PunteggioSecondoClassificato" />
@@ -3688,6 +3849,7 @@
           <EntitySetMapping Name="RegoleFantaCampionato">
             <EntityTypeMapping TypeName="FantaF1_SVRKModel.RegoleFantaCampionato">
               <MappingFragment StoreEntitySet="RegoleFantaCampionato">
+                <ScalarProperty Name="PunteggioPrimoPilotaSprintRace" ColumnName="PunteggioPrimoPilotaSprintRace" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="PunteggioPrimoClassificato" ColumnName="PunteggioPrimoClassificato" />
                 <ScalarProperty Name="PunteggioSecondoClassificato" ColumnName="PunteggioSecondoClassificato" />
@@ -3753,6 +3915,9 @@
           <EntitySetMapping Name="RisultatoGaraReale">
             <EntityTypeMapping TypeName="FantaF1_SVRKModel.RisultatoGaraReale">
               <MappingFragment StoreEntitySet="RisultatoGaraReale">
+                <ScalarProperty Name="PilotaId03SprintRace" ColumnName="PilotaId03SprintRace" />
+                <ScalarProperty Name="PilotaId02SprintRace" ColumnName="PilotaId02SprintRace" />
+                <ScalarProperty Name="PilotaId01SprintRace" ColumnName="PilotaId01SprintRace" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="PilotaId01" ColumnName="PilotaId01" />
                 <ScalarProperty Name="PilotaId02" ColumnName="PilotaId02" />
@@ -3783,6 +3948,7 @@
           <EntitySetMapping Name="RisultatoPronostico">
             <EntityTypeMapping TypeName="FantaF1_SVRKModel.RisultatoPronostico">
               <MappingFragment StoreEntitySet="RisultatoPronostico">
+                <ScalarProperty Name="PunteggioPrimoClassificatoSprintRace" ColumnName="PunteggioPrimoClassificatoSprintRace" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="PronosticoId" ColumnName="PronosticoId" />
                 <ScalarProperty Name="RisultatoPrimoClassificato" ColumnName="RisultatoPrimoClassificato" />

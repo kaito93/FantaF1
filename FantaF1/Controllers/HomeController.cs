@@ -1,13 +1,13 @@
 ﻿using FantaF1.Action;
 using FantaF1.Action.Interfaces;
 using FantaF1.Models;
-using FantaF1DataAccessDB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using FantaF1.Action.ReportAction;
 using FantaF1.Models.ExcelRisultatiPronostici;
+using FantaF1DataAccessDB;
 
 namespace FantaF1.Controllers
 {
@@ -19,7 +19,6 @@ namespace FantaF1.Controllers
         public ActionResult Index()
         {
             InitializeAll();
-
             return View();
         }
 
@@ -210,11 +209,23 @@ namespace FantaF1.Controllers
         {
             InitializeAll();
             var giornoGara = _orchestrator.IscrizioniCircuitoCampionatoAction.GetIscrizioneForId(idGara).DataGara;
+            var isSprintRace = _orchestrator.IscrizioniCircuitoCampionatoAction.GetIscrizioneForId(idGara).HaSprintRace;
             var pilotiId = _orchestrator.IscrizioniPilotiScuderieAction.GetIDPilotiForGara(giornoGara);
+
             pilotiId.Remove(23);
+
+            IEnumerable<SelectListItem> positionSprintRace = new List<SelectListItem>
+            {
+                new SelectListItem{Text = "1° Classificato", Value = "1SPR"},
+                new SelectListItem{Text = "2° Classificato", Value = "2SPR"},
+                new SelectListItem{Text = "3° Classificato", Value = "3SPR"},
+            };
+
             var model = new RisultatoGaraViewModel
             {
-                Piloti = _orchestrator.PilotiAction.GetPilotiFromIdSelectItem(pilotiId)
+                Piloti = _orchestrator.PilotiAction.GetPilotiFromIdSelectItem(pilotiId),
+                IsSprintRace = isSprintRace,
+                PositionSprintRace = positionSprintRace
             };
 
             return PartialView("_PilotiForGara", model);
@@ -457,7 +468,7 @@ namespace FantaF1.Controllers
             {
                 GetDataUtenti(utentiIscritti),
                 GetDataPronostici(pilotiList, utentiIscritti, pronosticiUtenti, risultatiPronosticiUtenti,
-                    iscrizioniCircuitiCampionato, idCampionatoReale, circuitiList, regolamentoFantaCampionato),
+                    iscrizioniCircuitiCampionato, idCampionatoReale, circuitiList, regolamentoFantaCampionato, fantaCampionato.Id),
                 GetDataStorico(utentiIscritti, pronosticiUtenti, iscrizioniCircuitiCampionato, idCampionatoReale,
                     circuitiList, risultatiPronosticiUtenti, iscrizioniUtentiFantaCampionato),
                 GetDataClassifica(utentiIscritti, pronosticiUtenti, iscrizioniCircuitiCampionato, idCampionatoReale,
@@ -498,12 +509,12 @@ namespace FantaF1.Controllers
             List<Utenti> utentiIscritti, List<PronosticoUtenteGara> pronosticiUtenti,
             List<RisultatoPronostico> risultatiPronosticiUtenti,
             List<IscrizioniCircuitiCampionato> iscrizioniCircuitiCampionato, int idCampionatoReale,
-            List<Circuiti> circuitiList, RegoleFantaCampionato regolamentoFantaCampionato)
+            List<Circuiti> circuitiList, RegoleFantaCampionato regolamentoFantaCampionato, int idFantaCampionato)
         {
             string outp;
             var manager = new ReportsManager();
 
-            var ds = manager.GetReportByTypePronostici(pilotiList, utentiIscritti, pronosticiUtenti, risultatiPronosticiUtenti, iscrizioniCircuitiCampionato, idCampionatoReale, circuitiList, regolamentoFantaCampionato, out outp);
+            var ds = manager.GetReportByTypePronostici(pilotiList, utentiIscritti, pronosticiUtenti, risultatiPronosticiUtenti, iscrizioniCircuitiCampionato, idCampionatoReale, circuitiList, regolamentoFantaCampionato, idFantaCampionato, out outp);
 
             if (ds == null || ds.Tables.Count <= 0)
                 return null;

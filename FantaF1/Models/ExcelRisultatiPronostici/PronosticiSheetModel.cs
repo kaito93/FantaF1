@@ -20,14 +20,12 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
             List<Utenti> utentiIscritti, List<PronosticoUtenteGara> pronosticiUtenti,
             List<RisultatoPronostico> risultatiPronosticiUtenti,
             List<IscrizioniCircuitiCampionato> iscrizioniCircuitiCampionato, int idCampionatoReale,
-            List<Circuiti> circuitiList, RegoleFantaCampionato regolamentoFantaCampionato)
+            List<Circuiti> circuitiList, RegoleFantaCampionato regolamentoFantaCampionato, int idFantaCampionato)
         {
             PronosticoSheetStructure = new List<PronosticiSheetStructure>();
 
             foreach (var utente in utentiIscritti)
             {
-                //if (utente.Id == 642)
-                //{
                 PronosticoSheetStructure.Add(new PronosticiSheetStructure
                 {
                     Id = utente.Id.ToString(),
@@ -36,10 +34,9 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
                         iscrizioniCircuitiCampionato,
                         idCampionatoReale, utente.Id, circuitiList, risultatiPronosticiUtenti,
                         regolamentoFantaCampionato),
-                    Punteggio_Totale = CalculateTotalResult(risultatiPronosticiUtenti, pronosticiUtenti, utente.Id)
+                    Punteggio_Totale = CalculateTotalResult(risultatiPronosticiUtenti, pronosticiUtenti, utente.Id, idFantaCampionato)
                         .ToString()
                 });
-                //}
             }
         }
 
@@ -67,9 +64,9 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
         }
 
         private static int CalculateTotalResult(IReadOnlyCollection<RisultatoPronostico> risultatiPronosticoUtenti,
-            List<PronosticoUtenteGara> pronosticiUtentiGara, int idUtente)
+            List<PronosticoUtenteGara> pronosticiUtentiGara, int idUtente, int idFantaCampionato)
         {
-            var pronosticiSingoloUtente = pronosticiUtentiGara.FindAll(x => x.UtenteId == idUtente);
+            var pronosticiSingoloUtente = pronosticiUtentiGara.FindAll(x => x.UtenteId == idUtente && x.FantaCampionatoId == idFantaCampionato);
 
             var risultatiPronosticoUtente = pronosticiSingoloUtente.Select(pronosticoSingoloUtente =>
                 risultatiPronosticoUtenti.FirstOrDefault(x => x.PronosticoId == pronosticoSingoloUtente.Id)).ToList();
@@ -86,7 +83,7 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
             var iscrizioniCircuiti =
                 iscritioniCircuitiCampionato.FindAll(x => x.CampionatoId == idCampionatoReale && x.RisultatiId != null);
 
-            // Per problema dimensione cella excel
+            //Per problema dimensione cella excel
             iscrizioniCircuiti.RemoveRange(0, 7);
 
             var primoPilota = string.Empty;
@@ -95,6 +92,7 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
             var polePilota = string.Empty;
             var giroVelocePilota = string.Empty;
             var dfnPilota = string.Empty;
+            var sprintPilota = string.Empty;
             var circuitoNames = string.Empty;
 
 
@@ -109,7 +107,7 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
 
                 circuitoNames += circuitoName;
 
-                for (var j = 0; j < 6; j++)
+                for (var j = 0; j < 7; j++)
                     listStringsBuilder.Add(new StringBuilder(circuitoName.Length));
 
                 if (circuitoNameWithoutSpaces != null)
@@ -126,6 +124,8 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
                     listStringsBuilder[4]?.Append(AddEmptySpaces(str));
                     str = new StringBuilder(circuitoNameWithoutSpaces.Length / 3);
                     listStringsBuilder[5]?.Append(AddEmptySpaces(str));
+                    str = new StringBuilder(circuitoNameWithoutSpaces.Length / 3);
+                    listStringsBuilder[6]?.Append(AddEmptySpaces(str));
                 }
 
                 var pronosticoGara = pronostici.FirstOrDefault(x =>
@@ -161,16 +161,28 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
                                              RetrieveScoreForPosition(risultatoPronostico, regolamentoFantaCampionato,
                                                  "DFN"));
 
+                if (iscrizioneCircuito.HaSprintRace)
+                {
+                    listStringsBuilder[6].Append(" SPR - " +
+                                                 RecoverSurnamePilot(pilotiList, pronosticoGara, "Spr") + " | " +
+                                                 RetrieveScoreForPosition(risultatoPronostico,
+                                                     regolamentoFantaCampionato,
+                                                     "Spr"));
+                }
+                else
+                    listStringsBuilder[6].Append(" ------------------ ");
+
                 primoPilota += AddEmptySpaces(listStringsBuilder[0]);
                 secondoPilota += AddEmptySpaces(listStringsBuilder[1]);
                 terzoPilota += AddEmptySpaces(listStringsBuilder[2]);
                 polePilota += AddEmptySpaces(listStringsBuilder[3]);
                 giroVelocePilota += AddEmptySpaces(listStringsBuilder[4]);
                 dfnPilota += AddEmptySpaces(listStringsBuilder[5]);
+                sprintPilota += AddEmptySpaces(listStringsBuilder[6]);
             }
 
             var firstText = circuitoNames + "@@" + primoPilota + "@" + secondoPilota + "@" + terzoPilota + "@" + polePilota +
-                            "@" + giroVelocePilota + "@" + dfnPilota;
+                            "@" + giroVelocePilota + "@" + dfnPilota + "@" + sprintPilota;
 
             firstText = firstText.Replace("@", Environment.NewLine);
 
@@ -209,6 +221,11 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
                 case "DFN":
                     if (risultato.RisultatoDFN)
                         punteggio += regolamento.PunteggioDFN;
+                    break;
+                case "Spr":
+                    if (risultato.PunteggioPrimoClassificatoSprintRace != null && (bool)risultato.PunteggioPrimoClassificatoSprintRace)
+                        if (regolamento.PunteggioPrimoPilotaSprintRace != null)
+                            punteggio += (int)regolamento.PunteggioPrimoPilotaSprintRace;
                     break;
             }
 
@@ -257,6 +274,10 @@ namespace FantaF1.Models.ExcelRisultatiPronostici
                 case "DFN":
                     pilota = pilotiList.FirstOrDefault(
                         x => pronosticoGara != null && x.Id == pronosticoGara.DFNPilotaId);
+                    break;
+                case "Spr":
+                    pilota = pilotiList.FirstOrDefault(
+                    x => pronosticoGara != null && x.Id == pronosticoGara.PrimoClassificatoSprintRacePilotaId);
                     break;
             }
 

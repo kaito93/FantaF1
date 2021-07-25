@@ -44,6 +44,9 @@ namespace FantaF1DataAccessDB
         public Nullable<int> PilotaIdGiroVeloce { get; set; }
         public Nullable<int> PilotaIdPolePosition { get; set; }
         public int RisultatoDFNId { get; set; }
+        public Nullable<int> PilotaId01SprintRace { get; set; }
+        public Nullable<int> PilotaId02SprintRace { get; set; }
+        public Nullable<int> PilotaId03SprintRace { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IscrizioniCircuitiCampionato> IscrizioniCircuitiCampionato { get; set; }
@@ -70,5 +73,8 @@ namespace FantaF1DataAccessDB
         public virtual Piloti Piloti20 { get; set; }
         public virtual Piloti Piloti21 { get; set; }
         public virtual RisultatoDFNGaraReale RisultatoDFNGaraReale { get; set; }
+        public virtual Piloti Piloti22 { get; set; }
+        public virtual Piloti Piloti23 { get; set; }
+        public virtual Piloti Piloti24 { get; set; }
     }
 }

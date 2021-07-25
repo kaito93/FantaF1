@@ -36,6 +36,7 @@
     <EntitySetMapping Name="IscrizioniCircuitiCampionato">
       <EntityTypeMapping TypeName="FantaF1_SVRKModel.IscrizioniCircuitiCampionato">
         <MappingFragment StoreEntitySet="IscrizioniCircuitiCampionato">
+          <ScalarProperty Name="HaSprintRace" ColumnName="HaSprintRace" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="CircuitoId" ColumnName="CircuitoId" />
           <ScalarProperty Name="CampionatoId" ColumnName="CampionatoId" />
@@ -116,6 +117,7 @@
     <EntitySetMapping Name="PronosticoUtenteGara">
       <EntityTypeMapping TypeName="FantaF1_SVRKModel.PronosticoUtenteGara">
         <MappingFragment StoreEntitySet="PronosticoUtenteGara">
+          <ScalarProperty Name="PrimoClassificatoSprintRacePilotaId" ColumnName="PrimoClassificatoSprintRacePilotaId" />
           <ScalarProperty Name="GaraId" ColumnName="GaraId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="UtenteId" ColumnName="UtenteId" />
@@ -133,6 +135,9 @@
     <EntitySetMapping Name="RegoleCampionatoMondiale">
       <EntityTypeMapping TypeName="FantaF1_SVRKModel.RegoleCampionatoMondiale">
         <MappingFragment StoreEntitySet="RegoleCampionatoMondiale">
+          <ScalarProperty Name="PunteggioTerzoSprintRace" ColumnName="PunteggioTerzoSprintRace" />
+          <ScalarProperty Name="PunteggioSecondoSprintRace" ColumnName="PunteggioSecondoSprintRace" />
+          <ScalarProperty Name="PunteggioPrimoSprintRace" ColumnName="PunteggioPrimoSprintRace" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="PunteggioPrimoClassificato" ColumnName="PunteggioPrimoClassificato" />
           <ScalarProperty Name="PunteggioSecondoClassificato" ColumnName="PunteggioSecondoClassificato" />
@@ -162,6 +167,7 @@
     <EntitySetMapping Name="RegoleFantaCampionato">
       <EntityTypeMapping TypeName="FantaF1_SVRKModel.RegoleFantaCampionato">
         <MappingFragment StoreEntitySet="RegoleFantaCampionato">
+          <ScalarProperty Name="PunteggioPrimoPilotaSprintRace" ColumnName="PunteggioPrimoPilotaSprintRace" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="PunteggioPrimoClassificato" ColumnName="PunteggioPrimoClassificato" />
           <ScalarProperty Name="PunteggioSecondoClassificato" ColumnName="PunteggioSecondoClassificato" />
@@ -227,6 +233,9 @@
     <EntitySetMapping Name="RisultatoGaraReale">
       <EntityTypeMapping TypeName="FantaF1_SVRKModel.RisultatoGaraReale">
         <MappingFragment StoreEntitySet="RisultatoGaraReale">
+          <ScalarProperty Name="PilotaId03SprintRace" ColumnName="PilotaId03SprintRace" />
+          <ScalarProperty Name="PilotaId02SprintRace" ColumnName="PilotaId02SprintRace" />
+          <ScalarProperty Name="PilotaId01SprintRace" ColumnName="PilotaId01SprintRace" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="PilotaId01" ColumnName="PilotaId01" />
           <ScalarProperty Name="PilotaId02" ColumnName="PilotaId02" />
@@ -257,6 +266,7 @@
     <EntitySetMapping Name="RisultatoPronostico">
       <EntityTypeMapping TypeName="FantaF1_SVRKModel.RisultatoPronostico">
         <MappingFragment StoreEntitySet="RisultatoPronostico">
+          <ScalarProperty Name="PunteggioPrimoClassificatoSprintRace" ColumnName="PunteggioPrimoClassificatoSprintRace" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="PronosticoId" ColumnName="PronosticoId" />
           <ScalarProperty Name="RisultatoPrimoClassificato" ColumnName="RisultatoPrimoClassificato" />

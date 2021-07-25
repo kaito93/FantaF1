@@ -25,7 +25,7 @@ namespace FantaF1.Action
 
         public int GetFantaCampionatoIdFromName(string name)
         {
-            var result = _fantaCampionati.FirstOrDefault(x => x.Nome.ToLower() == name.ToLower());
+            var result = _fantaCampionati.FirstOrDefault(x => x.Nome.ToLower() == name.ToLower() && x.Anno == DateTime.Today.Year);
 
             if (result != null)
                 return result.Id;

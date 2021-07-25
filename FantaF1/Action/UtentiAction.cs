@@ -25,7 +25,7 @@ namespace FantaF1.Action
                 Data_Registrazione = DateTime.Today
             };
 
-            var alreadyExist = _utenti.FirstOrDefault(x => x.Cognome == registrazione.Cognome && x.Nome == registrazione.Nome);
+            var alreadyExist = _utenti.FirstOrDefault(x => x.Cognome.ToLower() == registrazione.Cognome.ToLower() && x.Nome.ToLower() == registrazione.Nome.ToLower());
 
             if (alreadyExist != null) return -1;
 

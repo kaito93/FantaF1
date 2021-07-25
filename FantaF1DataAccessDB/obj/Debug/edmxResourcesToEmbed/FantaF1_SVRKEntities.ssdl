@@ -39,6 +39,7 @@
     <Property Name="RisultatiId" Type="int" />
     <Property Name="DataGara" Type="datetime" Nullable="false" />
     <Property Name="NomeGP" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="HaSprintRace" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="IscrizioniPilotiCampionato">
     <Key>
@@ -128,6 +129,7 @@
     <Property Name="GiroVelocePilotaId" Type="int" Nullable="false" />
     <Property Name="DFNPilotaId" Type="int" Nullable="false" />
     <Property Name="Inserimento" Type="datetime" Nullable="false" />
+    <Property Name="PrimoClassificatoSprintRacePilotaId" Type="int" />
   </EntityType>
   <EntityType Name="RegoleCampionatoMondiale">
     <Key>
@@ -156,6 +158,9 @@
     <Property Name="PunteggioVentesimoClassificato" Type="int" Nullable="false" />
     <Property Name="PunteggioGiroVeloce" Type="int" Nullable="false" />
     <Property Name="PunteggioPolePosition" Type="int" Nullable="false" />
+    <Property Name="PunteggioPrimoSprintRace" Type="int" Nullable="false" />
+    <Property Name="PunteggioSecondoSprintRace" Type="int" Nullable="false" />
+    <Property Name="PunteggioTerzoSprintRace" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="RegoleFantaCampionato">
     <Key>
@@ -193,6 +198,7 @@
     <Property Name="PunteggioNonaScuderiaMondiale" Type="int" Nullable="false" />
     <Property Name="PunteggioDecimaScuderiaMondiale" Type="int" Nullable="false" />
     <Property Name="PunteggioMalusCambioPronosticoMondiale" Type="int" Nullable="false" />
+    <Property Name="PunteggioPrimoPilotaSprintRace" Type="int" />
   </EntityType>
   <EntityType Name="RisultatoDFNGaraReale">
     <Key>
@@ -248,6 +254,9 @@
     <Property Name="PilotaIdGiroVeloce" Type="int" />
     <Property Name="PilotaIdPolePosition" Type="int" />
     <Property Name="RisultatoDFNId" Type="int" Nullable="false" />
+    <Property Name="PilotaId01SprintRace" Type="int" />
+    <Property Name="PilotaId02SprintRace" Type="int" />
+    <Property Name="PilotaId03SprintRace" Type="int" />
   </EntityType>
   <EntityType Name="RisultatoPronostico">
     <Key>
@@ -262,6 +271,7 @@
     <Property Name="RisultatoGiroVeloce" Type="bit" Nullable="false" />
     <Property Name="RisultatoDFN" Type="bit" Nullable="false" />
     <Property Name="PunteggioComplessivoPronostico" Type="int" Nullable="false" />
+    <Property Name="PunteggioPrimoClassificatoSprintRace" Type="bit" />
   </EntityType>
   <EntityType Name="Scuderie">
     <Key>
@@ -1278,6 +1288,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_PronosticoUtenteGara_Piloti6">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="PronosticoUtenteGara" Type="Self.PronosticoUtenteGara" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PronosticoUtenteGara">
+        <PropertyRef Name="PrimoClassificatoSprintRacePilotaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_PronosticoUtenteGara_Utenti">
     <End Role="Utenti" Type="Self.Utenti" Multiplicity="1" />
     <End Role="PronosticoUtenteGara" Type="Self.PronosticoUtenteGara" Multiplicity="*" />
@@ -1299,6 +1321,42 @@
       </Principal>
       <Dependent Role="RisultatoGaraReale">
         <PropertyRef Name="RisultatoDFNId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RisultatoGaraReale_Piloti">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoGaraReale" Type="Self.RisultatoGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoGaraReale">
+        <PropertyRef Name="PilotaId01SprintRace" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RisultatoGaraReale_Piloti1">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoGaraReale" Type="Self.RisultatoGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoGaraReale">
+        <PropertyRef Name="PilotaId02SprintRace" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RisultatoGaraReale_Piloti2">
+    <End Role="Piloti" Type="Self.Piloti" Multiplicity="0..1" />
+    <End Role="RisultatoGaraReale" Type="Self.RisultatoGaraReale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Piloti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RisultatoGaraReale">
+        <PropertyRef Name="PilotaId03SprintRace" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1653,12 +1711,28 @@
       <End Role="Piloti" EntitySet="Piloti" />
       <End Role="PronosticoUtenteGara" EntitySet="PronosticoUtenteGara" />
     </AssociationSet>
+    <AssociationSet Name="FK_PronosticoUtenteGara_Piloti6" Association="Self.FK_PronosticoUtenteGara_Piloti6">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="PronosticoUtenteGara" EntitySet="PronosticoUtenteGara" />
+    </AssociationSet>
     <AssociationSet Name="FK_PronosticoUtenteGara_Utenti" Association="Self.FK_PronosticoUtenteGara_Utenti">
       <End Role="Utenti" EntitySet="Utenti" />
       <End Role="PronosticoUtenteGara" EntitySet="PronosticoUtenteGara" />
     </AssociationSet>
     <AssociationSet Name="FK_RisultatoDFN" Association="Self.FK_RisultatoDFN">
       <End Role="RisultatoDFNGaraReale" EntitySet="RisultatoDFNGaraReale" />
+      <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RisultatoGaraReale_Piloti" Association="Self.FK_RisultatoGaraReale_Piloti">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RisultatoGaraReale_Piloti1" Association="Self.FK_RisultatoGaraReale_Piloti1">
+      <End Role="Piloti" EntitySet="Piloti" />
+      <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RisultatoGaraReale_Piloti2" Association="Self.FK_RisultatoGaraReale_Piloti2">
+      <End Role="Piloti" EntitySet="Piloti" />
       <End Role="RisultatoGaraReale" EntitySet="RisultatoGaraReale" />
     </AssociationSet>
   </EntityContainer>

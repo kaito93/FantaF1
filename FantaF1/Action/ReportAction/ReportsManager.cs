@@ -42,7 +42,7 @@ namespace FantaF1.Action.ReportAction
             return null;
         }
 
-        public ExcelSet GetReportByTypePronostici(List<Piloti> pilotiList, List<Utenti> utentiIscritti, List<PronosticoUtenteGara> pronosticiUtenti, List<RisultatoPronostico> risultatiPronosticiUtenti, List<IscrizioniCircuitiCampionato> iscrizioniCircuitiCampionato, int idCampionatoReale, List<Circuiti> circuitiList, RegoleFantaCampionato regolamentoFantaCampionato, out string retMsgs)
+        public ExcelSet GetReportByTypePronostici(List<Piloti> pilotiList, List<Utenti> utentiIscritti, List<PronosticoUtenteGara> pronosticiUtenti, List<RisultatoPronostico> risultatiPronosticiUtenti, List<IscrizioniCircuitiCampionato> iscrizioniCircuitiCampionato, int idCampionatoReale, List<Circuiti> circuitiList, RegoleFantaCampionato regolamentoFantaCampionato, int idFantaCampionato, out string retMsgs)
         {
             var dataSource = new ReportDataSource();
 
@@ -51,7 +51,7 @@ namespace FantaF1.Action.ReportAction
 
             try
             {
-                var responseNode = dataSource.GetReportByTypePronostici(pilotiList, utentiIscritti, pronosticiUtenti, risultatiPronosticiUtenti, iscrizioniCircuitiCampionato, idCampionatoReale, circuitiList, regolamentoFantaCampionato, writer);
+                var responseNode = dataSource.GetReportByTypePronostici(pilotiList, utentiIscritti, pronosticiUtenti, risultatiPronosticiUtenti, iscrizioniCircuitiCampionato, idCampionatoReale, circuitiList, regolamentoFantaCampionato, idFantaCampionato, writer);
 
                 if (responseNode == null || responseNode.OuterXml.IndexOf("<erro", 0) > -1)
                 {

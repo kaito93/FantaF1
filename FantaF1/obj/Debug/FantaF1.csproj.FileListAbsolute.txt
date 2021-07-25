@@ -1,5 +1,5 @@
+C:\Users\kaito\source\repos\kaito93\FantaF1\FantaF1\obj\Debug\FantaF1.csproj.AssemblyReference.cache
 C:\Users\kaito\source\repos\kaito93\FantaF1\FantaF1\obj\Debug\FantaF1.csproj.CoreCompileInputs.cache
-C:\Users\kaito\source\repos\kaito93\FantaF1\FantaF1\obj\Debug\FantaF1.csprojAssemblyReference.cache
 C:\Users\kaito\source\repos\kaito93\FantaF1\FantaF1\bin\FantaF1.dll.config
 C:\Users\kaito\source\repos\kaito93\FantaF1\FantaF1\bin\FantaF1.dll
 C:\Users\kaito\source\repos\kaito93\FantaF1\FantaF1\bin\FantaF1.pdb
@@ -29,10 +29,10 @@ C:\Users\kaito\source\repos\kaito93\FantaF1\FantaF1\bin\System.Web.WebPages.Depl
 C:\Users\kaito\source\repos\kaito93\FantaF1\FantaF1\bin\System.Web.WebPages.dll
 C:\Users\kaito\source\repos\kaito93\FantaF1\FantaF1\bin\System.Web.WebPages.Razor.dll
 C:\Users\kaito\source\repos\kaito93\FantaF1\FantaF1\bin\WebGrease.dll
-C:\Users\kaito\source\repos\kaito93\FantaF1\FantaF1\bin\EntityFramework.xml
-C:\Users\kaito\source\repos\kaito93\FantaF1\FantaF1\bin\EntityFramework.SqlServer.xml
 C:\Users\kaito\source\repos\kaito93\FantaF1\FantaF1\bin\FantaF1DataAccessDB.pdb
 C:\Users\kaito\source\repos\kaito93\FantaF1\FantaF1\bin\FantaF1DataAccessDB.dll.config
+C:\Users\kaito\source\repos\kaito93\FantaF1\FantaF1\bin\EntityFramework.xml
+C:\Users\kaito\source\repos\kaito93\FantaF1\FantaF1\bin\EntityFramework.SqlServer.xml
 C:\Users\kaito\source\repos\kaito93\FantaF1\FantaF1\bin\ICSharpCode.SharpZipLib.xml
 C:\Users\kaito\source\repos\kaito93\FantaF1\FantaF1\bin\SimpleInjector.xml
 C:\Users\kaito\source\repos\kaito93\FantaF1\FantaF1\bin\SimpleInjector.Extensions.ExecutionContextScoping.xml

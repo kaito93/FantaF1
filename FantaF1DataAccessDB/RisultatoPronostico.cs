@@ -23,6 +23,7 @@ namespace FantaF1DataAccessDB
         public bool RisultatoGiroVeloce { get; set; }
         public bool RisultatoDFN { get; set; }
         public int PunteggioComplessivoPronostico { get; set; }
+        public Nullable<bool> PunteggioPrimoClassificatoSprintRace { get; set; }
     
         public virtual PronosticoUtenteGara PronosticoUtenteGara { get; set; }
     }

@@ -20,6 +20,7 @@ namespace FantaF1.Action
         {
             foreach (var pronostico in pronosticiGara)
             {
+
                 var risultatoPronostico = new RisultatoPronostico();
                 var punteggio = 0;
 
@@ -63,7 +64,16 @@ namespace FantaF1.Action
                     punteggio += regolamentoFantaCampionato.PunteggioDFN;
                 }
 
+                if (risultatoGara.PilotaId01SprintRace != null && pronostico.PrimoClassificatoSprintRacePilotaId ==
+                    risultatoGara.PilotaId01SprintRace)
+                {
+                    risultatoPronostico.PunteggioPrimoClassificatoSprintRace = true;
+                    punteggio += (int)regolamentoFantaCampionato.PunteggioPrimoPilotaSprintRace;
+                }
+
+
                 var risultatoPodio = false;
+
                 if (regolamentoFantaCampionato.ComboPodio && risultatoPronostico.RisultatoPrimoClassificato &&
                     risultatoPronostico.RisultatoSecondoClassificato && risultatoPronostico.RisultatoTerzoClassificato)
                 {
@@ -89,7 +99,7 @@ namespace FantaF1.Action
 
         private static bool IsPilotaDfn(int? pilotaId, RisultatoDFNGaraReale resultDfn)
         {
-            if (pilotaId == null || pilotaId == 22) // Caso nessun DFN
+            if (pilotaId == null || pilotaId == 23) // Caso nessun DFN
             {
                 return resultDfn.PilotaId01 == null;
             }

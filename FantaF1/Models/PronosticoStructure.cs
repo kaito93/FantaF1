@@ -11,6 +11,7 @@ namespace FantaF1.Models
         public string PilotaGiroVeloce { get; set; }
         public string PilotaPolePosition { get; set; }
         public string PilotaDfn { get; set; }
+        public string PilotaPrimoSprintRace { get; set; }
         public DateTime InserimentoPronostico { get; set; }
 
     }

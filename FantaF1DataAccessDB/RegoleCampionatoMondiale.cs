@@ -43,6 +43,9 @@ namespace FantaF1DataAccessDB
         public int PunteggioVentesimoClassificato { get; set; }
         public int PunteggioGiroVeloce { get; set; }
         public int PunteggioPolePosition { get; set; }
+        public int PunteggioPrimoSprintRace { get; set; }
+        public int PunteggioSecondoSprintRace { get; set; }
+        public int PunteggioTerzoSprintRace { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CampionatiMondiali> CampionatiMondiali { get; set; }
