@@ -17,7 +17,7 @@ namespace FantaF1.Action
             _databaseAction = databaseAction;
             _pronosticiUtentiGara = databaseAction.GetPronosticiUtenteGara();
         }
-        public void SavePronosticiInDatabase(IEnumerable<PronosticoStructure> pronosticiList, int garaId, int fantaCampionatoId, List<Piloti> pilotiList, List<Utenti> utentiList)
+        public void SavePronosticiInDatabase(IEnumerable<PronosticoStructure> pronosticiList, int garaId, int fantaCampionatoId, List<Piloti> pilotiList, List<Utenti> utentiList, bool hasSprintRace)
         {
             var errors = new List<string>();
 
@@ -27,20 +27,37 @@ namespace FantaF1.Action
                 {
                     if (_pronosticiUtentiGara.FirstOrDefault(x => x.UtenteId == GetUtenteIdFromName(pronostico.IdUtente, utentiList) && x.GaraId == garaId) == null)
                     {
-                        var pronosticoDb = new PronosticoUtenteGara
-                        {
-                            GaraId = garaId,
-                            PrimoClassificatoPilotaId = GetPilotaIdFromNameAndSurname(pronostico.PilotaPrimoClassificato, pilotiList),
-                            SecondoClassificatoPilotaId = GetPilotaIdFromNameAndSurname(pronostico.PilotaSecondoClassificato, pilotiList),
-                            TerzoClassificatoPilotaId = GetPilotaIdFromNameAndSurname(pronostico.PilotaTerzoClassificato, pilotiList),
-                            GiroVelocePilotaId = GetPilotaIdFromNameAndSurname(pronostico.PilotaGiroVeloce, pilotiList),
-                            PolePositionPilotaId = GetPilotaIdFromNameAndSurname(pronostico.PilotaPolePosition, pilotiList),
-                            DFNPilotaId = GetPilotaIdFromNameAndSurname(pronostico.PilotaDfn, pilotiList),
-                            PrimoClassificatoSprintRacePilotaId = GetPilotaIdFromNameAndSurname(pronostico.PilotaPrimoSprintRace, pilotiList),
-                            Inserimento = pronostico.InserimentoPronostico,
-                            UtenteId = GetUtenteIdFromName(pronostico.IdUtente, utentiList),
-                            FantaCampionatoId = fantaCampionatoId
-                        };
+                        PronosticoUtenteGara pronosticoDb;
+
+                        if (hasSprintRace)
+                            pronosticoDb = new PronosticoUtenteGara
+                            {
+                                GaraId = garaId,
+                                PrimoClassificatoPilotaId = GetPilotaIdFromNameAndSurname(pronostico.PilotaPrimoClassificato, pilotiList),
+                                SecondoClassificatoPilotaId = GetPilotaIdFromNameAndSurname(pronostico.PilotaSecondoClassificato, pilotiList),
+                                TerzoClassificatoPilotaId = GetPilotaIdFromNameAndSurname(pronostico.PilotaTerzoClassificato, pilotiList),
+                                GiroVelocePilotaId = GetPilotaIdFromNameAndSurname(pronostico.PilotaGiroVeloce, pilotiList),
+                                PolePositionPilotaId = GetPilotaIdFromNameAndSurname(pronostico.PilotaPolePosition, pilotiList),
+                                DFNPilotaId = GetPilotaIdFromNameAndSurname(pronostico.PilotaDfn, pilotiList),
+                                PrimoClassificatoSprintRacePilotaId = GetPilotaIdFromNameAndSurname(pronostico.PilotaPrimoSprintRace, pilotiList),
+                                Inserimento = pronostico.InserimentoPronostico,
+                                UtenteId = GetUtenteIdFromName(pronostico.IdUtente, utentiList),
+                                FantaCampionatoId = fantaCampionatoId
+                            };
+                        else
+                            pronosticoDb = new PronosticoUtenteGara
+                            {
+                                GaraId = garaId,
+                                PrimoClassificatoPilotaId = GetPilotaIdFromNameAndSurname(pronostico.PilotaPrimoClassificato, pilotiList),
+                                SecondoClassificatoPilotaId = GetPilotaIdFromNameAndSurname(pronostico.PilotaSecondoClassificato, pilotiList),
+                                TerzoClassificatoPilotaId = GetPilotaIdFromNameAndSurname(pronostico.PilotaTerzoClassificato, pilotiList),
+                                GiroVelocePilotaId = GetPilotaIdFromNameAndSurname(pronostico.PilotaGiroVeloce, pilotiList),
+                                PolePositionPilotaId = GetPilotaIdFromNameAndSurname(pronostico.PilotaPolePosition, pilotiList),
+                                DFNPilotaId = GetPilotaIdFromNameAndSurname(pronostico.PilotaDfn, pilotiList),
+                                Inserimento = pronostico.InserimentoPronostico,
+                                UtenteId = GetUtenteIdFromName(pronostico.IdUtente, utentiList),
+                                FantaCampionatoId = fantaCampionatoId
+                            };
 
                         _pronosticiUtentiGara = _databaseAction.SavePronosticoUtenteGara(pronosticoDb);
                     }
@@ -66,7 +83,7 @@ namespace FantaF1.Action
 
         }
 
-        public IEnumerable<PronosticoStructure> LoadPronosticiFromFileCsv(FileInformation fileCsv)
+        public IEnumerable<PronosticoStructure> LoadPronosticiFromFileCsv(FileInformation fileCsv, bool sprintRace)
         {
             var riga = 0;
             var pronosticiList = new List<PronosticoStructure>();
@@ -91,18 +108,34 @@ namespace FantaF1.Action
 
                     if (riga != 0)
                     {
-                        var pronosticoParsed = new PronosticoStructure
-                        {
-                            InserimentoPronostico = DateTime.Parse(pronostico?[0].Split(' ')[0]),
-                            IdUtente = pronostico?[1],
-                            PilotaPrimoClassificato = pronostico?[2],
-                            PilotaSecondoClassificato = pronostico?[3],
-                            PilotaTerzoClassificato = pronostico?[4],
-                            PilotaPolePosition = pronostico?[5],
-                            PilotaGiroVeloce = pronostico?[6],
-                            PilotaDfn = pronostico?[7],
-                            PilotaPrimoSprintRace = pronostico?[8]
-                        };
+                        PronosticoStructure pronosticoParsed;
+
+                        if (sprintRace)
+                            pronosticoParsed = new PronosticoStructure
+                            {
+                                InserimentoPronostico = DateTime.Parse(pronostico?[0].Split(' ')[0]),
+                                IdUtente = pronostico?[1],
+                                PilotaPrimoClassificato = pronostico?[2],
+                                PilotaSecondoClassificato = pronostico?[3],
+                                PilotaTerzoClassificato = pronostico?[4],
+                                PilotaPolePosition = pronostico?[5],
+                                PilotaGiroVeloce = pronostico?[6],
+                                PilotaDfn = pronostico?[7],
+                                PilotaPrimoSprintRace = pronostico?[8]
+                            };
+                        else
+
+                            pronosticoParsed = new PronosticoStructure
+                            {
+                                InserimentoPronostico = DateTime.Parse(pronostico?[0].Split(' ')[0]),
+                                IdUtente = pronostico?[1],
+                                PilotaPrimoClassificato = pronostico?[2],
+                                PilotaSecondoClassificato = pronostico?[3],
+                                PilotaTerzoClassificato = pronostico?[4],
+                                PilotaPolePosition = pronostico?[5],
+                                PilotaGiroVeloce = pronostico?[6],
+                                PilotaDfn = pronostico?[7],
+                            };
 
                         pronosticiList.Add(pronosticoParsed);
                     }

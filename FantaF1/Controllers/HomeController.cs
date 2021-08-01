@@ -145,8 +145,10 @@ namespace FantaF1.Controllers
                 var idFantaCampionato =
                     _orchestrator.FantaCampionatiAction.GetFantaCampionatoIdFromName(splitName[1].Trim());
 
+                var hasSprintRace = _orchestrator.IscrizioniCircuitoCampionatoAction.GetIscrizioneForId(idGara).HaSprintRace;
+
                 var pronostici =
-                    _orchestrator.PronosticoUtenteGaraAction.LoadPronosticiFromFileCsv(uploadedFiles.FirstOrDefault());
+                    _orchestrator.PronosticoUtenteGaraAction.LoadPronosticiFromFileCsv(uploadedFiles.FirstOrDefault(), hasSprintRace);
 
                 var dateGara = _orchestrator.IscrizioniCircuitoCampionatoAction.GetIscrizioneForId(idGara).DataGara;
 
@@ -157,7 +159,7 @@ namespace FantaF1.Controllers
                 var utentiList = _orchestrator.UtentiAction.GetUtentiList();
 
                 _orchestrator.PronosticoUtenteGaraAction.SavePronosticiInDatabase(pronostici, idGara,
-                    idFantaCampionato, pilotiList, utentiList);
+                    idFantaCampionato, pilotiList, utentiList, hasSprintRace);
 
                 res = new JsonResult { Data = "Ok" };
             }
