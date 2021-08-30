@@ -7,7 +7,7 @@ namespace FantaF1.Action.Interfaces
     public interface IIscrizioniPilotiCampionatoAction
     {
         void UpdatePunteggioPiloti(RegoleCampionatoMondiale regoleCampionato, IEnumerable<RaceResultObj> resultRace,
-            int idCampionatoReale);
+            int idCampionatoReale, bool garaCompletata);
 
         List<IscrizioniPilotiCampionato> GetAllIscrizioniPilotiCampionatoForCampionatoMondialeId(int campionatoId);
         List<IscrizioniPilotiCampionato> GetClassificaPilotiFromIdCampionato(int idCampionato);

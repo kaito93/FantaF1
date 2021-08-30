@@ -176,6 +176,7 @@ function SendResultRace() {
         var isGiroVeloce = $("#PilotaGiroVeloceInput" + i).prop("checked");
         var isPolePosition = $("#PilotaPolePositionInput" + i).prop("checked");
         var posSprintRace = $("#PilotaSpr" + i).val();
+        var raceCompleted = $("#RaceCompleted").prop("checked");
 
 
         var oData = {
@@ -186,8 +187,9 @@ function SendResultRace() {
             DFN: isDfn,
             GiroVeloce: isGiroVeloce,
             PolePosition: isPolePosition,
-            SprintRacePosition: posSprintRace
-        }
+            SprintRacePosition: posSprintRace,
+            RaceCompleted: raceCompleted
+    }
 
         dat.push(oData);
     }

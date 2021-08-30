@@ -28,6 +28,7 @@ namespace FantaF1DataAccessDB
         public System.DateTime DataGara { get; set; }
         public string NomeGP { get; set; }
         public bool HaSprintRace { get; set; }
+        public Nullable<bool> GaraCompletata { get; set; }
     
         public virtual CampionatiMondiali CampionatiMondiali { get; set; }
         public virtual Circuiti Circuiti { get; set; }

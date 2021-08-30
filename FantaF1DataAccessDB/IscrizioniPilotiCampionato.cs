@@ -16,7 +16,7 @@ namespace FantaF1DataAccessDB
     {
         public int Id { get; set; }
         public int CampionatoId { get; set; }
-        public int Punteggio { get; set; }
+        public decimal Punteggio { get; set; }
         public int IscrizionePilotaScuderiaId { get; set; }
     
         public virtual CampionatiMondiali CampionatiMondiali { get; set; }

@@ -251,7 +251,9 @@ namespace FantaF1.Controllers
 
                 if (result == null) return null;
 
-                _orchestrator.IscrizioniCircuitoCampionatoAction.UpdateResultRace(result.IdIscrizione, idRisultato);
+                var garaCompletata = list[0].RaceCompleted;
+
+                _orchestrator.IscrizioniCircuitoCampionatoAction.UpdateResultRace(result.IdIscrizione, idRisultato, garaCompletata);
 
                 var regoleCampionatoMondialeId =
                     _orchestrator.CampionatiMondialiAction.GetRegoleCampionatoIdFromCampionatoId(result.IdCampionato);
@@ -261,7 +263,7 @@ namespace FantaF1.Controllers
                         regoleCampionatoMondialeId);
 
                 _orchestrator.IscrizioniPilotiCampionatoAction.UpdatePunteggioPiloti(regolamentoCampionato,
-                    listResultRace.ToList(), result.IdCampionato);
+                    listResultRace.ToList(), result.IdCampionato, garaCompletata);
 
                 var iscrizioniPilotiCampionato =
                     _orchestrator.IscrizioniPilotiCampionatoAction

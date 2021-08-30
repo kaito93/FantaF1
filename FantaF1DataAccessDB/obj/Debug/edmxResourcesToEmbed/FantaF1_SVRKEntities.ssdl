@@ -40,6 +40,7 @@
     <Property Name="DataGara" Type="datetime" Nullable="false" />
     <Property Name="NomeGP" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="HaSprintRace" Type="bit" Nullable="false" />
+    <Property Name="GaraCompletata" Type="bit" />
   </EntityType>
   <EntityType Name="IscrizioniPilotiCampionato">
     <Key>
@@ -48,7 +49,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IscrizionePilotaScuderiaId" Type="int" Nullable="false" />
     <Property Name="CampionatoId" Type="int" Nullable="false" />
-    <Property Name="Punteggio" Type="int" Nullable="false" />
+    <Property Name="Punteggio" Type="decimal" Precision="18" Scale="1" Nullable="false" />
   </EntityType>
   <EntityType Name="IscrizioniPilotiScuderie">
     <Key>
@@ -67,7 +68,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ScuderiaId" Type="int" Nullable="false" />
     <Property Name="CampionatoId" Type="int" Nullable="false" />
-    <Property Name="Punteggio" Type="int" Nullable="false" />
+    <Property Name="Punteggio" Type="decimal" Precision="18" Scale="1" Nullable="false" />
   </EntityType>
   <EntityType Name="IscrizioniUtentiFantaCampionato">
     <Key>

@@ -26,9 +26,9 @@ namespace FantaF1.Action
             _iscrizioniCircuitiCampionato = _databaseAction.SaveIscrizioniCircuitoCampionato(newIscrizione);
         }
 
-        public void UpdateResultRace(int idIscrizione, int idRisultato)
+        public void UpdateResultRace(int idIscrizione, int idRisultato, bool garaCompletata)
         {
-            _iscrizioniCircuitiCampionato = _databaseAction.UpdateIscrizioneCircuitoCampionato(idIscrizione, idRisultato);
+            _iscrizioniCircuitiCampionato = _databaseAction.UpdateIscrizioneCircuitoCampionato(idIscrizione, idRisultato, garaCompletata);
         }
 
         public int GetIdCircuitoFromIscrizioneCircuitoCampionatoRealeId(int iscrizioneCircuitoCampionatoReale)

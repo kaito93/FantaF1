@@ -44,7 +44,7 @@ namespace FantaF1.Action
                 RisultatoDFNId = idRisultatoDfnGaraReale,
                 PilotaId01SprintRace = listResultRace.FirstOrDefault(x => x.SprintRacePosition == "1SPR")?.PilotaId,
                 PilotaId02SprintRace = listResultRace.FirstOrDefault(x => x.SprintRacePosition == "2SPR")?.PilotaId,
-                PilotaId03SprintRace = listResultRace.FirstOrDefault(x => x.SprintRacePosition == "3SPR")?.PilotaId,
+                PilotaId03SprintRace = listResultRace.FirstOrDefault(x => x.SprintRacePosition == "3SPR")?.PilotaId
             };
 
             _risultatiGareReali = _databaseAction.SaveRisultatoGaraReale(newResultRace);

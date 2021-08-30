@@ -20,8 +20,7 @@ namespace FantaF1.Action.Interfaces
         List<RisultatoPronostico> SaveRisultatoPronostico(RisultatoPronostico risultatoPronostico);
         List<Scuderie> SaveScuderia(Scuderie scuderia);
         List<Utenti> SaveUtente(Utenti utente);
-        List<IscrizioniCircuitiCampionato> UpdateIscrizioneCircuitoCampionato(int idIscrizione, int idRisultato);
-
+        List<IscrizioniCircuitiCampionato> UpdateIscrizioneCircuitoCampionato(int idIscrizione, int idRisultato, bool garaCompletata);
         List<CampionatiMondiali> GetCampionatiMondiali();
         List<Circuiti> GetCircuiti();
         List<FantaCampionati> GetFantaCampionati();
@@ -40,10 +39,10 @@ namespace FantaF1.Action.Interfaces
         List<IscrizioniPilotiCampionato> GetIscrizioniPilotiCampionatoMondiale();
         List<RegoleCampionatoMondiale> GetRegoleCampionato();
 
-        List<IscrizioniPilotiCampionato> UpdateIscrizionePilotaCampionato(int idCampionato, int idPilota, int punteggio);
+        List<IscrizioniPilotiCampionato> UpdateIscrizionePilotaCampionato(int idCampionato, int idPilota, decimal punteggio);
 
         List<IscrizioniScuderieCampionato> UpdateIscrizioneScuderiaCampionato(int idCampionato, int idScuderia,
-            int punteggio);
+            decimal punteggio);
         List<IscrizioniUtentiFantaCampionato> UpdateIscrizioneUtenteFantaCampionato(int idIscrizione, int punteggio);
 
         List<IscrizioniUtentiFantaCampionato> UpdateIscrizioneWithNewPronostico(int idIscrizione,

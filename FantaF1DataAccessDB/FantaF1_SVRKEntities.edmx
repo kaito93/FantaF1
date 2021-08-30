@@ -45,6 +45,7 @@
           <Property Name="DataGara" Type="datetime" Nullable="false" />
           <Property Name="NomeGP" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="HaSprintRace" Type="bit" Nullable="false" />
+          <Property Name="GaraCompletata" Type="bit" />
         </EntityType>
         <EntityType Name="IscrizioniPilotiCampionato">
           <Key>
@@ -53,7 +54,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IscrizionePilotaScuderiaId" Type="int" Nullable="false" />
           <Property Name="CampionatoId" Type="int" Nullable="false" />
-          <Property Name="Punteggio" Type="int" Nullable="false" />
+          <Property Name="Punteggio" Type="decimal" Precision="18" Scale="1" Nullable="false" />
         </EntityType>
         <EntityType Name="IscrizioniPilotiScuderie">
           <Key>
@@ -72,7 +73,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ScuderiaId" Type="int" Nullable="false" />
           <Property Name="CampionatoId" Type="int" Nullable="false" />
-          <Property Name="Punteggio" Type="int" Nullable="false" />
+          <Property Name="Punteggio" Type="decimal" Precision="18" Scale="1" Nullable="false" />
         </EntityType>
         <EntityType Name="IscrizioniUtentiFantaCampionato">
           <Key>
@@ -1798,6 +1799,7 @@
           <NavigationProperty Name="PronosticoUtenteGara" Relationship="Self.FK_PronosticoUtenteGara_IscrizioniCircuitiCampionato" FromRole="IscrizioniCircuitiCampionato" ToRole="PronosticoUtenteGara" />
           <NavigationProperty Name="PronosticoUtenteGara1" Relationship="FantaF1_SVRKModel.FK_PronosticoUtenteGara_IscrizioniCircuitiCampionato1" FromRole="IscrizioniCircuitiCampionato" ToRole="PronosticoUtenteGara" />
           <Property Name="HaSprintRace" Type="Boolean" Nullable="false" />
+          <Property Name="GaraCompletata" Type="Boolean" />
         </EntityType>
         <EntityType Name="IscrizioniPilotiCampionato">
           <Key>
@@ -1805,7 +1807,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CampionatoId" Type="Int32" Nullable="false" />
-          <Property Name="Punteggio" Type="Int32" Nullable="false" />
+          <Property Name="Punteggio" Type="Decimal" Nullable="false" Precision="18" Scale="1" />
           <NavigationProperty Name="CampionatiMondiali" Relationship="Self.FK_IscrizioneCampionatoPilota" FromRole="IscrizioniPilotiCampionato" ToRole="CampionatiMondiali" />
           <Property Name="IscrizionePilotaScuderiaId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="IscrizioniPilotiScuderie" Relationship="FantaF1_SVRKModel.FK_IscrizionePilota1" FromRole="IscrizioniPilotiCampionato" ToRole="IscrizioniPilotiScuderie" />
@@ -1817,7 +1819,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ScuderiaId" Type="Int32" Nullable="false" />
           <Property Name="CampionatoId" Type="Int32" Nullable="false" />
-          <Property Name="Punteggio" Type="Int32" Nullable="false" />
+          <Property Name="Punteggio" Type="Decimal" Nullable="false" Precision="18" Scale="1" />
           <NavigationProperty Name="CampionatiMondiali" Relationship="Self.FK_IscrizioneCampionato" FromRole="IscrizioniScuderieCampionato" ToRole="CampionatiMondiali" />
           <NavigationProperty Name="Scuderie" Relationship="Self.FK_IscrizioneScuderia" FromRole="IscrizioniScuderieCampionato" ToRole="Scuderie" />
         </EntityType>
@@ -3718,6 +3720,7 @@
           <EntitySetMapping Name="IscrizioniCircuitiCampionato">
             <EntityTypeMapping TypeName="FantaF1_SVRKModel.IscrizioniCircuitiCampionato">
               <MappingFragment StoreEntitySet="IscrizioniCircuitiCampionato">
+                <ScalarProperty Name="GaraCompletata" ColumnName="GaraCompletata" />
                 <ScalarProperty Name="HaSprintRace" ColumnName="HaSprintRace" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CircuitoId" ColumnName="CircuitoId" />

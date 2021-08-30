@@ -10,5 +10,6 @@
         public bool GiroVeloce { get; set; }
         public bool PolePosition { get; set; }
         public string SprintRacePosition { get; set; }
+        public bool RaceCompleted { get; set; }
     }
 }

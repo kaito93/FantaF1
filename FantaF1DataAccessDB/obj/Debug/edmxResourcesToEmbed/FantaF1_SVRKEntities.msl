@@ -36,6 +36,7 @@
     <EntitySetMapping Name="IscrizioniCircuitiCampionato">
       <EntityTypeMapping TypeName="FantaF1_SVRKModel.IscrizioniCircuitiCampionato">
         <MappingFragment StoreEntitySet="IscrizioniCircuitiCampionato">
+          <ScalarProperty Name="GaraCompletata" ColumnName="GaraCompletata" />
           <ScalarProperty Name="HaSprintRace" ColumnName="HaSprintRace" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="CircuitoId" ColumnName="CircuitoId" />

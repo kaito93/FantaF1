@@ -209,13 +209,15 @@ namespace FantaF1.Action
             return _database.Utenti.ToList();
         }
 
-        public List<IscrizioniCircuitiCampionato> UpdateIscrizioneCircuitoCampionato(int idIscrizione, int idRisultato)
+        public List<IscrizioniCircuitiCampionato> UpdateIscrizioneCircuitoCampionato(int idIscrizione, int idRisultato, bool garaCompletata)
         {
             if (_database != null)
             {
                 _database.IscrizioniCircuitiCampionato
                         .FirstOrDefault(x => x.Id == idIscrizione).RisultatiId =
                     idRisultato;
+                _database.IscrizioniCircuitiCampionato
+                        .FirstOrDefault(x => x.Id == idIscrizione).GaraCompletata = garaCompletata;
                 _database.SaveChanges();
                 return _database.IscrizioniCircuitiCampionato.ToList();
             }
@@ -223,14 +225,14 @@ namespace FantaF1.Action
             return null;
         }
 
-        public List<IscrizioniPilotiCampionato> UpdateIscrizionePilotaCampionato(int idCampionato, int idPilota, int punteggio)
+        public List<IscrizioniPilotiCampionato> UpdateIscrizionePilotaCampionato(int idCampionato, int idPilota, decimal punteggio)
         {
             _database.IscrizioniPilotiCampionato.FirstOrDefault(x => x.CampionatoId == idCampionato && x.IscrizioniPilotiScuderie.PilotaId == idPilota).Punteggio += punteggio;
             _database.SaveChanges();
             return _database.IscrizioniPilotiCampionato.ToList();
         }
 
-        public List<IscrizioniScuderieCampionato> UpdateIscrizioneScuderiaCampionato(int idCampionato, int idScuderia, int punteggio)
+        public List<IscrizioniScuderieCampionato> UpdateIscrizioneScuderiaCampionato(int idCampionato, int idScuderia, decimal punteggio)
         {
             _database.IscrizioniScuderieCampionato.FirstOrDefault(x => x.CampionatoId == idCampionato && x.ScuderiaId == idScuderia).Punteggio = punteggio;
             _database.SaveChanges();

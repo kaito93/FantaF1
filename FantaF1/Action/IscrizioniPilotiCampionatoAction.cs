@@ -16,13 +16,13 @@ namespace FantaF1.Action
             _iscrizioniPilotiCampionato = databaseAction.GetIscrizioniPilotiCampionatoMondiale();
         }
 
-        public void UpdatePunteggioPiloti(RegoleCampionatoMondiale regoleCampionato, IEnumerable<RaceResultObj> resultRace, int idCampionatoReale)
+        public void UpdatePunteggioPiloti(RegoleCampionatoMondiale regoleCampionato, IEnumerable<RaceResultObj> resultRace, int idCampionatoReale, bool garaCompletata)
         {
             foreach (var risultato in resultRace)
             {
                 if (risultato.PilotaId == 23) continue;
 
-                var punteggio = CalcolaPunteggio(risultato.PosizioneFinale, regoleCampionato, risultato.GiroVeloce, risultato.PolePosition, risultato.SprintRacePosition);
+                var punteggio = CalcolaPunteggio(risultato.PosizioneFinale, regoleCampionato, risultato.GiroVeloce, risultato.PolePosition, risultato.SprintRacePosition, garaCompletata);
 
                 _iscrizioniPilotiCampionato = _databaseAction.UpdateIscrizionePilotaCampionato(idCampionatoReale, risultato.PilotaId, punteggio);
             }
@@ -38,9 +38,9 @@ namespace FantaF1.Action
             return _iscrizioniPilotiCampionato.FindAll(x => x.CampionatoId == idCampionato).OrderByDescending(x => x.Punteggio).ToList();
         }
 
-        private static int CalcolaPunteggio(int posizioneFinale, RegoleCampionatoMondiale regoleCampionato, bool giroVeloce, bool polePosition, string sprintRacePosition)
+        private static decimal CalcolaPunteggio(int posizioneFinale, RegoleCampionatoMondiale regoleCampionato, bool giroVeloce, bool polePosition, string sprintRacePosition, bool garaCompletata)
         {
-            var punteggio = 0;
+            decimal punteggio = 0;
 
             switch (posizioneFinale)
             {
@@ -105,6 +105,9 @@ namespace FantaF1.Action
                     punteggio = regoleCampionato.PunteggioVentesimoClassificato;
                     break;
             }
+
+            if (!garaCompletata)
+                punteggio /= 2;
 
             if (giroVeloce && posizioneFinale <= 10)
                 punteggio += regoleCampionato.PunteggioGiroVeloce;
