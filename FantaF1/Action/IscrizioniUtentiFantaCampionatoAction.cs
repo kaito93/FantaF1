@@ -51,8 +51,8 @@ namespace FantaF1.Action
                         {
                             var registrazioneParsed = new RegistrazioneUtenteStructure
                             {
-                                Nome = registrazione[1],
-                                Cognome = registrazione[2],
+                                Nome = registrazione[1].Trim(),
+                                Cognome = registrazione[2].Trim(),
                                 PrimoCognomePilota = registrazione[3],
                                 SecondoCognomePilota = registrazione[4],
                                 TerzoCognomePilota = registrazione[5],

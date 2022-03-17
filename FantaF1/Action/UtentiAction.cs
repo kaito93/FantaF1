@@ -25,7 +25,7 @@ namespace FantaF1.Action
                 Data_Registrazione = DateTime.Today
             };
 
-            var alreadyExist = _utenti.FirstOrDefault(x => x.Cognome.ToLower() == registrazione.Cognome.ToLower() && x.Nome.ToLower() == registrazione.Nome.ToLower());
+            var alreadyExist = _utenti.FirstOrDefault(x => x.Cognome.ToLower().Trim() == registrazione.Cognome.ToLower().Trim() && x.Nome.ToLower().Trim() == registrazione.Nome.ToLower().Trim());
 
             if (alreadyExist != null) return -1;
 
@@ -36,7 +36,7 @@ namespace FantaF1.Action
         public int GetUtenteIdFromNameAndSurname(string name, string surname)
         {
             var result = _utenti.FirstOrDefault(x =>
-                x.Nome.ToLower() == name.ToLower() && x.Cognome.ToLower() == surname.ToLower());
+                x.Nome.ToLower().Trim() == name.ToLower().Trim() && x.Cognome.ToLower().Trim() == surname.ToLower().Trim());
 
             if (result != null)
                 return result.Id;
