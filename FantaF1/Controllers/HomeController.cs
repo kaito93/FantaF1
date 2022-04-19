@@ -221,6 +221,11 @@ namespace FantaF1.Controllers
                 new SelectListItem{Text = "1° Classificato", Value = "1SPR"},
                 new SelectListItem{Text = "2° Classificato", Value = "2SPR"},
                 new SelectListItem{Text = "3° Classificato", Value = "3SPR"},
+                new SelectListItem{Text = "4° Classificato", Value = "4SPR"},
+                new SelectListItem{Text = "5° Classificato", Value = "5SPR"},
+                new SelectListItem{Text = "6° Classificato", Value = "6SPR"},
+                new SelectListItem{Text = "7° Classificato", Value = "7SPR"},
+                new SelectListItem{Text = "8° Classificato", Value = "8SPR"},
             };
 
             var model = new RisultatoGaraViewModel

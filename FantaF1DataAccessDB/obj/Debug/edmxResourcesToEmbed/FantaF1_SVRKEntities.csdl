@@ -266,6 +266,11 @@
     <Property Name="PunteggioPrimoSprintRace" Type="Int32" Nullable="false" />
     <Property Name="PunteggioSecondoSprintRace" Type="Int32" Nullable="false" />
     <Property Name="PunteggioTerzoSprintRace" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioQuartoSprintRace" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioQuintoSprintRace" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioSestoSprintRace" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioSettimoSprintRace" Type="Int32" Nullable="false" />
+    <Property Name="PunteggioOttavoSprintRace" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="RegoleFantaCampionato">
     <Key>
@@ -410,6 +415,11 @@
     <Property Name="PilotaId03SprintRace" Type="Int32" />
     <NavigationProperty Name="Piloti23" Relationship="FantaF1_SVRKModel.FK_RisultatoGaraReale_Piloti1" FromRole="RisultatoGaraReale" ToRole="Piloti" />
     <NavigationProperty Name="Piloti24" Relationship="FantaF1_SVRKModel.FK_RisultatoGaraReale_Piloti2" FromRole="RisultatoGaraReale" ToRole="Piloti" />
+    <Property Name="PilotaId04SprintRace" Type="Int32" />
+    <Property Name="PilotaId05SprintRace" Type="Int32" />
+    <Property Name="PilotaId06SprintRace" Type="Int32" />
+    <Property Name="PilotaId07SprintRace" Type="Int32" />
+    <Property Name="PilotaId08SprintRace" Type="Int32" />
   </EntityType>
   <EntityType Name="RisultatoPronostico">
     <Key>

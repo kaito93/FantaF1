@@ -167,6 +167,11 @@
           <Property Name="PunteggioPrimoSprintRace" Type="int" Nullable="false" />
           <Property Name="PunteggioSecondoSprintRace" Type="int" Nullable="false" />
           <Property Name="PunteggioTerzoSprintRace" Type="int" Nullable="false" />
+          <Property Name="PunteggioQuartoSprintRace" Type="int" Nullable="false" />
+          <Property Name="PunteggioQuintoSprintRace" Type="int" Nullable="false" />
+          <Property Name="PunteggioSestoSprintRace" Type="int" Nullable="false" />
+          <Property Name="PunteggioSettimoSprintRace" Type="int" Nullable="false" />
+          <Property Name="PunteggioOttavoSprintRace" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="RegoleFantaCampionato">
           <Key>
@@ -263,6 +268,11 @@
           <Property Name="PilotaId01SprintRace" Type="int" />
           <Property Name="PilotaId02SprintRace" Type="int" />
           <Property Name="PilotaId03SprintRace" Type="int" />
+          <Property Name="PilotaId04SprintRace" Type="int" />
+          <Property Name="PilotaId05SprintRace" Type="int" />
+          <Property Name="PilotaId06SprintRace" Type="int" />
+          <Property Name="PilotaId07SprintRace" Type="int" />
+          <Property Name="PilotaId08SprintRace" Type="int" />
         </EntityType>
         <EntityType Name="RisultatoPronostico">
           <Key>
@@ -2012,6 +2022,11 @@
           <Property Name="PunteggioPrimoSprintRace" Type="Int32" Nullable="false" />
           <Property Name="PunteggioSecondoSprintRace" Type="Int32" Nullable="false" />
           <Property Name="PunteggioTerzoSprintRace" Type="Int32" Nullable="false" />
+          <Property Name="PunteggioQuartoSprintRace" Type="Int32" Nullable="false" />
+          <Property Name="PunteggioQuintoSprintRace" Type="Int32" Nullable="false" />
+          <Property Name="PunteggioSestoSprintRace" Type="Int32" Nullable="false" />
+          <Property Name="PunteggioSettimoSprintRace" Type="Int32" Nullable="false" />
+          <Property Name="PunteggioOttavoSprintRace" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="RegoleFantaCampionato">
           <Key>
@@ -2156,6 +2171,11 @@
           <Property Name="PilotaId03SprintRace" Type="Int32" />
           <NavigationProperty Name="Piloti23" Relationship="FantaF1_SVRKModel.FK_RisultatoGaraReale_Piloti1" FromRole="RisultatoGaraReale" ToRole="Piloti" />
           <NavigationProperty Name="Piloti24" Relationship="FantaF1_SVRKModel.FK_RisultatoGaraReale_Piloti2" FromRole="RisultatoGaraReale" ToRole="Piloti" />
+          <Property Name="PilotaId04SprintRace" Type="Int32" />
+          <Property Name="PilotaId05SprintRace" Type="Int32" />
+          <Property Name="PilotaId06SprintRace" Type="Int32" />
+          <Property Name="PilotaId07SprintRace" Type="Int32" />
+          <Property Name="PilotaId08SprintRace" Type="Int32" />
         </EntityType>
         <EntityType Name="RisultatoPronostico">
           <Key>
@@ -3820,6 +3840,11 @@
           <EntitySetMapping Name="RegoleCampionatoMondiale">
             <EntityTypeMapping TypeName="FantaF1_SVRKModel.RegoleCampionatoMondiale">
               <MappingFragment StoreEntitySet="RegoleCampionatoMondiale">
+                <ScalarProperty Name="PunteggioOttavoSprintRace" ColumnName="PunteggioOttavoSprintRace" />
+                <ScalarProperty Name="PunteggioSettimoSprintRace" ColumnName="PunteggioSettimoSprintRace" />
+                <ScalarProperty Name="PunteggioSestoSprintRace" ColumnName="PunteggioSestoSprintRace" />
+                <ScalarProperty Name="PunteggioQuintoSprintRace" ColumnName="PunteggioQuintoSprintRace" />
+                <ScalarProperty Name="PunteggioQuartoSprintRace" ColumnName="PunteggioQuartoSprintRace" />
                 <ScalarProperty Name="PunteggioTerzoSprintRace" ColumnName="PunteggioTerzoSprintRace" />
                 <ScalarProperty Name="PunteggioSecondoSprintRace" ColumnName="PunteggioSecondoSprintRace" />
                 <ScalarProperty Name="PunteggioPrimoSprintRace" ColumnName="PunteggioPrimoSprintRace" />
@@ -3918,6 +3943,11 @@
           <EntitySetMapping Name="RisultatoGaraReale">
             <EntityTypeMapping TypeName="FantaF1_SVRKModel.RisultatoGaraReale">
               <MappingFragment StoreEntitySet="RisultatoGaraReale">
+                <ScalarProperty Name="PilotaId08SprintRace" ColumnName="PilotaId08SprintRace" />
+                <ScalarProperty Name="PilotaId07SprintRace" ColumnName="PilotaId07SprintRace" />
+                <ScalarProperty Name="PilotaId06SprintRace" ColumnName="PilotaId06SprintRace" />
+                <ScalarProperty Name="PilotaId05SprintRace" ColumnName="PilotaId05SprintRace" />
+                <ScalarProperty Name="PilotaId04SprintRace" ColumnName="PilotaId04SprintRace" />
                 <ScalarProperty Name="PilotaId03SprintRace" ColumnName="PilotaId03SprintRace" />
                 <ScalarProperty Name="PilotaId02SprintRace" ColumnName="PilotaId02SprintRace" />
                 <ScalarProperty Name="PilotaId01SprintRace" ColumnName="PilotaId01SprintRace" />

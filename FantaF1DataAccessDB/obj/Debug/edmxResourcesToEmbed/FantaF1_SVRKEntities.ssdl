@@ -162,6 +162,11 @@
     <Property Name="PunteggioPrimoSprintRace" Type="int" Nullable="false" />
     <Property Name="PunteggioSecondoSprintRace" Type="int" Nullable="false" />
     <Property Name="PunteggioTerzoSprintRace" Type="int" Nullable="false" />
+    <Property Name="PunteggioQuartoSprintRace" Type="int" Nullable="false" />
+    <Property Name="PunteggioQuintoSprintRace" Type="int" Nullable="false" />
+    <Property Name="PunteggioSestoSprintRace" Type="int" Nullable="false" />
+    <Property Name="PunteggioSettimoSprintRace" Type="int" Nullable="false" />
+    <Property Name="PunteggioOttavoSprintRace" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="RegoleFantaCampionato">
     <Key>
@@ -258,6 +263,11 @@
     <Property Name="PilotaId01SprintRace" Type="int" />
     <Property Name="PilotaId02SprintRace" Type="int" />
     <Property Name="PilotaId03SprintRace" Type="int" />
+    <Property Name="PilotaId04SprintRace" Type="int" />
+    <Property Name="PilotaId05SprintRace" Type="int" />
+    <Property Name="PilotaId06SprintRace" Type="int" />
+    <Property Name="PilotaId07SprintRace" Type="int" />
+    <Property Name="PilotaId08SprintRace" Type="int" />
   </EntityType>
   <EntityType Name="RisultatoPronostico">
     <Key>

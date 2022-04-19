@@ -21,3 +21,15 @@ C:\Users\kaito\source\repos\kaito93\FantaF1\FantaF1DataAccessDB\obj\Debug\FantaF
 C:\Users\kaito\source\repos\kaito93\FantaF1\FantaF1DataAccessDB\obj\Debug\FantaF1DataAccessDB.csproj.CopyComplete
 C:\Users\kaito\source\repos\kaito93\FantaF1\FantaF1DataAccessDB\obj\Debug\FantaF1DataAccessDB.dll
 C:\Users\kaito\source\repos\kaito93\FantaF1\FantaF1DataAccessDB\obj\Debug\FantaF1DataAccessDB.pdb
+C:\Users\Samuele\source\repos\kaito93\FantaF1\FantaF1DataAccessDB\bin\Debug\FantaF1DataAccessDB.dll.config
+C:\Users\Samuele\source\repos\kaito93\FantaF1\FantaF1DataAccessDB\bin\Debug\FantaF1DataAccessDB.dll
+C:\Users\Samuele\source\repos\kaito93\FantaF1\FantaF1DataAccessDB\bin\Debug\FantaF1DataAccessDB.pdb
+C:\Users\Samuele\source\repos\kaito93\FantaF1\FantaF1DataAccessDB\bin\Debug\EntityFramework.dll
+C:\Users\Samuele\source\repos\kaito93\FantaF1\FantaF1DataAccessDB\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Samuele\source\repos\kaito93\FantaF1\FantaF1DataAccessDB\bin\Debug\EntityFramework.xml
+C:\Users\Samuele\source\repos\kaito93\FantaF1\FantaF1DataAccessDB\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Samuele\source\repos\kaito93\FantaF1\FantaF1DataAccessDB\obj\Debug\FantaF1DataAccessDB.csproj.AssemblyReference.cache
+C:\Users\Samuele\source\repos\kaito93\FantaF1\FantaF1DataAccessDB\obj\Debug\FantaF1DataAccessDB.csproj.CoreCompileInputs.cache
+C:\Users\Samuele\source\repos\kaito93\FantaF1\FantaF1DataAccessDB\obj\Debug\FantaF1DataAccessDB.csproj.CopyComplete
+C:\Users\Samuele\source\repos\kaito93\FantaF1\FantaF1DataAccessDB\obj\Debug\FantaF1DataAccessDB.dll
+C:\Users\Samuele\source\repos\kaito93\FantaF1\FantaF1DataAccessDB\obj\Debug\FantaF1DataAccessDB.pdb
