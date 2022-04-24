@@ -127,19 +127,19 @@ namespace FantaF1.Action
                     punteggio += regoleCampionato.PunteggioTerzoSprintRace;
                     break;
                 case "4SPR":
-                    punteggio += regoleCampionato.PunteggioTerzoSprintRace;
+                    punteggio += regoleCampionato.PunteggioQuartoSprintRace;
                     break;
                 case "5SPR":
-                    punteggio += regoleCampionato.PunteggioTerzoSprintRace;
+                    punteggio += regoleCampionato.PunteggioQuintoSprintRace;
                     break;
                 case "6SPR":
-                    punteggio += regoleCampionato.PunteggioTerzoSprintRace;
+                    punteggio += regoleCampionato.PunteggioSestoSprintRace;
                     break;
                 case "7SPR":
-                    punteggio += regoleCampionato.PunteggioTerzoSprintRace;
+                    punteggio += regoleCampionato.PunteggioSettimoSprintRace;
                     break;
                 case "8SPR":
-                    punteggio += regoleCampionato.PunteggioTerzoSprintRace;
+                    punteggio += regoleCampionato.PunteggioOttavoSprintRace;
                     break;
             }
 
