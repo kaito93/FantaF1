@@ -22,7 +22,7 @@ namespace FantaF1.Action
         {
             foreach (var scuderia in scuderieList)
             {
-                if (IsScuderiaInCampionato(scuderia, idCampionatoReale) && scuderia.Id != 12)
+                if (IsScuderiaInCampionato(scuderia, idCampionatoReale))
                 {
                     var pilots = iscrizioniPilotiScuderieYear.FindAll(x => x.ScuderiaId == scuderia.Id).DistinctBy(x => x.PilotaId).ToList();
 
